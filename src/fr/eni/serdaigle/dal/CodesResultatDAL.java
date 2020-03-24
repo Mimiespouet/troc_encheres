@@ -11,5 +11,7 @@ public abstract class CodesResultatDAL {
 	public static final int SELECT_LOGIN_ECHEC = 10000;
 	
 	public static final int INSERT_USER_ECHEC = 10001;
+	
+	public static final int INSERT_ARTICLE_ECHEC = 10002;
 
 }
