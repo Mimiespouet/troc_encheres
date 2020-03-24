@@ -1,0 +1,26 @@
+@charset "UTF-8";
+h1
+{
+	text-align: center;
+}
+.contenu
+{
+	padding: 20px;
+	text-align: center;
+}
+.saisie
+{
+	padding:5px;
+}
+label
+{
+	text-align:left;
+}
+thead
+{
+	font-weight: bolder;
+}
+li
+{
+	text-align: left;
+}
