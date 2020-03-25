@@ -1,8 +1,9 @@
 package fr.eni.serdaigle.bo;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class ArticleVendu {
+public class ArticleVendu implements Serializable {
 	private int noArticle;
 	private String nomArticle;
 	private String description;

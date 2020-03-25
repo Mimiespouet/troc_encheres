@@ -24,17 +24,17 @@
 
 			<div class="col-lg-6 col-sm-12">
 
-
+				<p>${success}</p>
 				<form action="login" method="post">
 				
-			<c:if test="${errorLogin != null}"> 
-
-					<div class="col-lg-6 col-sm-4">
-						<div class="alert alert-danger" role="alert">
-						  <p>${errorLogin}</p>
+				<c:if test="${errorLogin != null}"> 
+	
+						<div class="col-lg-6 col-sm-4">
+							<div class="alert alert-danger" role="alert">
+							  <p>${errorLogin}</p>
+							</div>
 						</div>
-					</div>
-			</c:if>
+				</c:if>
 						<label for="username"><b>Identifiant : </b></label> 
 						<input type="text" placeholder="Entrer votre identifiant" id="username" name="username" required> <br> 
 					
@@ -51,7 +51,7 @@
 
 				</form>
 				
-				 <a id="creaCompte" href="inscription" class="btn btn-primary">Créer un compte</a>
+				<a id="creaCompte" href="inscription" class="btn btn-primary">Créer un compte</a>
 				
 			</div>
 		</div>

@@ -1,6 +1,8 @@
 package fr.eni.serdaigle.bo;
 
-public class Retrait {
+import java.io.Serializable;
+
+public class Retrait implements Serializable {
 	private int noArticle;
 	private String rue;
 	private String codePostal;

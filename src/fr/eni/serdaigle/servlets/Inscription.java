@@ -44,8 +44,10 @@ public class Inscription extends HttpServlet {
 			String motDePasse = request.getParameter("password").trim();
 			String checkMotDePasse = request.getParameter("checkPassword").trim();
 			mger.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse,checkMotDePasse);
+			request.setAttribute("success", "Compte créé avec succès");
 		} catch (BusinessException be) {
 			request.setAttribute("error", be.getMessage());
+			doGet(request, response);
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 		rd.forward(request, response);	

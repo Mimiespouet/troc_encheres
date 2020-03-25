@@ -1,10 +1,12 @@
 package fr.eni.serdaigle.bo;
 
-public class Categorie {
+import java.io.Serializable;
+
+public class Categorie implements Serializable {
 	private int noCategorie;
 	private String libelle;
 
-	public Categorie() {
+	public Categorie()  {
 
 	}
 

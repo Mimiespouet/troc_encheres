@@ -1,8 +1,9 @@
 package fr.eni.serdaigle.bo;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class Enchere {
+public class Enchere implements Serializable {
 	private LocalDateTime dateEnchere;
 	private int montantEnchere;
 	private int noUtilisateur;

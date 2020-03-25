@@ -1,6 +1,8 @@
 package fr.eni.serdaigle.bo;
 
-public class Utilisateur {
+import java.io.Serializable;
+
+public class Utilisateur implements Serializable {
 	private int noUtilisateur;
 	private String pseudo;
 	private String nom;
