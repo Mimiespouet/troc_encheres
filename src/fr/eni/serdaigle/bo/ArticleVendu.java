@@ -8,25 +8,27 @@ public class ArticleVendu {
 	private String description;
 	private LocalDate dateDebutEncheres;
 	private LocalDate dateFinEncheres;
-	private int miseAPrix;
+	private int prixInitial;
 	private int prixVente;
-	private boolean etatVente;
+	private int noUtilisateur;
+	private int noCategorie;
 
 	public ArticleVendu() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int miseAPrix, int prixVente, boolean etatVente) {
+			LocalDate dateFinEncheres, int prixInitial, int prixVente, int noUtilisateur, int noCategorie) {
 		super();
 		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.dateFinEncheres = dateFinEncheres;
-		this.miseAPrix = miseAPrix;
+		this.prixInitial = prixInitial;
 		this.prixVente = prixVente;
-		this.etatVente = etatVente;
+		this.noUtilisateur = noUtilisateur;
+		this.noCategorie = noCategorie;
 	}
 
 	public int getNoArticle() {
@@ -69,12 +71,12 @@ public class ArticleVendu {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 
-	public int getMiseAPrix() {
-		return miseAPrix;
+	public int getPrixInitial() {
+		return prixInitial;
 	}
 
-	public void setMiseAPrix(int miseAPrix) {
-		this.miseAPrix = miseAPrix;
+	public void setPrixInitial(int prixInital) {
+		this.prixInitial = prixInital;
 	}
 
 	public int getPrixVente() {
@@ -84,13 +86,21 @@ public class ArticleVendu {
 	public void setPrixVente(int prixVente) {
 		this.prixVente = prixVente;
 	}
-
-	public boolean isEtatVente() {
-		return etatVente;
+	
+	public int getNoUtilisateur() {
+		return noUtilisateur;
 	}
 
-	public void setEtatVente(boolean etatVente) {
-		this.etatVente = etatVente;
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
+	}
+	
+	public int getNoCategorie() {
+		return prixVente;
+	}
+
+	public void setNoCategorie(int noCategorie) {
+		this.noCategorie = noCategorie;
 	}
 
 	@Override
@@ -119,8 +129,9 @@ public class ArticleVendu {
 	@Override
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
-				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", miseAPrix="
-				+ miseAPrix + ", prixVente=" + prixVente + ", etatVente=" + etatVente + "]";
+				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", prixInitial="
+				+ prixInitial + ", prixVente=" + prixVente + ", noUtilisateur=" + noUtilisateur + ", noCategorie=" + noCategorie + "]";
 	}
 
 }
+

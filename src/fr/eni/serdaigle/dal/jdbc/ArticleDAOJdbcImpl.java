@@ -23,12 +23,14 @@ public class ArticleDAOJdbcImpl implements ArticleDAO{
 		try {
 			cnx = ConnectionProvider.getConnection();
 			PreparedStatement psmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-			psmt.setString(1, article.getDescription());
-			psmt.setDate(2, Date.valueOf(article.getDateDebutEncheres()));
-			psmt.setDate(3, Date.valueOf(article.getDateFinEncheres()));
-			psmt.setInt(4, article.getMiseAPrix());
-			psmt.setInt(5, article.getPrixVente());
-			psmt.setBoolean(6, article.isEtatVente());
+			psmt.setString(1, article.getNomArticle());
+			psmt.setString(2, article.getDescription());
+			psmt.setDate(3, Date.valueOf(article.getDateDebutEncheres()));
+			psmt.setDate(4, Date.valueOf(article.getDateFinEncheres()));
+			psmt.setInt(5, article.getPrixInitial());
+			psmt.setInt(6, article.getPrixVente());
+			psmt.setInt(7, article.getNoUtilisateur());
+			psmt.setInt(8, article.getNoCategorie());
 
 			int nombreArticleInsere = psmt.executeUpdate();
 			if (nombreArticleInsere == 1) {
