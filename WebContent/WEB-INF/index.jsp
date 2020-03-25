@@ -31,12 +31,12 @@
 					<a href="connexion">S'inscrire - se connecter</a>
 				</c:if>	
 			</div>
-
+			
+		
 			<div class="col-lg-6 col-sm-12">
-				<a href="${pageContext.request.contextPath}/.jsp">Vendre un article</a> 
-				<a href="${pageContext.request.contextPath}/.jsp">Mon profil</a> 
-				
-				<c:if test="${utilisateur != null}"> 
+				<c:if test="${utilisateur != null}">
+					<a href="vendreArticle">Vendre un article</a> 
+					<a href="profil">Mon profil</a> 
 					<a href="logout">Déconnexion</a>
 				</c:if>
 			</div>
@@ -51,41 +51,44 @@
 			
 			<h3 class="my-4 col-lg-12 col-sm-12">Filtres :</h3>
 			
-			<div class="col-lg-6 col-sm-12">
-				<input type="radio" id="filtre" name="filtre" value="buy" checked> 
-				<label for="filtre"><b>Achats</b><br></label>
-					
-					<input type="checkbox" id="buy" name="buy" value="open"> 
-					<label for="buy"><b>enchères ouvertes</b></label> <br>
-					
-					<input type="checkbox" id="buy" name="buy" value="current"> 
-					<label for="buy"><b>mes enchères en cours</b></label><br>
-					
-					<input type="checkbox" id="buy" name="buy" value="win"> 
-					<label for="buy"><b>mes enchères remportées</b></label><br>
 				
-				<input type="radio" id="filtre" name="filtre" value="sales"> 
-				<label for="filtre"><b>Mes ventes</b><br></label>
+				<div class="col-lg-6 col-sm-12">
+					<c:if test="${utilisateur != null}"> 
 					
-					<input type="checkbox" id="sales" name="sales" value="currentsales"> 
-					<label for="sales"><b>mes ventes en cours</b></label><br> 
-					
-					<input type="checkbox" id="sales" name="sales" value="upcommingsales"> 
-					<label for="sales"><b>ventes non débutées</b></label><br>
-					
-					<input type="checkbox" id="sales" name="sales" value="closesales"> 
-					<label for="sales"><b>ventes terminées</b></label><br>
+						<input type="radio" id="filtre" name="filtre" value="buy" checked> 
+						<label for="filtre">Achats<br></label>
+							
+							<input type="checkbox" id="buy" name="buy" value="open"> 
+							<label for="buy">enchères ouvertes</label> <br>
+							
+							<input type="checkbox" id="buy" name="buy" value="current"> 
+							<label for="buy">mes enchères en cours</label><br>
+							
+							<input type="checkbox" id="buy" name="buy" value="win"> 
+							<label for="buy">mes enchères remportées</label><br>
+						
+						<input type="radio" id="filtre" name="filtre" value="sales"> 
+						<label for="filtre">Mes ventes<br></label>
+							
+							<input type="checkbox" id="sales" name="sales" value="currentsales"> 
+							<label for="sales">mes ventes en cours</label><br> 
+							
+							<input type="checkbox" id="sales" name="sales" value="upcommingsales"> 
+							<label for="sales">ventes non débutées</label><br>
+							
+							<input type="checkbox" id="sales" name="sales" value="closesales"> 
+							<label for="sales">ventes terminées</label><br>
+					</c:if>	
+				</div>
 				
-			</div>
-
 			<div class="col-lg-6 col-sm-12">
 
 
 				<form action="" method="post">
 
 
-					<label for="categories">Catégories : </label> <select
-						name="categories" size="1">
+					<label for="categories">Catégories : </label> 
+					<select name="categories" size="1">
 						<optgroup label="Categories">
 							<option value="toutes" selected="selected">Toutes</option>
 							<option value=""></option>
@@ -94,13 +97,12 @@
 							<option value=""></option>
 
 						</optgroup>
-					</select> <br> <input type="text"
-						placeholder="Le nom de l'article contient" id="nomArticle"
-						name="nomArticle"> <br>
+					</select> <br> 
+					
+					<input type="text" placeholder="Le nom de l'article contient" id="nomArticle" name="nomArticle"> <br>
 
 
-					<button class="col-lg-2 h-25" id="research" name="research">
-						Rechercher</button>
+					<button class="col-lg-2 h-25" id="research" name="research">Rechercher</button>
 
 					<br>
 
