@@ -83,7 +83,6 @@
             	</button>
             </div>
             
-        
 	</div>
 	<%@ include file="piedDePage.html" %>
 	
