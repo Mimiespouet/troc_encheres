@@ -49,10 +49,10 @@
 						<label for="remember"><b>Se souvenir de moi</b></label> 
 						<a id="ForgotPassword" href="">Mot de passe oublié</a> <br>
 
-
-						<button id="creaCompte" name="creaCompte">Créer un compte</button>
-
 				</form>
+				
+				 <a id="creaCompte" href="inscription" class="btn btn-primary">Créer un compte</a>
+				
 			</div>
 		</div>
 
