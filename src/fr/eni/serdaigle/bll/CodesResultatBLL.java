@@ -8,8 +8,5 @@ public abstract class CodesResultatBLL {
 	
 	public static final int CHAMP_OBLIGATOIRE = 20000;
 	public static final int CHAMP_TAILLE_DEPASSEE  = 20001;
-	
-	
-	
-	
+	public static final int MOT_DE_PASSE_DIFFERENT  = 20007;
 }

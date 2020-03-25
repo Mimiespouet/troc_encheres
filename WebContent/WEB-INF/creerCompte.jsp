@@ -27,7 +27,7 @@
 	
 	 
           
-            <form action="" method="post">
+            <form action="inscription" method="post">
    
                 
                 <label for="pseudo"><b>Pseudo : </b></label>
@@ -35,11 +35,11 @@
 				<br>
 
                 <label for="name"><b>Nom :</b></label>
-                <input type="text" id="name" name="name" required>
+                <input type="text" id="nom" name="nom" required>
 				<br>
 
 				<label for="firstname"><b>Prénom :</b></label>
-                <input type="text" id="firstname" name="firstname" required>
+                <input type="text" id="prenom" name="prenom" required>
 				<br>
 				
 				<label for="mail"><b>Email :</b></label>
@@ -51,7 +51,7 @@
 				<br>
 				
 				<label for="address"><b>Rue :</b></label>
-                <input type="text" id="address" name="address" required>
+                <input type="text" id="rue" name="rue" required>
 				<br>
 				
 				<label for="cpo"><b>Code Postal :</b></label>
@@ -59,15 +59,15 @@
 				<br>
 				
 				<label for="city"><b>Ville :</b></label>
-                <input type="text" id="city" name="city" required>
+                <input type="text" id="ville" name="ville" required>
 				<br>
 				
 				<label for="password"><b>Mot de passe :</b></label>
                 <input type="password" id="password" name="password" required>
 				<br>
 				
-				<label for="password"><b>Confirmation :</b></label>
-                <input type="password" id="password" name="password" required>
+				<label for="checkPassword"><b>Confirmation :</b></label>
+                <input type="password" id="checkPassword" name="checkPassword" required>
 				<br>
 				
 				

@@ -18,7 +18,7 @@ public class UtilisateurManager {
 	}
 
 	public Utilisateur ajouterUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse)
+			String rue, String codePostal, String ville, String motDePasse, String checkMotDePasse)
 			throws BusinessException {
 		BusinessException be = new BusinessException();
 		// valider les champs
@@ -31,8 +31,13 @@ public class UtilisateurManager {
 		validerChamps(rue, CHAMPS_VARCHAR_30, be);
 		validerChamps(codePostal, CHAMPS_VARCHAR_10, be);
 		validerChamps(ville, CHAMPS_VARCHAR_30, be);
-		validerChamps(motDePasse, CHAMPS_VARCHAR_30, be);
-
+		if(motDePasse.equals(checkMotDePasse)) {
+			validerChamps(motDePasse, CHAMPS_VARCHAR_30, be);
+		}else {
+			be.ajouterErreur(CodesResultatBLL.MOT_DE_PASSE_DIFFERENT);
+		}
+		
+		
 		Utilisateur utilisateur = null;
 
 		if (!be.hasErreurs()) {
