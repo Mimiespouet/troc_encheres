@@ -15,12 +15,21 @@ import fr.eni.serdaigle.exception.BusinessException;
 public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	private static final String INSERT = "INSERT INTO UTILISATEURS(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe) VALUES (?,?,?,?,?,?,?,?,?);";
+<<<<<<< HEAD
 	private static final String SELECT_CONNEXION = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE (pseudo=? and mot_de_passe =?) or(email=? and mot_de_passe=?);";
 	private static final String SELECT_BY_ID = "";
 	private static final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo=?";
 	private static final String SELECT_ALL = "";
 	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?;";
 	private static final String UPDATE = "UPDATE UTILISATEURS SET(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe) VALUES (?,?,?,?,?,?,?,?,?);";
+=======
+	private static final String SELECT_CONNEXION ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE (pseudo=? and mot_de_passe =?) or(email=? and mot_de_passe=?);" ;
+	private static final String SELECT_BY_ID ="" ;
+	private static final String SELECT_BY_PSEUDO ="SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo=?" ;
+	private static final String SELECT_ALL ="" ;
+	private static final String UPDATE = "UPDATE UTILISATEURS SET(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe) VALUES (?,?,?,?,?,?,?,?,?);";
+
+>>>>>>> branch 'master' of https://github.com/Mimiespouet/troc_encheres.git
 
 	@Override
 	public void insert(Utilisateur utilisateur) throws BusinessException {
@@ -165,6 +174,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void delete(Utilisateur utilisateur) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement psmt = cnx.prepareStatement(DELETE);) {
@@ -176,5 +186,44 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			throw be;
 		}
 	}
+=======
+	public void update(Utilisateur utilisateur) throws BusinessException {
+		Connection cnx = null;
+		BusinessException be = new BusinessException();
+		try {
+			cnx = ConnectionProvider.getConnection();
+			// Pour prendre la main sur la transaction
+			PreparedStatement psmt = cnx.prepareStatement(UPDATE);
+			psmt.setString(1, utilisateur.getPseudo());
+			psmt.setString(2, utilisateur.getNom());
+			psmt.setString(3, utilisateur.getPrenom());
+			psmt.setString(4, utilisateur.getEmail());
+			psmt.setString(5, utilisateur.getTelephone());
+			psmt.setString(6, utilisateur.getRue());
+			psmt.setString(7, utilisateur.getCodePostal());
+			psmt.setString(8, utilisateur.getVille());
+			psmt.setString(9, utilisateur.getMotDePasse());
+			psmt.executeUpdate();
+			
+			psmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			be.ajouterErreur(CodesResultatDAL.UPDATE_UTILISATEUR_ECHEC);
+		} finally {
+			try {
+				cnx.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if (be.hasErreurs()) {
+				throw be;
+			}
+		}
+
+	}
+	
+	
+>>>>>>> branch 'master' of https://github.com/Mimiespouet/troc_encheres.git
 }
 

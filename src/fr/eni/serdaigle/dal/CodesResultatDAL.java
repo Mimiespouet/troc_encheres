@@ -15,7 +15,10 @@ public abstract class CodesResultatDAL {
 	public static final int INSERT_ARTICLE_ECHEC = 10002;
 	
 	public static final int UPDATE_UTILISATEUR_ECHEC = 10003;
+<<<<<<< HEAD
 	
 	public static final int DELETE_USER = 10004;
 
+=======
+>>>>>>> branch 'master' of https://github.com/Mimiespouet/troc_encheres.git
 }

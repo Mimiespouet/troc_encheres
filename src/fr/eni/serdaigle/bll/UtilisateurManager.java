@@ -60,6 +60,7 @@ public class UtilisateurManager {
 		return null;
 	}
 
+<<<<<<< HEAD
 	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException {
 		BusinessException be = new BusinessException();
 		// valider les champs
@@ -80,4 +81,28 @@ public class UtilisateurManager {
 			throw be;
 		}
 	}
+=======
+	
+	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException {
+		BusinessException be = new BusinessException();
+		// valider les champs
+
+		validerChamps(utilisateur.getPseudo(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getNom(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getPrenom(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getEmail(), CHAMPS_VARCHAR_20, be);
+		validerChamps(utilisateur.getTelephone(), CHAMPS_VARCHAR_15, be);
+		validerChamps(utilisateur.getRue(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getCodePostal(), CHAMPS_VARCHAR_10, be);
+		validerChamps(utilisateur.getVille(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getMotDePasse(), CHAMPS_VARCHAR_30, be);
+			
+		if (!be.hasErreurs()) {
+			utilisateurDAO.update(utilisateur);
+		} else {
+			throw be;
+		}
+	}
+	
+>>>>>>> branch 'master' of https://github.com/Mimiespouet/troc_encheres.git
 }
