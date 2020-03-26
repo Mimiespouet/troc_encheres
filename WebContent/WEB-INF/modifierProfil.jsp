@@ -79,20 +79,29 @@
 				  </form>
 				</div>	
 					
-					
 				<div class="col-lg-6 col-sm-12">	
-					<button id="save" name="save">
-	            		Enregistrer
-	            	</button>
+					<form>
+						<button id="save" name="save">
+		            		Enregistrer
+		            	</button>
+					</form>
+					
+	            </div>
+	            <div class="col-lg-6 col-sm-12">
+	            	<form>
+	            		<button id="delete" name="delete">
+	            			Supprimer mon compte
+	            		</button>
+	            	</form>
+	            </div>
 	            	
-	            	<button id="delete" name="delete">
-	            		Supprimer mon compte
-	            	</button>
+	            <div class="col-lg-6 col-sm-12">
+						
+					<a id="previous" href="profil" class="btn btn-primary">Retour</a>
+	       		</div>
 	            	
-	            	<button id="previous" name="previous">
-	            		Retour
-	            	</button>
-				</div>
+	      
+				
 	            
 	          
         	
