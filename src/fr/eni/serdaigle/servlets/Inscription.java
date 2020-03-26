@@ -48,15 +48,16 @@ public class Inscription extends HttpServlet {
 				Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 				mger.ajouterUtilisateur(utilisateur);
 				request.setAttribute("success", "Compte créé avec succès");
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+				rd.forward(request, response);	
 			}else {
 				request.setAttribute("error", "Les mots de passe ne correspondent pas");
 			}
 		} catch (BusinessException be) {
 			request.setAttribute("error", be.getMessage());
 			doGet(request, response);
-		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
-		rd.forward(request, response);	
+		
 	}
 
+}
 }

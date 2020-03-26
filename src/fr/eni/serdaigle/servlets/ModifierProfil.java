@@ -42,6 +42,9 @@ public class ModifierProfil extends HttpServlet {
 			String checkMotDePasse = request.getParameter("checkPassword").trim();
 			if(motDePasse.equals(checkMotDePasse)) {
 				UtilisateurManager mger = new UtilisateurManager();
+				HttpSession session = request.getSession();
+				Utilisateur utilisateurSession = (Utilisateur) session.getAttribute("utilisateur");
+					
 				String pseudo = request.getParameter("pseudo").trim();
 				String nom = request.getParameter("nom").trim();
 				String prenom = request.getParameter("prenom").trim();
@@ -50,11 +53,15 @@ public class ModifierProfil extends HttpServlet {
 				String rue = request.getParameter("rue").trim();
 				String codePostal = request.getParameter("cpo").trim();
 				String ville = request.getParameter("ville").trim();
-				
-				Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+			
+				Utilisateur utilisateur = new Utilisateur(utilisateurSession.getNoUtilisateur(), pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+				System.out.println(utilisateur);
 				mger.modifierUtilisateur(utilisateur);
+				// On écrase l'utilisateur en session par l'utilisateur qui contient les modifs
+				session.setAttribute("utilisateur", utilisateur);
 				request.setAttribute("success", "Profil modifié avec succès");
-				
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/modifierProfil.jsp");
+				rd.forward(request, response);
 			} else {
 				request.setAttribute("error", "Les mots de passe ne correspondent pas");
 			}
@@ -62,8 +69,6 @@ public class ModifierProfil extends HttpServlet {
 			request.setAttribute("error", be.getMessage());
 			doGet(request, response);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/modifierProfil.jsp");
-		rd.forward(request, response);
 	}
 
 }

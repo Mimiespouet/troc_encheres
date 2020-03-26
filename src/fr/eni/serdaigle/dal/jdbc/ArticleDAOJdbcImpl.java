@@ -1,10 +1,10 @@
 package fr.eni.serdaigle.dal.jdbc;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.dal.ArticleDAO;
@@ -25,8 +25,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO{
 			PreparedStatement psmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			psmt.setString(1, article.getNomArticle());
 			psmt.setString(2, article.getDescription());
-			psmt.setDate(3, Date.valueOf(article.getDateDebutEncheres()));
-			psmt.setDate(4, Date.valueOf(article.getDateFinEncheres()));
+			psmt.setTimestamp(3, Timestamp.valueOf(article.getDateDebutEncheres()));
+			psmt.setTimestamp(4, Timestamp.valueOf(article.getDateFinEncheres()));
 			psmt.setInt(5, article.getPrixInitial());
 			psmt.setInt(6, article.getPrixVente());
 			psmt.setInt(7, article.getNoVendeur());
@@ -62,4 +62,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO{
 		}
 
 	}
+	
+	
+	
 }

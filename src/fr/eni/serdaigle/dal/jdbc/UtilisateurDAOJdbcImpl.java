@@ -21,7 +21,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String SELECT_BY_PSEUDO = "SELECT no_utilisateur, pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe, credit, administrateur FROM UTILISATEURS WHERE pseudo=?";
 	private static final String SELECT_ALL = "";
 	private static final String DELETE = "DELETE FROM UTILISATEURS WHERE no_utilisateur=?;";
-	private static final String UPDATE = "UPDATE UTILISATEURS SET(pseudo, nom, prenom, email, telephone, rue, code_postal, ville, mot_de_passe) VALUES (?,?,?,?,?,?,?,?,?);";
+	private static final String UPDATE = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=? ;";
 
 	@Override
 	public void insert(Utilisateur utilisateur) throws BusinessException {
@@ -137,6 +137,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			// Pour prendre la main sur la transaction
 			PreparedStatement psmt = cnx.prepareStatement(UPDATE);
 			psmt.setString(1, utilisateur.getPseudo());
+			System.out.println("pseudo dans jdbcimplc " + utilisateur.getPseudo());
 			psmt.setString(2, utilisateur.getNom());
 			psmt.setString(3, utilisateur.getPrenom());
 			psmt.setString(4, utilisateur.getEmail());
@@ -145,6 +146,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			psmt.setString(7, utilisateur.getCodePostal());
 			psmt.setString(8, utilisateur.getVille());
 			psmt.setString(9, utilisateur.getMotDePasse());
+			psmt.setInt(10, utilisateur.getNoUtilisateur());
+			
 			psmt.executeUpdate();
 			
 			psmt.close();
