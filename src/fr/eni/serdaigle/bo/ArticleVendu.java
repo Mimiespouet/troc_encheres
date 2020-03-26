@@ -11,25 +11,28 @@ public class ArticleVendu implements Serializable {
 	private LocalDate dateFinEncheres;
 	private int prixInitial;
 	private int prixVente;
-	private int noUtilisateur;
+	private int noVendeur;
+	private int noAcheteur;
 	private int noCategorie;
+	private boolean etatVente;
 
 	public ArticleVendu() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int prixInitial, int prixVente, int noUtilisateur, int noCategorie) {
-		super();
-		this.noArticle = noArticle;
+	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
+			LocalDate dateFinEncheres, int prixInitial, int prixVente, int noVendeur, int noAcheteur, int noCategorie,  boolean etatVente) {
+		this();
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.dateFinEncheres = dateFinEncheres;
 		this.prixInitial = prixInitial;
 		this.prixVente = prixVente;
-		this.noUtilisateur = noUtilisateur;
+		this.noVendeur = noVendeur;
+		this.noAcheteur = noAcheteur;
 		this.noCategorie = noCategorie;
+		this.etatVente = etatVente;
 	}
 
 	public int getNoArticle() {
@@ -88,12 +91,20 @@ public class ArticleVendu implements Serializable {
 		this.prixVente = prixVente;
 	}
 	
-	public int getNoUtilisateur() {
-		return noUtilisateur;
+	public int getNoVendeur() {
+		return noVendeur;
 	}
 
-	public void setNoUtilisateur(int noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public void setNoVendeur(int noVendeur) {
+		this.noVendeur = noVendeur;
+	}
+	
+	public int getNoAcheteur() {
+		return noAcheteur;
+	}
+
+	public void setNoAcheteur(int noAcheteur) {
+		this.noAcheteur = noAcheteur;
 	}
 	
 	public int getNoCategorie() {
@@ -102,6 +113,14 @@ public class ArticleVendu implements Serializable {
 
 	public void setNoCategorie(int noCategorie) {
 		this.noCategorie = noCategorie;
+	}
+	
+	public boolean getEtatVente() {
+		return etatVente;
+	}
+
+	public void setEtatVente(boolean etatVente) {
+		this.etatVente = etatVente;
 	}
 
 	@Override
@@ -131,8 +150,8 @@ public class ArticleVendu implements Serializable {
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", prixInitial="
-				+ prixInitial + ", prixVente=" + prixVente + ", noUtilisateur=" + noUtilisateur + ", noCategorie=" + noCategorie + "]";
+				+ prixInitial + ", prixVente=" + prixVente + ", noVendeur=" + noVendeur + ", noAcheteur=" + noAcheteur + 
+				", noCategorie=" + noCategorie + ", EtatVente=" + etatVente + "]";
 	}
 
 }
-

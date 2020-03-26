@@ -12,42 +12,29 @@ public class ArticleManager {
 	private ArticleDAO articleDAO;
 	private static final int CHAMPS_VARCHAR_30 = 30;
 	private static final int CHAMPS_VARCHAR_300 = 300;
+
 	
 
 	public ArticleManager() {
 		articleDAO = DAOFactory.getArticleDAO();
 	}
 
-	public ArticleVendu ajouterArticle(String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int prixInitial, int prixVente, int noUtilisateur, int noCategorie)
+	public void ajouterArticle(ArticleVendu article)
 			throws BusinessException {
 		BusinessException be = new BusinessException();
 
 //valider les champs
-		validerNomArticle(nomArticle, CHAMPS_VARCHAR_30, be);
-		validerDescriptionArticle(description, CHAMPS_VARCHAR_300, be);
-		validerDateEncheres(dateDebutEncheres, dateFinEncheres, be);
-		validerPrix(prixInitial, be);
-
-		ArticleVendu article = null;
+		validerNomArticle(article.getNomArticle(), CHAMPS_VARCHAR_30, be);
+		validerDescriptionArticle(article.getDescription(), CHAMPS_VARCHAR_300, be);
+		validerDateEncheres(article.getDateDebutEncheres(), article.getDateDebutEncheres(), be);
+		validerPrix(article.getPrixInitial(), be);
 		
 		if (!be.hasErreurs()) {
-			article = new ArticleVendu();
-
-			article.setNomArticle(nomArticle);
-			article.setDescription(description);
-			article.setDateDebutEncheres(dateDebutEncheres);
-			article.setDateFinEncheres(dateFinEncheres);
-			article.setPrixInitial(prixInitial);
-			article.setPrixVente(article.getPrixInitial());
-			article.setNoUtilisateur(noUtilisateur);
-			article.setNoCategorie(noCategorie);
-			
 			articleDAO.insert(article);
 		} else {
 			throw be;
 		}
-		return article;
+
 	}
 	
 	public void validerNomArticle(String nomArticle, int varchar, BusinessException be) {
