@@ -4,6 +4,7 @@ import fr.eni.serdaigle.dal.DAOFactory;
 import fr.eni.serdaigle.exception.BusinessException;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.dal.ArticleDAO;
@@ -26,7 +27,7 @@ public class ArticleManager {
 //valider les champs
 		validerNomArticle(article.getNomArticle(), CHAMPS_VARCHAR_30, be);
 		validerDescriptionArticle(article.getDescription(), CHAMPS_VARCHAR_300, be);
-		validerDateEncheres(article.getDateDebutEncheres(), article.getDateDebutEncheres(), be);
+		validerDateEncheres(article.getDateDebutEncheres(), article.getDateFinEncheres(), be);
 		validerPrix(article.getPrixInitial(), be);
 		
 		if (!be.hasErreurs()) {
@@ -57,7 +58,7 @@ public class ArticleManager {
 
 	}
 	
-	private void validerDateEncheres(LocalDate dateDebutEncheres, LocalDate dateFinEncheres, BusinessException be) {
+	private void validerDateEncheres(LocalDateTime dateDebutEncheres, LocalDateTime dateFinEncheres, BusinessException be) {
 		if(dateDebutEncheres == null || dateFinEncheres == null || dateDebutEncheres.isAfter(dateFinEncheres) ) {
 			be.ajouterErreur(CodesResultatBLL.DATE_ERREUR);
 		}

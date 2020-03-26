@@ -20,11 +20,11 @@ public class Retrait implements Serializable {
 		this.ville = ville;
 	}
 
-	public int getNo_article() {
+	public int getNoArticle() {
 		return noArticle;
 	}
 
-	public void setNo_article(int noArticle) {
+	public void setNoArticle(int noArticle) {
 		this.noArticle = noArticle;
 	}
 

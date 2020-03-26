@@ -16,11 +16,11 @@ public class Categorie implements Serializable {
 		this.libelle = libelle;
 	}
 
-	public int getNo_categorie() {
+	public int getNoCategorie() {
 		return noCategorie;
 	}
 
-	public void setNo_categorie(int noCategorie) {
+	public void setNoCategorie(int noCategorie) {
 		this.noCategorie = noCategorie;
 	}
 

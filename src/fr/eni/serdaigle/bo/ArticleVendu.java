@@ -2,13 +2,14 @@ package fr.eni.serdaigle.bo;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class ArticleVendu implements Serializable {
 	private int noArticle;
 	private String nomArticle;
 	private String description;
-	private LocalDate dateDebutEncheres;
-	private LocalDate dateFinEncheres;
+	private LocalDateTime dateDebutEncheres;
+	private LocalDateTime dateFinEncheres;
 	private int prixInitial;
 	private int prixVente;
 	private int noVendeur;
@@ -20,8 +21,8 @@ public class ArticleVendu implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ArticleVendu(String nomArticle, String description, LocalDate dateDebutEncheres,
-			LocalDate dateFinEncheres, int prixInitial, int prixVente, int noVendeur, int noAcheteur, int noCategorie,  boolean etatVente) {
+	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEncheres,
+			LocalDateTime dateFinEncheres, int prixInitial, int prixVente, int noVendeur, int noAcheteur, int noCategorie ) {
 		this();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -32,7 +33,7 @@ public class ArticleVendu implements Serializable {
 		this.noVendeur = noVendeur;
 		this.noAcheteur = noAcheteur;
 		this.noCategorie = noCategorie;
-		this.etatVente = etatVente;
+	
 	}
 
 	public int getNoArticle() {
@@ -59,19 +60,19 @@ public class ArticleVendu implements Serializable {
 		this.description = description;
 	}
 
-	public LocalDate getDateDebutEncheres() {
+	public LocalDateTime getDateDebutEncheres() {
 		return dateDebutEncheres;
 	}
 
-	public void setDateDebutEncheres(LocalDate dateDebutEncheres) {
+	public void setDateDebutEncheres(LocalDateTime dateDebutEncheres) {
 		this.dateDebutEncheres = dateDebutEncheres;
 	}
 
-	public LocalDate getDateFinEncheres() {
+	public LocalDateTime getDateFinEncheres() {
 		return dateFinEncheres;
 	}
 
-	public void setDateFinEncheres(LocalDate dateFinEncheres) {
+	public void setDateFinEncheres(LocalDateTime dateFinEncheres) {
 		this.dateFinEncheres = dateFinEncheres;
 	}
 
