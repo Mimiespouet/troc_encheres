@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.serdaigle.bll.UtilisateurManager;
+import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.exception.BusinessException;
 
 /**
@@ -32,19 +33,24 @@ public class Inscription extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			UtilisateurManager mger = new UtilisateurManager();
-			String pseudo = request.getParameter("pseudo").trim();
-			String nom = request.getParameter("nom").trim();
-			String prenom = request.getParameter("prenom").trim();
-			String email = request.getParameter("mail").trim();
-			String telephone = request.getParameter("tel").trim();
-			String rue = request.getParameter("rue").trim();
-			String codePostal = request.getParameter("cpo").trim();
-			String ville = request.getParameter("ville").trim();
 			String motDePasse = request.getParameter("password").trim();
 			String checkMotDePasse = request.getParameter("checkPassword").trim();
-			mger.ajouterUtilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse,checkMotDePasse);
-			request.setAttribute("success", "Compte créé avec succès");
+			if(motDePasse.equals(checkMotDePasse)) {
+				UtilisateurManager mger = new UtilisateurManager();
+				String pseudo = request.getParameter("pseudo").trim();
+				String nom = request.getParameter("nom").trim();
+				String prenom = request.getParameter("prenom").trim();
+				String email = request.getParameter("mail").trim();
+				String telephone = request.getParameter("tel").trim();
+				String rue = request.getParameter("rue").trim();
+				String codePostal = request.getParameter("cpo").trim();
+				String ville = request.getParameter("ville").trim();
+				Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
+				mger.ajouterUtilisateur(utilisateur);
+				request.setAttribute("success", "Compte créé avec succès");
+			}else {
+				request.setAttribute("error", "Les mots de passe ne correspondent pas");
+			}
 		} catch (BusinessException be) {
 			request.setAttribute("error", be.getMessage());
 			doGet(request, response);

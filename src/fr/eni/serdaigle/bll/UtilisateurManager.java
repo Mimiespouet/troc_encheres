@@ -1,10 +1,9 @@
 package fr.eni.serdaigle.bll;
 
+import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.dal.DAOFactory;
 import fr.eni.serdaigle.dal.UtilisateurDAO;
-
 import fr.eni.serdaigle.exception.BusinessException;
-import fr.eni.serdaigle.bo.Utilisateur;
 
 public class UtilisateurManager {
 	private UtilisateurDAO utilisateurDAO;
@@ -17,49 +16,27 @@ public class UtilisateurManager {
 		utilisateurDAO = DAOFactory.getUtilisateurDAO();
 	}
 
-	public Utilisateur ajouterUtilisateur(String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasse, String checkMotDePasse)
-			throws BusinessException {
+	public void ajouterUtilisateur(Utilisateur utilisateur) throws BusinessException {
 		BusinessException be = new BusinessException();
 		// valider les champs
 
-		validerChamps(pseudo, CHAMPS_VARCHAR_30, be);
-		validerChamps(nom, CHAMPS_VARCHAR_30, be);
-		validerChamps(prenom, CHAMPS_VARCHAR_30, be);
-		validerChamps(email, CHAMPS_VARCHAR_20, be);
-		validerChamps(telephone, CHAMPS_VARCHAR_15, be);
-		validerChamps(rue, CHAMPS_VARCHAR_30, be);
-		validerChamps(codePostal, CHAMPS_VARCHAR_10, be);
-		validerChamps(ville, CHAMPS_VARCHAR_30, be);
-		if(motDePasse.equals(checkMotDePasse)) {
-			validerChamps(motDePasse, CHAMPS_VARCHAR_30, be);
-		}else {
-			be.ajouterErreur(CodesResultatBLL.MOT_DE_PASSE_DIFFERENT);
-		}
-		
-		
-		Utilisateur utilisateur = null;
-
+		validerChamps(utilisateur.getPseudo(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getNom(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getPrenom(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getEmail(), CHAMPS_VARCHAR_20, be);
+		validerChamps(utilisateur.getTelephone(), CHAMPS_VARCHAR_15, be);
+		validerChamps(utilisateur.getRue(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getCodePostal(), CHAMPS_VARCHAR_10, be);
+		validerChamps(utilisateur.getVille(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getMotDePasse(), CHAMPS_VARCHAR_30, be);
+			
 		if (!be.hasErreurs()) {
-			utilisateur = new Utilisateur();
-
-			utilisateur.setPseudo(pseudo);
-			utilisateur.setNom(nom);
-			utilisateur.setPrenom(prenom);
-			utilisateur.setEmail(email);
-			utilisateur.setTelephone(telephone);
-			utilisateur.setRue(rue);
-			utilisateur.setCodePostal(codePostal);
-			utilisateur.setVille(ville);
-			utilisateur.setMotDePasse(motDePasse);
-
 			utilisateurDAO.insert(utilisateur);
 		} else {
 			throw be;
 		}
-		return utilisateur;
 	}
-
+			
 	public Utilisateur selectionnerConnexion(String identifiant, String password) throws BusinessException {
 		return utilisateurDAO.selectConnexion(identifiant, password);
 	}

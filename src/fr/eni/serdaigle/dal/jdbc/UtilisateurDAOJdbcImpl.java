@@ -38,22 +38,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			psmt.setString(7, utilisateur.getCodePostal());
 			psmt.setString(8, utilisateur.getVille());
 			psmt.setString(9, utilisateur.getMotDePasse());
-
-			int nombreEnregistrementInsere = psmt.executeUpdate();
-			if (nombreEnregistrementInsere == 1) {
-				ResultSet rs = psmt.getGeneratedKeys();
-				if (rs.next()) {
-					utilisateur.setNoUtilisateur(rs.getInt(1));
-					
-					// A revoir
-					utilisateur.setCredit(0);
-					utilisateur.setAdministrateur(false);
-				}
-				rs.close();
-
-			} else {
-				be.ajouterErreur(CodesResultatDAL.INSERT_USER_ECHEC);
-			}
+			psmt.executeUpdate();
 			psmt.close();
 
 		} catch (Exception e) {
