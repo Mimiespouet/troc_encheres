@@ -27,19 +27,19 @@
 	
 	 
           
-	            <form action="" method="post">
+	            <form action="modifierProfil" method="post">
 	   
 	                
 	                <label for="pseudo">Pseudo :</label>
 	                <input type="text" id="pseudo" name="pseudo" value="${utilisateur.pseudo}">
 					<br>
 	
-	                <label for="name">Nom :</label>
-	                <input type="text" id="name" name="name" value="${utilisateur.nom}">
+	                <label for="nom">Nom :</label>
+	                <input type="text" id="nom" name="nom" value="${utilisateur.nom}">
 					<br>
 	
-					<label for="firstname">Prénom :</label>
-	             	<input type="text" id="firstname" name="firstname" value="${utilisateur.prenom}">
+					<label for="prenom">Prénom :</label>
+	             	<input type="text" id="prenom" name="prenom" value="${utilisateur.prenom}">
 					<br>
 					
 					<label for="mail">Email :</label>
@@ -50,16 +50,16 @@
 	                <input type="tel" id="tel" name="tel" value="${utilisateur.telephone}">
 					<br>
 					
-					<label for="address">Rue :</label>
-	                <input type="text" id="address" name="address" value="${utilisateur.rue}">
+					<label for="rue">Rue :</label>
+	                <input type="text" id="rue" name="rue" value="${utilisateur.rue}">
 					<br>
 					
 					<label for="cpo">Code Postal :</label>
 	                <input type="text"id="cpo" name="cpo" value="${utilisateur.codePostal}">
 					<br>
 					
-					<label for="city">Ville :</label>
-	                <input type="text" id="city" name="city" value="${utilisateur.ville}">
+					<label for="ville">Ville :</label>
+	                <input type="text" id="ville" name="ville" value="${utilisateur.ville}">
 					<br>
 					
 					
@@ -67,8 +67,8 @@
 	                <input type="password" id="password" name="password" value="${utilisateur.motDePasse}">
 					<br>
 					
-					<label for="password">Confirmation :</label>
-	                <input type="password" id="password" name="password" value="${utilisateur.motDePasse}">
+					<label for="checkPassword">Confirmation :</label>
+	                <input type="password" id="checkPassword" name="checkPassword" value="${utilisateur.motDePasse}">
 					<br>
 					
 					<label for="credit">Credit :</label>
@@ -76,10 +76,12 @@
 					<br>
 					
 					<div class="col-lg-6 col-sm-12">
+						<p>${success}</p>
 						<button id="save" name="save">Enregistrer</button>
 					</div>
 				  </form>
 				</div>	
+	            
 	            
 	            <div class="col-lg-6 col-sm-12">
 	            	<form action="suppression" method="post">
