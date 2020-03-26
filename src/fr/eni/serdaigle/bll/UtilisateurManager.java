@@ -45,6 +45,10 @@ public class UtilisateurManager {
 		return utilisateurDAO.selectPseudo(pseudo);
 	}
 
+	public Utilisateur supprimerUtilisateur(Utilisateur utilisateur) throws BusinessException {
+		return utilisateurDAO.selectPseudo(pseudo);
+	}
+	
 	public Utilisateur validerChamps(String champs, int varchar, BusinessException be) {
 		if (champs == null || champs.equals("")) {
 			be.ajouterErreur(CodesResultatBLL.CHAMP_OBLIGATOIRE);
@@ -56,4 +60,24 @@ public class UtilisateurManager {
 		return null;
 	}
 
+	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException {
+		BusinessException be = new BusinessException();
+		// valider les champs
+
+		validerChamps(utilisateur.getPseudo(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getNom(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getPrenom(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getEmail(), CHAMPS_VARCHAR_20, be);
+		validerChamps(utilisateur.getTelephone(), CHAMPS_VARCHAR_15, be);
+		validerChamps(utilisateur.getRue(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getCodePostal(), CHAMPS_VARCHAR_10, be);
+		validerChamps(utilisateur.getVille(), CHAMPS_VARCHAR_30, be);
+		validerChamps(utilisateur.getMotDePasse(), CHAMPS_VARCHAR_30, be);
+			
+		if (!be.hasErreurs()) {
+			utilisateurDAO.update(utilisateur);
+		} else {
+			throw be;
+		}
+	}
 }
