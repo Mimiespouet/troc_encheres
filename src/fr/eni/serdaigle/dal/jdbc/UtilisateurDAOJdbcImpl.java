@@ -170,6 +170,8 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement psmt = cnx.prepareStatement(DELETE);) {
 			psmt.setInt(1, utilisateur.getNoUtilisateur());
+			psmt.executeUpdate();
+			psmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			BusinessException be = new BusinessException();

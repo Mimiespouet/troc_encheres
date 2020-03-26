@@ -75,20 +75,14 @@
 	                <p>${utilisateur.credit}</p>
 					<br>
 					
-					
+					<div class="col-lg-6 col-sm-12">
+						<button id="save" name="save">Enregistrer</button>
+					</div>
 				  </form>
 				</div>	
-					
-				<div class="col-lg-6 col-sm-12">	
-					<form>
-						<button id="save" name="save">
-		            		Enregistrer
-		            	</button>
-					</form>
-					
-	            </div>
+	            
 	            <div class="col-lg-6 col-sm-12">
-	            	<form>
+	            	<form action="suppression" method="post">
 	            		<button id="delete" name="delete">
 	            			Supprimer mon compte
 	            		</button>

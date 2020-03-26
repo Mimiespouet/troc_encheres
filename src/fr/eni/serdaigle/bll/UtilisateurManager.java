@@ -29,14 +29,14 @@ public class UtilisateurManager {
 		validerChamps(utilisateur.getCodePostal(), CHAMPS_VARCHAR_10, be);
 		validerChamps(utilisateur.getVille(), CHAMPS_VARCHAR_30, be);
 		validerChamps(utilisateur.getMotDePasse(), CHAMPS_VARCHAR_30, be);
-			
+
 		if (!be.hasErreurs()) {
 			utilisateurDAO.insert(utilisateur);
 		} else {
 			throw be;
 		}
 	}
-			
+
 	public Utilisateur selectionnerConnexion(String identifiant, String password) throws BusinessException {
 		return utilisateurDAO.selectConnexion(identifiant, password);
 	}
@@ -48,7 +48,7 @@ public class UtilisateurManager {
 //	public Utilisateur supprimerUtilisateur(Utilisateur utilisateur) throws BusinessException {
 //		return utilisateurDAO.selectPseudo(utilisateur.getNoUtilisateur());
 //	}
-	
+
 	public Utilisateur validerChamps(String champs, int varchar, BusinessException be) {
 		if (champs == null || champs.equals("")) {
 			be.ajouterErreur(CodesResultatBLL.CHAMP_OBLIGATOIRE);
@@ -73,11 +73,15 @@ public class UtilisateurManager {
 		validerChamps(utilisateur.getCodePostal(), CHAMPS_VARCHAR_10, be);
 		validerChamps(utilisateur.getVille(), CHAMPS_VARCHAR_30, be);
 		validerChamps(utilisateur.getMotDePasse(), CHAMPS_VARCHAR_30, be);
-			
+
 		if (!be.hasErreurs()) {
 			utilisateurDAO.update(utilisateur);
 		} else {
 			throw be;
 		}
+	}
+
+	public void supprimerUtilisateur(Utilisateur utilisateur) throws BusinessException {
+		utilisateurDAO.delete(utilisateur);
 	}
 }
