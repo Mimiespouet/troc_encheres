@@ -3,9 +3,15 @@
  */
 package fr.eni.serdaigle.dal.jdbc;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 import fr.eni.serdaigle.bo.Enchere;
+import fr.eni.serdaigle.dal.CodesResultatDAL;
+import fr.eni.serdaigle.dal.ConnectionProvider;
 import fr.eni.serdaigle.dal.EnchereDAO;
 import fr.eni.serdaigle.exception.BusinessException;
 
@@ -16,7 +22,41 @@ import fr.eni.serdaigle.exception.BusinessException;
  * @date 27 mars 2020
  */
 public class EnchereDAOJdbcImpl implements EnchereDAO{
+	private static final String INSERT = "INSERT INTO ENCHERES(date_enchere,montant_enchere) VALUES (?,?);";
 	private static final String SELECT_BY = "SELECT FROM ENCHERES WHERE";
+	
+	
+	/**
+	 * {@inheritDoc}
+	 * @see fr.eni.serdaigle.dal.EnchereDAO#insert(fr.eni.serdaigle.bo.Enchere)
+	 */
+	@Override
+	public void insert(Enchere enchere) throws BusinessException {
+		Connection cnx = null;
+		BusinessException be = new BusinessException();
+		try {
+			cnx = ConnectionProvider.getConnection();
+			PreparedStatement psmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
+			psmt.setTimestamp(1, Timestamp.valueOf(enchere.getDateEnchere()));
+			psmt.setInt(2, enchere.getMontantEnchere());
+			psmt.close();
+
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			be.ajouterErreur(CodesResultatDAL.INSERT_ENCHERE_ECHEC);
+		} finally {
+			try {
+				cnx.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if (be.hasErreurs()) {
+				throw be;
+			}
+		}
+
+	}
 	
 	
 	/**

@@ -15,6 +15,9 @@ import fr.eni.serdaigle.exception.BusinessException;
  * @date 27 mars 2020
  */
 public interface EnchereDAO {
+	
+	void insert(Enchere enchere) throws BusinessException;
+	
 	List<Enchere> select(Enchere enchere) throws BusinessException;
 	
 }
