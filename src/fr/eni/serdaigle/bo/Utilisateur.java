@@ -144,7 +144,31 @@ public class Utilisateur implements Serializable {
 		this.administrateur = administrateur;
 	}
 
+	public List<ArticleVendu> getListeVente() {
+		return listeVente;
+	}
 
+	public void setListeVente(List<ArticleVendu> listeVente) {
+		this.listeVente = listeVente;
+	}
+
+	public List<ArticleVendu> getListeAchat() {
+		return listeAchat;
+	}
+
+	public void setListeAchat(List<ArticleVendu> listeAchat) {
+		this.listeAchat = listeAchat;
+	}
+
+	public List<Enchere> getListeEnchere() {
+		return listeEnchere;
+	}
+
+	public void setListeEnchere(List<Enchere> listeEnchere) {
+		this.listeEnchere = listeEnchere;
+	}
+
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -172,7 +196,10 @@ public class Utilisateur implements Serializable {
 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
 				+ codePostal + ", ville=" + ville + ", motDePasse=" + motDePasse + ", credit=" + credit
-				+ ", administrateur=" + administrateur + "]";
+				+ ", administrateur=" + administrateur + ", listeVente=" + listeVente + ", listeAchat=" + listeAchat
+				+ ", listeEnchere=" + listeEnchere + "]";
 	}
+
+
 	
 }

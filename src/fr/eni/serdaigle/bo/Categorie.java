@@ -34,18 +34,49 @@ public class Categorie implements Serializable {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
+	
+	public List<ArticleVendu> getListeArticle() {
+		return listeArticle;
+	}
+
+	public void setListeArticle(List<ArticleVendu> listeArticle) {
+		this.listeArticle = listeArticle;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((libelle == null) ? 0 : libelle.hashCode());
 		result = prime * result + noCategorie;
 		return result;
 	}
 
 	@Override
-	public String toString() {
-		return "Categorie [noCategorie=" + noCategorie + ", libelle=" + libelle + "]";
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Categorie other = (Categorie) obj;
+		if (libelle == null) {
+			if (other.libelle != null)
+				return false;
+		} else if (!libelle.equals(other.libelle))
+			return false;
+		if (noCategorie != other.noCategorie)
+			return false;
+		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Categorie [noCategorie=" + noCategorie + ", libelle=" + libelle + ", listeArticle=" + listeArticle
+				+ "]";
+	}
+
+
 	
 }

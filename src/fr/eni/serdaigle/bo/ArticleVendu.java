@@ -127,6 +127,14 @@ public class ArticleVendu implements Serializable {
 		this.etatVente = etatVente;
 	}
 
+	public List<Enchere> getListeEnchere() {
+		return listeEnchere;
+	}
+
+	public void setListeEnchere(List<Enchere> listeEnchere) {
+		this.listeEnchere = listeEnchere;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -147,15 +155,16 @@ public class ArticleVendu implements Serializable {
 		if (noArticle != other.noArticle)
 			return false;
 		return true;
-
 	}
 
 	@Override
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", prixInitial="
-				+ prixInitial + ", prixVente=" + prixVente + ", noVendeur=" + noVendeur + ", noAcheteur=" + noAcheteur + 
-				", noCategorie=" + noCategorie + ", EtatVente=" + etatVente + "]";
+				+ prixInitial + ", prixVente=" + prixVente + ", noVendeur=" + noVendeur + ", noAcheteur=" + noAcheteur
+				+ ", noCategorie=" + noCategorie + ", etatVente=" + etatVente + ", listeEnchere=" + listeEnchere + "]";
 	}
+
+
 
 }
