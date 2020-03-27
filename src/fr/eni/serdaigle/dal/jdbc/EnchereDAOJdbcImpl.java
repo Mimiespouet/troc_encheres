@@ -22,7 +22,7 @@ import fr.eni.serdaigle.exception.BusinessException;
  * @date 27 mars 2020
  */
 public class EnchereDAOJdbcImpl implements EnchereDAO{
-	private static final String INSERT = "INSERT INTO ENCHERES(date_enchere,montant_enchere) VALUES (?,?);";
+	private static final String INSERT = "INSERT INTO ENCHERES(no_utilisateur,no_article,date_enchere,montant_enchere) VALUES (?,?,?,?);";
 	private static final String SELECT_BY = "SELECT FROM ENCHERES WHERE";
 	
 	
@@ -36,9 +36,12 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 		BusinessException be = new BusinessException();
 		try {
 			cnx = ConnectionProvider.getConnection();
-			PreparedStatement psmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
-			psmt.setTimestamp(1, Timestamp.valueOf(enchere.getDateEnchere()));
-			psmt.setInt(2, enchere.getMontantEnchere());
+			PreparedStatement psmt = cnx.prepareStatement(INSERT);
+			psmt.setInt(1, enchere.getUtilisateur().getNoUtilisateur());
+			psmt.setInt(2, enchere.getArticle().getNoArticle());
+			psmt.setTimestamp(3, Timestamp.valueOf(enchere.getDateEnchere()));
+			psmt.setInt(4, enchere.getMontantEnchere());
+			psmt.executeUpdate();
 			psmt.close();
 
 
