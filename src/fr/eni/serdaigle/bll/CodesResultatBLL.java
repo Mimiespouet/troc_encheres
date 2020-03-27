@@ -15,9 +15,4 @@ public abstract class CodesResultatBLL {
 	public static final int DATE_ERREUR = 20006;
 	public static final int MOT_DE_PASSE_DIFFERENT  = 20007;
 	public static final int PRIX_ERREUR = 20008;
-	
-	
-	
-	
-	
 }

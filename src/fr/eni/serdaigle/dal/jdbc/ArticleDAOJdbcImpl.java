@@ -14,7 +14,7 @@ import fr.eni.serdaigle.exception.BusinessException;
 
 public class ArticleDAOJdbcImpl implements ArticleDAO{
 
-	private static final String INSERT = "INSERT INTO ARTICLE_VENDU(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_vendeur, no_acheteur, no_categorie, etat_vente) VALUES (?,?,?,?,?,?,?,?,?,?);";
+	private static final String INSERT = "INSERT INTO ARTICLES_VENDUS(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_vendeur, no_categorie) VALUES (?,?,?,?,?,?,?,?);";
 
 	@Override
 	public void insert(ArticleVendu article) throws BusinessException {
@@ -29,10 +29,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO{
 			psmt.setTimestamp(4, Timestamp.valueOf(article.getDateFinEncheres()));
 			psmt.setInt(5, article.getPrixInitial());
 			psmt.setInt(6, article.getPrixVente());
-			psmt.setInt(7, article.getNoVendeur());
-			psmt.setInt(8, article.getNoAcheteur());
-			psmt.setInt(9, article.getNoCategorie());
-			psmt.setBoolean(10, article.getEtatVente());
+			psmt.setInt(7, article.getVendeur().getNoUtilisateur());
+			psmt.setInt(8, article.getCategorie().getNoCategorie());
 
 			int nombreArticleInsere = psmt.executeUpdate();
 			if (nombreArticleInsere == 1) {
