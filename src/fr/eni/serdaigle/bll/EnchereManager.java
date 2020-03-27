@@ -1,7 +1,5 @@
 package fr.eni.serdaigle.bll;
 
-import java.time.LocalDateTime;
-
 import fr.eni.serdaigle.bo.Enchere;
 import fr.eni.serdaigle.dal.DAOFactory;
 import fr.eni.serdaigle.dal.EnchereDAO;
@@ -33,7 +31,7 @@ public class EnchereManager {
 
 	}
 	private void validerDateEnchere(Enchere enchere, BusinessException be) {
-		if(enchere.getDateEnchere() == null || enchere.getDateEnchere() isAfter enchere.getArticle().getDateFinEncheres()) {
+		if(enchere.getDateEnchere() == null || enchere.getDateEnchere().isAfter(enchere.getArticle().getDateFinEncheres()) ){
 			be.ajouterErreur(CodesResultatBLL.DATE_ERREUR);
 		}
 	}
