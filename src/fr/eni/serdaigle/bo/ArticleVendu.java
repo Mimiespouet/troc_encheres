@@ -24,9 +24,11 @@ public class ArticleVendu implements Serializable {
 		this.listeEnchere = new ArrayList<Enchere>();
 	}
 
-	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, int prixInitial, int prixVente, Utilisateur vendeur, Utilisateur acheteur, Categorie categorie) {
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
+			LocalDateTime dateFinEncheres, int prixInitial, int prixVente, Utilisateur vendeur, Utilisateur acheteur,
+			Categorie categorie, boolean etatVente, List<Enchere> listeEnchere) {
 		this();
+		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
@@ -36,7 +38,8 @@ public class ArticleVendu implements Serializable {
 		this.vendeur = vendeur;
 		this.acheteur = acheteur;
 		this.categorie = categorie;
-	
+		this.etatVente = etatVente;
+		this.listeEnchere = listeEnchere;
 	}
 
 	public int getNoArticle() {
@@ -157,7 +160,12 @@ public class ArticleVendu implements Serializable {
 		return true;
 	}
 
-
-
+	@Override
+	public String toString() {
+		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
+				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", prixInitial="
+				+ prixInitial + ", prixVente=" + prixVente + ", vendeur=" + vendeur + ", acheteur=" + acheteur
+				+ ", categorie=" + categorie + ", etatVente=" + etatVente + ", listeEnchere=" + listeEnchere + "]";
+	}
 
 }
