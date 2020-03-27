@@ -7,18 +7,18 @@ import java.util.ArrayList;
 public class Enchere implements Serializable {
 	private LocalDateTime dateEnchere;
 	private int montantEnchere;
-	private int noUtilisateur;
-	private int noArticle;
+	private Utilisateur utilisateur;
+	private ArticleVendu article;
 
 	public Enchere() {
 	}
 
-	public Enchere(LocalDateTime dateEnchere, int montantEnchere, int noUtilisateur, int noArticle) {
+	public Enchere(LocalDateTime dateEnchere, int montantEnchere, Utilisateur utilisateur, ArticleVendu article) {
 		this();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
-		this.noUtilisateur = noUtilisateur;
-		this.noArticle = noArticle;
+		this.utilisateur = utilisateur;
+		this.article = article;
 	}
 
 	public LocalDateTime getDateEnchere() {
@@ -37,28 +37,30 @@ public class Enchere implements Serializable {
 		this.montantEnchere = montantEnchere;
 	}
 
-	public int getNo_utilisateur() {
-		return noUtilisateur;
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
-	public void setNoUtilisateur(int noUtilisateur) {
-		this.noUtilisateur = noUtilisateur;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
-	public int getNo_article() {
-		return noArticle;
+	public ArticleVendu getArticle() {
+		return article;
 	}
 
-	public void setNoArticle(int noArticle) {
-		this.noArticle = noArticle;
+	public void setArticle(ArticleVendu article) {
+		this.article = article;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + noArticle;
-		result = prime * result + noUtilisateur;
+		result = prime * result + ((article == null) ? 0 : article.hashCode());
+		result = prime * result + ((dateEnchere == null) ? 0 : dateEnchere.hashCode());
+		result = prime * result + montantEnchere;
+		result = prime * result + ((utilisateur == null) ? 0 : utilisateur.hashCode());
 		return result;
 	}
 
@@ -71,17 +73,29 @@ public class Enchere implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Enchere other = (Enchere) obj;
-		if (noArticle != other.noArticle)
+		if (article == null) {
+			if (other.article != null)
+				return false;
+		} else if (!article.equals(other.article))
 			return false;
-		if (noUtilisateur != other.noUtilisateur)
+		if (dateEnchere == null) {
+			if (other.dateEnchere != null)
+				return false;
+		} else if (!dateEnchere.equals(other.dateEnchere))
+			return false;
+		if (montantEnchere != other.montantEnchere)
+			return false;
+		if (utilisateur == null) {
+			if (other.utilisateur != null)
+				return false;
+		} else if (!utilisateur.equals(other.utilisateur))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Enchere [dateEnchere=" + dateEnchere + ", montantEnchere=" + montantEnchere + ", noUtilisateur="
-				+ noUtilisateur + ", noArticle=" + noArticle + "]";
+		return "Enchere [dateEnchere=" + dateEnchere + ", montantEnchere=" + montantEnchere + ", utilisateur="
+				+ utilisateur + ", article=" + article + "]";
 	}
-
 }

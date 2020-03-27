@@ -3,7 +3,7 @@ package fr.eni.serdaigle.bo;
 import java.io.Serializable;
 
 public class Retrait implements Serializable {
-	private int noArticle;
+	private ArticleVendu article;
 	private String rue;
 	private String codePostal;
 	private String ville;
@@ -11,20 +11,20 @@ public class Retrait implements Serializable {
 	public Retrait() {
 	}
 
-	public Retrait(int noArticle, String rue, String codePostal, String ville) {
+	public Retrait(ArticleVendu article, String rue, String codePostal, String ville) {
 		this();
-		this.noArticle = noArticle;
+		this.article = article;
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;
 	}
 
-	public int getNoArticle() {
-		return noArticle;
+	public ArticleVendu getArticle() {
+		return article;
 	}
 
-	public void setNoArticle(int noArticle) {
-		this.noArticle = noArticle;
+	public void setArticle(ArticleVendu article) {
+		this.article = article;
 	}
 
 	public String getRue() {
@@ -55,7 +55,10 @@ public class Retrait implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + noArticle;
+		result = prime * result + ((article == null) ? 0 : article.hashCode());
+		result = prime * result + ((codePostal == null) ? 0 : codePostal.hashCode());
+		result = prime * result + ((rue == null) ? 0 : rue.hashCode());
+		result = prime * result + ((ville == null) ? 0 : ville.hashCode());
 		return result;
 	}
 
@@ -68,15 +71,33 @@ public class Retrait implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Retrait other = (Retrait) obj;
-		if (noArticle != other.noArticle)
+		if (article == null) {
+			if (other.article != null)
+				return false;
+		} else if (!article.equals(other.article))
+			return false;
+		if (codePostal == null) {
+			if (other.codePostal != null)
+				return false;
+		} else if (!codePostal.equals(other.codePostal))
+			return false;
+		if (rue == null) {
+			if (other.rue != null)
+				return false;
+		} else if (!rue.equals(other.rue))
+			return false;
+		if (ville == null) {
+			if (other.ville != null)
+				return false;
+		} else if (!ville.equals(other.ville))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Retrait [noArticle=" + noArticle + ", rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville
-				+ "]";
+		return "Retrait [article=" + article + ", rue=" + rue + ", codePostal=" + codePostal + ", ville=" + ville + "]";
 	}
 
+	
 }
