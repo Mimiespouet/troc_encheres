@@ -2,6 +2,7 @@ package fr.eni.serdaigle.bo;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class Enchere implements Serializable {
 	private LocalDateTime dateEnchere;
@@ -10,11 +11,10 @@ public class Enchere implements Serializable {
 	private int noArticle;
 
 	public Enchere() {
-
 	}
 
 	public Enchere(LocalDateTime dateEnchere, int montantEnchere, int noUtilisateur, int noArticle) {
-		super();
+		this();
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 		this.noUtilisateur = noUtilisateur;

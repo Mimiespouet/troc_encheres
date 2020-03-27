@@ -1,6 +1,8 @@
 package fr.eni.serdaigle.bo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Utilisateur implements Serializable {
 	private int noUtilisateur;
@@ -15,9 +17,15 @@ public class Utilisateur implements Serializable {
 	private String motDePasse;
 	private int credit;
 	private boolean administrateur;
+	private List<ArticleVendu> listeVente;
+	private List<ArticleVendu> listeAchat;
+	private List<Enchere> listeEnchere;
 
 	
 	public Utilisateur() {
+		this.listeEnchere = new ArrayList<Enchere>();
+		this.listeAchat = new ArrayList<ArticleVendu>();
+		this.listeVente = new ArrayList<ArticleVendu>();
 	}
 	
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,

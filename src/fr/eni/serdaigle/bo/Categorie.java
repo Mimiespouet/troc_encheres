@@ -1,17 +1,20 @@
 package fr.eni.serdaigle.bo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Categorie implements Serializable {
 	private int noCategorie;
 	private String libelle;
+	private List<ArticleVendu> listeArticle;
 
 	public Categorie()  {
-
+		this.listeArticle = new ArrayList<ArticleVendu>();
 	}
 
 	public Categorie(int noCategorie, String libelle) {
-		super();
+		this();
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 	}

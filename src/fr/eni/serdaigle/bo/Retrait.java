@@ -9,11 +9,10 @@ public class Retrait implements Serializable {
 	private String ville;
 
 	public Retrait() {
-
 	}
 
 	public Retrait(int noArticle, String rue, String codePostal, String ville) {
-		super();
+		this();
 		this.noArticle = noArticle;
 		this.rue = rue;
 		this.codePostal = codePostal;

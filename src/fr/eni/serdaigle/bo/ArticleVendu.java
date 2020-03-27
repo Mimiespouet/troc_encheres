@@ -3,6 +3,8 @@ package fr.eni.serdaigle.bo;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArticleVendu implements Serializable {
 	private int noArticle;
@@ -16,9 +18,10 @@ public class ArticleVendu implements Serializable {
 	private int noAcheteur;
 	private int noCategorie;
 	private boolean etatVente;
+	private List<Enchere> listeEnchere;
 
 	public ArticleVendu() {
-		// TODO Auto-generated constructor stub
+		this.listeEnchere = new ArrayList<Enchere>();
 	}
 
 	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEncheres,
