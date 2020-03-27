@@ -32,8 +32,8 @@ public class EnchereManager {
 		}
 
 	}
-	private void validerDateEnchere(LocalDateTime dateEnchere, BusinessException be) {
-		if(dateEnchere == null) {
+	private void validerDateEnchere(Enchere enchere, BusinessException be) {
+		if(enchere.getDateEnchere() == null || enchere.getDateEnchere() isAfter enchere.getArticle().getDateFinEncheres()) {
 			be.ajouterErreur(CodesResultatBLL.DATE_ERREUR);
 		}
 	}
