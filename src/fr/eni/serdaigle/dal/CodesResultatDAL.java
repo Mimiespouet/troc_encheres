@@ -17,5 +17,9 @@ public abstract class CodesResultatDAL {
 	public static final int UPDATE_UTILISATEUR_ECHEC = 10003;
 
 	public static final int DELETE_USER = 10004;
+	
+	public static final int INSERT_CATEGORIE_ECHEC = 10005;
+	
+	public static final int LOGIN_INCORRECT = 10006;
 
 }

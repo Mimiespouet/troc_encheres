@@ -66,6 +66,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	@Override
 	public Utilisateur selectConnexion(String identifiant, String password) throws BusinessException {
+		BusinessException be = new BusinessException();
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement psmt = cnx.prepareStatement(SELECT_CONNEXION);) {
 			psmt.setString(1, identifiant);
@@ -76,48 +77,31 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			Utilisateur utilisateur = null;
 			if (rs.next()) {
 				utilisateur = mappingUtilisateur(rs);
+			}else {
+				be.ajouterErreur(CodesResultatDAL.LOGIN_INCORRECT);
+				throw be;
 			}
+			rs.close();
+			psmt.close();
 			return utilisateur;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			BusinessException be = new BusinessException();
 			be.ajouterErreur(CodesResultatDAL.SELECT_LOGIN_ECHEC);
 			throw be;
 		}
-
-	}
-
-	private Utilisateur mappingUtilisateur(ResultSet rs) throws SQLException {
-		Utilisateur utilisateur = new Utilisateur();
-		utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
-		utilisateur.setPseudo(rs.getString("pseudo"));
-		utilisateur.setNom(rs.getString("nom"));
-		utilisateur.setPrenom(rs.getString("prenom"));
-		utilisateur.setEmail(rs.getString("email"));
-		utilisateur.setTelephone(rs.getString("telephone"));
-		utilisateur.setRue(rs.getString("rue"));
-		utilisateur.setCodePostal(rs.getString("code_postal"));
-		utilisateur.setVille(rs.getString("ville"));
-		utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
-		utilisateur.setCredit(rs.getInt("credit"));
-		if (rs.getInt("administrateur") == 1) {
-			utilisateur.setAdministrateur(true);
-		} else {
-			utilisateur.setAdministrateur(false);
-		}
-		return utilisateur;
 	}
 
 	public Utilisateur selectPseudo(String pseudo) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement psmt = cnx.prepareStatement(SELECT_BY_PSEUDO);) {
 			psmt.setString(1, pseudo);
-
 			ResultSet rs = psmt.executeQuery();
 			Utilisateur utilisateur = null;
 			if (rs.next()) {
 				utilisateur = mappingUtilisateur(rs);
 			}
+			rs.close();
+			psmt.close();
 			return utilisateur;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -147,9 +131,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			psmt.setString(8, utilisateur.getVille());
 			psmt.setString(9, utilisateur.getMotDePasse());
 			psmt.setInt(10, utilisateur.getNoUtilisateur());
-			
 			psmt.executeUpdate();
-			
 			psmt.close();
 
 		} catch (Exception e) {
@@ -183,5 +165,25 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		}
 	}
 
+	private Utilisateur mappingUtilisateur(ResultSet rs) throws SQLException {
+		Utilisateur utilisateur = new Utilisateur();
+		utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+		utilisateur.setPseudo(rs.getString("pseudo"));
+		utilisateur.setNom(rs.getString("nom"));
+		utilisateur.setPrenom(rs.getString("prenom"));
+		utilisateur.setEmail(rs.getString("email"));
+		utilisateur.setTelephone(rs.getString("telephone"));
+		utilisateur.setRue(rs.getString("rue"));
+		utilisateur.setCodePostal(rs.getString("code_postal"));
+		utilisateur.setVille(rs.getString("ville"));
+		utilisateur.setMotDePasse(rs.getString("mot_de_passe"));
+		utilisateur.setCredit(rs.getInt("credit"));
+		if (rs.getInt("administrateur") == 1) {
+			utilisateur.setAdministrateur(true);
+		} else {
+			utilisateur.setAdministrateur(false);
+		}
+		return utilisateur;
+	}
 }
 
