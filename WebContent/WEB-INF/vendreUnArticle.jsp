@@ -22,6 +22,8 @@
 		</div>
 
 		<div class="col-lg-6 col-sm-12">
+		<p>${success}</p>
+		<p>${error}</p>
 			<form action="vendreArticle" method="post">
 				<div>
 					<label for="nom">Article :</label>
@@ -40,7 +42,7 @@
 
 				<div>
 					<label for="description">Description :</label><br>
-					<textarea id="description" name="description" rows="5" cols="33" maxlength="100" placeholder="Entrer la description de l'article"></textarea>
+					<textarea id="description" name="description" rows="5" cols="33" maxlength="100" placeholder="Entrer la description de l'article" required></textarea>
 				</div>
 
 				<div>
@@ -52,7 +54,7 @@
 				<div>
 					<label for="prixInitial">Prix initial :</label> <input
 						type="number" id="prixInitial" name="prixInitial" min="1"
-						max="10000">
+						max="10000" required>
 				</div>
 					<div>
 						<label for="dateDebut">Début de l'enchère :</label> <input
@@ -71,7 +73,7 @@
 						<label for="adresse">Retrait :</label> <input
 							type="text"
 							placeholder="Entrer l'adresse de retrait de l'article"
-							id="adresse" name="adresse"  size="40" required>
+							id="adresse" name="adresse"  size="40">
 					</div>
 
 					<div>

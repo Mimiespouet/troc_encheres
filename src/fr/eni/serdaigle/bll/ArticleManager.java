@@ -59,13 +59,13 @@ public class ArticleManager {
 	}
 	
 	private void validerDateEncheres(LocalDateTime dateDebutEncheres, LocalDateTime dateFinEncheres, BusinessException be) {
-		if(dateDebutEncheres == null || dateFinEncheres == null || dateDebutEncheres.isAfter(dateFinEncheres) ) {
+		if(dateDebutEncheres.isAfter(dateFinEncheres)) {
 			be.ajouterErreur(CodesResultatBLL.DATE_ERREUR);
 		}
 	}
 	
 	public void validerPrix(int prixInitial, BusinessException be) {
-		if (prixInitial == 0) {
+		if (prixInitial < 0) {
 			be.ajouterErreur(CodesResultatBLL.PRIX_ERREUR);
 		}
 	}

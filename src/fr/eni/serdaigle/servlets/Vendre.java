@@ -58,11 +58,8 @@ public class Vendre extends HttpServlet {
 			//Conversion pour les dates
 			try {
 				DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-				System.out.println("formatter cree");
 				dateDebutEncheres = LocalDateTime.parse(dateDebutEncheresStr, formatter);
 				dateFinEncheres = LocalDateTime.parse(dateFinEncheresStr, formatter);
-				System.out.println(dateDebutEncheres);
-				System.out.println(dateFinEncheres);
 			} catch (DateTimeParseException e) {
 				e.printStackTrace();
 				request.setAttribute("error", "Erreur de saisie dans les données Date de début et/ou fin enchère");
@@ -86,11 +83,11 @@ public class Vendre extends HttpServlet {
 			
 			// Redirection à changer
 			request.setAttribute("success", "L'article a bien été mis en vente");
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vendreUnArticle.jsp");
 			rd.forward(request, response);
 
 		} catch (BusinessException be) {
-			be.printStackTrace();
+			System.out.println(be.getMessage());
 			request.setAttribute("error", be.getMessage());
 			doGet(request, response);
 		}
