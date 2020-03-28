@@ -6,6 +6,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe en charge de l'objet Article
+ * @author Max
+ * @version Trocencheres - v1.0
+ * @date 28 mars 2020
+ */
 public class ArticleVendu implements Serializable {
 	private int noArticle;
 	private String nomArticle;
@@ -20,25 +26,60 @@ public class ArticleVendu implements Serializable {
 	private boolean etatVente;
 	private List<Enchere> listeEnchere;
 
+	/**
+	 * Constructeur
+	 */
 	public ArticleVendu() {
 		this.listeEnchere = new ArrayList<Enchere>();
 	}
 
-	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, int prixInitial, int prixVente, Utilisateur vendeur, Utilisateur acheteur,
-			Categorie categorie, boolean etatVente, List<Enchere> listeEnchere) {
+	/**
+	 * Constructeur pour la servlet Vendre
+	 * @param nomArticle
+	 * @param description
+	 * @param dateDebutEncheres
+	 * @param dateFinEncheres
+	 * @param prixInitial
+	 * @param vendeur
+	 * @param categorie
+	 * @param etatVente
+	 */
+	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEncheres,
+			LocalDateTime dateFinEncheres, int prixInitial, Utilisateur vendeur, Categorie categorie,
+			boolean etatVente) {
 		this();
-		this.noArticle = noArticle;
 		this.nomArticle = nomArticle;
 		this.description = description;
 		this.dateDebutEncheres = dateDebutEncheres;
 		this.dateFinEncheres = dateFinEncheres;
 		this.prixInitial = prixInitial;
-		this.prixVente = prixVente;
 		this.vendeur = vendeur;
-		this.acheteur = acheteur;
 		this.categorie = categorie;
 		this.etatVente = etatVente;
+	}
+
+	/**
+	 * Constructeur
+	 * @param noArticle
+	 * @param nomArticle
+	 * @param description
+	 * @param dateDebutEncheres
+	 * @param dateFinEncheres
+	 * @param prixInitial
+	 * @param prixVente
+	 * @param vendeur
+	 * @param acheteur
+	 * @param categorie
+	 * @param etatVente
+	 * @param listeEnchere
+	 */
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
+			LocalDateTime dateFinEncheres, int prixInitial, int prixVente, Utilisateur vendeur, Utilisateur acheteur,
+			Categorie categorie, boolean etatVente, List<Enchere> listeEnchere) {
+		this(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie, etatVente);
+		this.noArticle = noArticle;
+		this.prixVente = prixVente;
+		this.acheteur = acheteur;
 		this.listeEnchere = listeEnchere;
 	}
 
