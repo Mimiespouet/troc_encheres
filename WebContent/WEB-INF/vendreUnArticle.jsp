@@ -22,75 +22,61 @@
 		</div>
 
 		<div class="col-lg-6 col-sm-12">
-			<form action="login" method="post">
+			<form action="vendreArticle" method="post">
 				<div>
-					<label for="nomArt">Article :</label>
-					<input type="text" placeholder="Entrer le nom de l'article" id="nomArt" name="nomArt" size="30" required>
+					<label for="nom">Article :</label>
+					<input type="text" placeholder="Entrer le nom de l'article" id="nom" name="nom" size="30" required>
 				</div>
 
 				<div>
-					<label for="catArt">Catégorie :</label> 
-					<select>
-						<optgroup label="Loisirs">
-					        <option>DVD - Films</option>
-					        <option>CD - Musique</option>
-					        <option>Livres</option>
-					        <option>Animaux</option>
-					        <option>Vélos</option>
-					        <option>Sports</option>
-				    	</optgroup>
-				    	<optgroup label="Mode">
-					        <option>Vêtements</option>
-					        <option>Chaussures</option>
-					        <option>Bijoux</option>
-				    	</optgroup>
-				    	<optgroup label="Multimédia">
-					        <option>Informatique</option>
-					        <option>Consoles - Jeux Vidéos</option>
-					        <option>Images - Sons</option>
-				    	</optgroup>
+					<label for="categorie">Catégorie :</label> 
+					<select id="categorie" name="categorie">				      				    	
+					        <option value="Informatique">Informatique</option>
+					        <option value="Livres">Livres</option>
+					        <option value="Nourriture">Nourriture</option>
+					        <option value="Vêtements">Vêtements</option>
 					</select>
 				</div>
 
 				<div>
-					<label for="descriptArt">Description :</label><br>
-					<textarea id="descriptArt" name="descriptArt" rows="5" cols="33" maxlength="100" placeholder="Entrer la description de l'article"></textarea>
+					<label for="description">Description :</label><br>
+					<textarea id="description" name="description" rows="5" cols="33" maxlength="100" placeholder="Entrer la description de l'article"></textarea>
 				</div>
 
 				<div>
-					<label for="photoArt">Photo de l'article</label> <input
-						type="file" id="photoArticle" name="photoArticle"
+					<label for="photo">Photo de l'article</label> <input
+						type="file" id="photo" name="photo"
 						accept="image/png, image/jpeg">
 				</div>
 
 				<div>
-					<label for="prixInit">Prix initial :</label> <input
-						type="number" id="prixArticle" name="prixArticle" min="1"
+					<label for="prixInitial">Prix initial :</label> <input
+						type="number" id="prixInitial" name="prixInitial" min="1"
 						max="10000">
 				</div>
 					<div>
-						<label for="debutEnchere">Début de l'enchère :</label> <input
-							id="dateDebEnchere" type="datetime-local" name="debutEnchere"
+						<label for="dateDebut">Début de l'enchère :</label> <input
+							id="dateDebut" type="datetime-local" name="dateDebut"
 							required>
 					</div>
 
 
 					<div>
-						<label for="finEnchere">Fin de l'enchère :</label> <input
-							id="dateFinEnchere" type="datetime-local" name="finEnchere"
+						<label for="dateFin">Fin de l'enchère :</label> <input
+							id="dateFin" type="datetime-local" name="dateFin"
 							required>
 					</div>
 
 					<div>
-						<label for="adresseRetrait">Retrait :</label> <input
+						<label for="adresse">Retrait :</label> <input
 							type="text"
 							placeholder="Entrer l'adresse de retrait de l'article"
-							id="adresseRetrait" name="adresse"  size="40" required>
+							id="adresse" name="adresse"  size="40" required>
 					</div>
 
 					<div>
-						<a id="enregistrerVente" href="validerVente"
-							class="btn btn-primary">Enregistrer</a> 
+					<button id="enregistrer" name="enregistrer">Enregistrer</button>
+					
 						<a id="annulerVente"
 							href="accueil" class="btn btn-primary">Annuler</a>
 					</div>

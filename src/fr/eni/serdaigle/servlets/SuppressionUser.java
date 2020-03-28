@@ -18,7 +18,7 @@ import fr.eni.serdaigle.exception.BusinessException;
  * Servlet implementation class Accueil
  */
 @WebServlet("/suppression")
-public class Suppression extends HttpServlet {
+public class SuppressionUser extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	/**
