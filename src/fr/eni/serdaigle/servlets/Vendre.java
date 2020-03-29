@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +23,24 @@ import fr.eni.serdaigle.exception.BusinessException;
 @WebServlet("/vendreArticle")
 public class Vendre extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+//	@Override
+// 	A VOIR UNE FOIS QUE LE CategorieManager SERA EN PLACE 
+//    public void init() throws ServletException {
+//
+//        List<Categorie> listeCategories = new ArrayList<Categorie>();
+//
+//        try {
+//            CategorieManager categorieManager = new CategorieManager();
+//            listeCategories = categorieManager.selectionnerToutesLesCategories();
+//
+//        } catch (BusinessException e) {
+//            e.printStackTrace();
+//        }
+//
+//        this.getServletContext().setAttribute("categories", listeCategories);
+//        super.init();
+//    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

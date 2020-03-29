@@ -3,6 +3,7 @@ package fr.eni.serdaigle.servlets;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,35 +20,49 @@ import fr.eni.serdaigle.bo.Utilisateur;
 @WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Utilisateur utilisateur;
+	private UtilisateurManager mger; 
+	//private Utilisateur utilisateur;
 	
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * {@inheritDoc}
+	 * @see javax.servlet.GenericServlet#init()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		session.setAttribute("utilisateur", utilisateur);
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
-		rd.forward(request, response);
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config); 
+		mger = new UtilisateurManager();
+		
 	}
+	
+//	/**
+//	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+//	 */
+//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//		HttpSession session = request.getSession();
+//		session.setAttribute("utilisateur", utilisateur);
+//		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+//		rd.forward(request, response);
+//	}
 
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			UtilisateurManager mger = new UtilisateurManager();
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			Utilisateur utilisateurTest = mger.selectionnerConnexion(username, password);
-			System.out.println(utilisateurTest);
+			System.err.println(utilisateurTest); //voir pour enlever mdp de toString de Utilisateur bo
 			if (utilisateurTest==null) {
-				request.setAttribute("errorLogin", "Erreur de saisie Login / MDP, veuillez réessayer");
+				request.setAttribute("errorLogin", "Erreur de saisie Login / MDP, veuillez rï¿½essayer");
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 				rd.forward(request, response);
 			}else {
-				utilisateur = utilisateurTest;
-				doGet(request, response);
+				HttpSession session = request.getSession();
+				session.setAttribute("utilisateur", utilisateurTest);
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+				rd.forward(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
