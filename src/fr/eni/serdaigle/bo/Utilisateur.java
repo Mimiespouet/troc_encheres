@@ -20,12 +20,19 @@ public class Utilisateur implements Serializable {
 	private List<ArticleVendu> listeVente;
 	private List<ArticleVendu> listeAchat;
 	private List<Enchere> listeEnchere;
+	
 
 	
 	public Utilisateur() {
 		this.listeEnchere = new ArrayList<Enchere>();
 		this.listeAchat = new ArrayList<ArticleVendu>();
 		this.listeVente = new ArrayList<ArticleVendu>();
+	}
+	
+	public Utilisateur(String pseudo,String motDePasse) {
+		this();
+		this.pseudo = pseudo;
+		this.motDePasse = motDePasse;
 	}
 	
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
