@@ -22,9 +22,6 @@ public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Utilisateur utilisateur;
 	
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Cookie pseudo;
@@ -49,32 +46,35 @@ public class Login extends HttpServlet {
 			response.addCookie(pseudo);
 			response.addCookie(mdp);
 			etatCheckBox = false;
-
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
 		rd.forward(request, response);
-	
+	}
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		try {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			UtilisateurManager mger = new UtilisateurManager(); 
+
+			// A modifier
 			Utilisateur utilisateurTest = mger.selectionnerConnexion(username, password);
 			System.out.println(utilisateurTest); //voir pour enlever mdp de toString de Utilisateur bo
 			if (utilisateurTest==null) {
 				request.setAttribute("errorLogin", "Erreur de saisie Login / MDP, veuillez réessayer");
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 				rd.forward(request, response);
-			}else {
-				utilisateur=utilisateurTest;
+			} else {
+				utilisateur = utilisateurTest;
 				doGet(request, response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 	}
-
 }
