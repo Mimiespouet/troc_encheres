@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import fr.eni.serdaigle.bo.ArticleVendu;
+import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.dal.ArticleDAO;
 
 public class ArticleManager {
@@ -46,6 +47,22 @@ public class ArticleManager {
 
 	}
 	
+	public void modifierArticle(ArticleVendu article) throws BusinessException {
+		BusinessException be = new BusinessException();
+		// valider les champs
+		validerModifArticle(article.getDateDebutEncheres(),LocalDateTime.now(), be);
+		validerNomArticle(article.getNomArticle(), CHAMPS_VARCHAR_30, be);
+		validerDescriptionArticle(article.getDescription(), CHAMPS_VARCHAR_300, be);
+		validerDateEncheres(article.getDateDebutEncheres(), article.getDateFinEncheres(), be);
+		validerPrix(article.getPrixInitial(), be);
+
+		if (!be.hasErreurs()) {
+			articleDAO.update(article);
+		} else {
+			throw be;
+		}
+	}
+	
 	public void validerNomArticle(String nomArticle, int varchar, BusinessException be) {
 		if (nomArticle == null || nomArticle.equals("")) {
 			be.ajouterErreur(CodesResultatBLL.CHAMP_NOM_ARTICLE_OBLIGATOIRE);
@@ -75,6 +92,12 @@ public class ArticleManager {
 	public void validerPrix(int prixInitial, BusinessException be) {
 		if (prixInitial < 0) {
 			be.ajouterErreur(CodesResultatBLL.PRIX_ERREUR);
+		}
+	}
+	
+	public void validerModifArticle(LocalDateTime dateDebutEnchere, LocalDateTime dateNow, BusinessException be) {
+		if(dateNow.isAfter(dateDebutEnchere)) {
+			be.ajouterErreur(CodesResultatBLL.DATE_MODIFICATION_DEPASSE);
 		}
 	}
 

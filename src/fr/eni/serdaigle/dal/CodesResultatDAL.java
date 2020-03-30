@@ -25,4 +25,6 @@ public abstract class CodesResultatDAL {
 	public static final int INSERT_ENCHERE_ECHEC = 10007;
 	
 	public static final int SELECT_CATEGORIE_ECHEC = 10008;
+	
+	public static final int UPDATE_ARTICLE_ECHEC = 10009;
 }
