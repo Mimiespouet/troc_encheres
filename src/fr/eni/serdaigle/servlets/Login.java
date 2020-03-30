@@ -40,9 +40,9 @@ public class Login extends HttpServlet {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			Utilisateur utilisateurTest = mger.selectionnerConnexion(username, password);
-			System.out.println(utilisateurTest);
+			System.err.println(utilisateurTest); //voir pour enlever mdp de toString de Utilisateur bo
 			if (utilisateurTest==null) {
-				request.setAttribute("errorLogin", "Erreur de saisie Login / MDP, veuillez réessayer");
+				request.setAttribute("errorLogin", "Erreur de saisie Login / MDP, veuillez rÃ©essayer");
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 				rd.forward(request, response);
 			}else {
