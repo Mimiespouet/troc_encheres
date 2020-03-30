@@ -79,7 +79,6 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 				utilisateur = mappingUtilisateur(rs);
 			}else {
 				be.ajouterErreur(CodesResultatDAL.LOGIN_INCORRECT);
-				throw be;
 			}
 			rs.close();
 			psmt.close();
