@@ -87,14 +87,14 @@
 				<form action="" method="post">
 
 
-					<label for="categories">Catégories : </label> 
-					<select name="categories" size="1">
+					<label for="categorie">Catégories : </label> 
+					<select id="categorie" name="categorie" size="1">
 						<optgroup label="Categories">
 							<option value="toutes" selected="selected">Toutes</option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
+							<option value="Informatique">Informatique</option>
+					        <option value="Livres">Livres</option>
+					        <option value="Nourriture">Nourriture</option>
+					        <option value="Vêtements">Vêtements</option>
 
 						</optgroup>
 					</select> <br> 

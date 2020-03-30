@@ -25,8 +25,11 @@
 		<div class="col-lg-6 col-sm-12">
 			
 			<h3 class="my-4 col-lg-12 col-sm-12">Détail vente</h3>
+			
+				<p>${error}</p>
+			
 	           
-	            <form action="" method="post">
+	            <!-- changer les label en paragraphe car ce n'est pas un formulaire -->
 	                <label for="articleName">Nom de l'article :</label>
 	                <p>${articleVendu.nomArticle}</p>
 					<br>
@@ -36,7 +39,7 @@
 					<br>
 					
 					<label for="categorie">Catégorie :</label>
-	                <p>${categorie.libelle}</p>
+	                <p>${categorie.libelle}</p> <!-- articleVendu.categorie.libelle-->
 					<br>
 	
 					<label for="bestOffer">Meilleure offre :</label>
@@ -44,37 +47,45 @@
 					<br>
 					
 					<label for="initialPrice">Mise à prix :</label>
-	                <p>${articlevendu.prixInitial}</p>
+	                <p>${articleVendu.prixInitial}</p>
 					<br>
 					
 					<label for="startDate">Date de début de l'enchère :</label>
-	                <p>${articlevendu.dateDebutEnchere}</p>
+	                <p>${articleVendu.dateDebutEnchere}</p>
 					<br>
 					
 					<label for="endDate">Date de fin de l'enchère :</label>
-	                <p>${articlevendu.dateFinEnchere}</p>
+	                <p>${articleVendu.dateFinEnchere}</p>
 					<br>
 					
 					<label for="adress">Adresse de retrait :</label>
-	                 <p>${retrait.rue}</p>
+	                
+	                 <!-- articleVendu.retrait-->
+	                <p>${retrait.rue}</p>
 					<br>
 					<p>${retrait.codepostal}</p>
 					<p>${retrait.ville}</p>
 					<br>
 					
 					<label for="seller">Vendeur de l'article :</label>
-	                <p>${utilisateur.vendeur}</p>
+	                <p>${utilisateur.vendeur}</p> <!-- articleVendu.vendeur.pseudo -->
 					<br>
 					
-<%-- 				<label for="proposition">Ma proposition :</label>
-	                <input type="text"id="proposition" name="proposition" value="${}">
+<%-- 
+	<!--comparer avec l'heure actuelle, si c'est après l'heure actuelle ça n'apparait plus-->
+		<c:if test=${LocalDateTime.now().isAfter(article.dateFinEnchere)}> 
+		
+			<form action="" method="post">
+				<label for="proposition">Ma proposition :</label>
+	                <input type="number"id="proposition" name="proposition" value="${enchere.montantEnchere + 1}" min="${enchere.montantEnchere + 1}">
 					<br> 
-			
+			</form>
 				<div class="col-lg-6 col-sm-12">
 					<a id="validerMaProposition" href="" class="btn btn-primary">Enchérir</a>
-				</div> --%>
+				</div> 
 		
-			</form>
+		</c:if>	
+--%>
 				
 				<div class="col-lg-6 col-sm-12">
 					<a id="retour" href="accueil" class="btn btn-primary">Retour</a>
