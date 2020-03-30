@@ -36,7 +36,7 @@ public class TestJDBCinsert extends HttpServlet {
 			UtilisateurManager umger = new UtilisateurManager();
 			Utilisateur vendeur = umger.selectionnerUtilisateur("Mimies");
 			Utilisateur acheteur = umger.selectionnerUtilisateur("Delphetitoun");
-			ArticleVendu a1 = new ArticleVendu(10, "nomArticle", "description", LocalDateTime.now(), LocalDateTime.now(), 60, 100, vendeur, acheteur, categorie, false, listeEnchere);
+			ArticleVendu a1 = new ArticleVendu(10, "nomArticle", "description", LocalDateTime.now(), LocalDateTime.now().plusMinutes(5), 60, 100, vendeur, acheteur, categorie, false, listeEnchere);
 			ArticleManager mger = new ArticleManager();
 			mger.ajouterArticle(a1);		
 		} catch (BusinessException e) {

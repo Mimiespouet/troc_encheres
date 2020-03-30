@@ -5,6 +5,7 @@ import fr.eni.serdaigle.exception.BusinessException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.dal.ArticleDAO;
@@ -18,6 +19,13 @@ public class ArticleManager {
 
 	public ArticleManager() {
 		articleDAO = DAOFactory.getArticleDAO();
+	}
+	
+	public List<ArticleVendu> rechercherArticles(String categorie,String nomArticle, String[] checkedEtat)
+			throws BusinessException {
+		BusinessException be = new BusinessException();
+		
+		return null;
 	}
 
 	public void ajouterArticle(ArticleVendu article)

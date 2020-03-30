@@ -8,8 +8,6 @@ import fr.eni.serdaigle.exception.BusinessException;
 public class EnchereManager {
 	private EnchereDAO enchereDAO;
 
-	
-
 	public EnchereManager() {
 		enchereDAO = DAOFactory.getEnchereDAO();
 	}
@@ -19,8 +17,8 @@ public class EnchereManager {
 		BusinessException be = new BusinessException();
 
 //valider les champs
-		validerDateEnchere(enchere.getDateEnchere(), be);
-		validerMontantEnchere(enchere.getMontantEnchere(), be);
+		validerDateEnchere(enchere, be);
+		validerMontantEnchere(enchere, be);
 	
 		
 		if (!be.hasErreurs()) {
@@ -31,15 +29,16 @@ public class EnchereManager {
 
 	}
 	private void validerDateEnchere(Enchere enchere, BusinessException be) {
-		if(enchere.getDateEnchere() == null || enchere.getDateEnchere().isAfter(enchere.getArticle().getDateFinEncheres()) ){
+		if(enchere.getDateEnchere() == null || enchere.getDateEnchere().isAfter(enchere.getArticle().getDateFinEncheres()) 
+				|| enchere.getDateEnchere().isBefore(enchere.getArticle().getDateDebutEncheres()) ){
 			be.ajouterErreur(CodesResultatBLL.DATE_ERREUR);
 		}
 	}
 	
 	
 
-	public void validerMontantEnchere(int prixInitial, BusinessException be) {
-		if (prixInitial == 0) {
+	public void validerMontantEnchere(Enchere enchere, BusinessException be) {
+		if (enchere.getMontantEnchere() == 0) {
 			be.ajouterErreur(CodesResultatBLL.PRIX_ERREUR);
 		}
 	}
