@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 
 import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.dal.ArticleDAO;
@@ -15,7 +16,12 @@ import fr.eni.serdaigle.exception.BusinessException;
 public class ArticleDAOJdbcImpl implements ArticleDAO{
 
 	private static final String INSERT = "INSERT INTO ARTICLES_VENDUS(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_vendeur, no_categorie) VALUES (?,?,?,?,?,?,?,?);";
-
+/*
+ * 	SELECT av.* FROM ARTICLES_VENDUS av
+ * WHERE av.no_categorie = ? AND av.nom_article LIKE ?
+ * AND SYSDATETIME() BETWEEN date_debut_encheres AND date_fin_encheres --les encheres en cours "open" form
+ */
+	
 	@Override
 	public void insert(ArticleVendu article) throws BusinessException {
 		Connection cnx = null;
@@ -61,6 +67,15 @@ public class ArticleDAOJdbcImpl implements ArticleDAO{
 
 	}
 	
-	
+	/**
+	 * {@inheritDoc}
+	 * @see fr.eni.serdaigle.dal.ArticleDAO#rechercherArticles(java.lang.String, java.lang.String, java.lang.String[])
+	 */
+	@Override
+	public List<ArticleVendu> rechercherArticles(String categorie, String nomArticle, String[] checkedEtat)
+			throws BusinessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
