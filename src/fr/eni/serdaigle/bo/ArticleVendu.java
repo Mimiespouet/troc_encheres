@@ -57,9 +57,28 @@ public class ArticleVendu implements Serializable {
 		this.categorie = categorie;
 		this.etatVente = etatVente;
 	}
+	
+	/**
+	 * Constructeur pour l'affichage en page d'accueil
+	 * @param noArticle
+	 * @param nomArticle
+	 * @param description
+	 * @param dateDebutEncheres
+	 * @param dateFinEncheres
+	 * @param prixInitial
+	 * @param vendeur
+	 * @param categorie
+	 * @param etatVente
+	 */
+	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
+			LocalDateTime dateFinEncheres, int prixInitial, Utilisateur vendeur, Categorie categorie,
+			boolean etatVente) {
+		this(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie, etatVente);
+		this.noArticle = noArticle;
+	}
 
 	/**
-	 * Constructeur
+	 * Constructeur complet
 	 * @param noArticle
 	 * @param nomArticle
 	 * @param description
@@ -76,8 +95,7 @@ public class ArticleVendu implements Serializable {
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, int prixInitial, int prixVente, Utilisateur vendeur, Utilisateur acheteur,
 			Categorie categorie, boolean etatVente, List<Enchere> listeEnchere) {
-		this(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie, etatVente);
-		this.noArticle = noArticle;
+		this(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie, etatVente);
 		this.prixVente = prixVente;
 		this.acheteur = acheteur;
 		this.listeEnchere = listeEnchere;

@@ -66,6 +66,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 
 	@Override
 	public Utilisateur selectConnexion(String identifiant, String password) throws BusinessException {
+		Utilisateur resultat = null;
 		BusinessException be = new BusinessException();
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement psmt = cnx.prepareStatement(SELECT_CONNEXION);) {
@@ -74,20 +75,17 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			psmt.setString(3, identifiant);
 			psmt.setString(4, password);
 			ResultSet rs = psmt.executeQuery();
-			Utilisateur utilisateur = null;
 			if (rs.next()) {
-				utilisateur = mappingUtilisateur(rs);
-			}else {
-				be.ajouterErreur(CodesResultatDAL.LOGIN_INCORRECT);
+				resultat = mappingUtilisateur(rs);
 			}
 			rs.close();
 			psmt.close();
-			return utilisateur;
 		} catch (SQLException e) {
-			e.printStackTrace();
 			be.ajouterErreur(CodesResultatDAL.SELECT_LOGIN_ECHEC);
 			throw be;
 		}
+		return resultat;
+		
 	}
 
 	public Utilisateur selectPseudo(String pseudo) throws BusinessException {
