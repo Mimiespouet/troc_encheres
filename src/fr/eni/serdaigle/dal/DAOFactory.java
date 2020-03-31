@@ -1,6 +1,7 @@
 package fr.eni.serdaigle.dal;
 
 import fr.eni.serdaigle.dal.jdbc.ArticleDAOJdbcImpl;
+import fr.eni.serdaigle.dal.jdbc.CategorieDAOJdbcImpl;
 import fr.eni.serdaigle.dal.jdbc.EnchereDAOJdbcImpl;
 import fr.eni.serdaigle.dal.jdbc.UtilisateurDAOJdbcImpl;
 
@@ -15,5 +16,9 @@ public abstract class DAOFactory {
 	
 	public static EnchereDAO getEnchereDAO() {
 		return new EnchereDAOJdbcImpl();
+	}
+	
+	public static CategorieDAO getCategorieDAO() {
+		return new CategorieDAOJdbcImpl();
 	}
 }
