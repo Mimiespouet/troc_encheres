@@ -40,7 +40,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			"	JOIN (SELECT av.no_article,	u.no_utilisateur, u.pseudo as pseudo_max, MAX(e.montant_enchere) as val_max\r\n" + 
 			"	FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article\r\n" + 
 			"	JOIN UTILISATEURS u ON av.no_acheteur = u.no_utilisateur\r\n" + 
-			"	GROUP BY av.no_article, u.no_utilisateur, u.pseudo) vme ON vme.no_article = av.no_article";
+			"	GROUP BY av.no_article, u.no_utilisateur, u.pseudo) vme ON vme.no_article = av.no_article\r\n" +
+			"	WHERE av.no_article = ?";
 	
 	
 	/**
