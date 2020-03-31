@@ -25,6 +25,7 @@ public class Mapping {
 	 * @return Utilisateur
 	 * @throws SQLException
 	 */
+	//A REFAIRE AVEC LE CONSTRUCTEUR
 	public static Utilisateur mappingUtilisateur(ResultSet rs) throws SQLException {
 		Utilisateur utilisateur = new Utilisateur();
 		utilisateur.setNoUtilisateur(rs.getInt("no_utilisateur"));
@@ -62,6 +63,40 @@ public class Mapping {
 		ArticleVendu article = new ArticleVendu(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie);
 		return article;
 	}
+	
+
+	/**
+	 * Méthode en charge du mapping de l'objet ArticleVendu pour l'affichage sur la page afficherDetailEnchere.jsp
+	 * @param rs
+	 * @return ArticleVendu
+	 * @throws SQLException
+	 */
+	public static ArticleVendu mappingArticleVenduDetailEnchere(ResultSet rs) throws SQLException {
+        int noArticle = rs.getInt("noArticle");
+        String nomArticle = rs.getString("nomArticle");
+        String description = rs.getString("description");
+        LocalDateTime dateDebutEncheres = rs.getTimestamp("date_debut_encheres").toLocalDateTime();
+        LocalDateTime dateFinEncheres = rs.getTimestamp("date_fin_encheres").toLocalDateTime();
+        int prixInitial = rs.getInt("prix_initial");
+        int prixVente = rs.getInt("prix_vente");
+
+//        récupération de Catégorie
+        Categorie categorie = new Categorie();
+        categorie.setNoCategorie(rs.getInt("no_categorie"));
+        categorie.setLibelle(rs.getString("cate_libelle"));
+//        récupération du vendeur
+        Utilisateur vendeur = new Utilisateur();
+        vendeur.setPseudo(rs.getString("vendeur_pseudo"));
+        vendeur.setNoUtilisateur(rs.getInt("vendeur_id"));
+        
+//        récupération de l'acheteur
+        Utilisateur acheteur = new Utilisateur();
+       acheteur.setPseudo(rs.getString("acheteur_pseudo"));
+       acheteur.setNoUtilisateur(rs.getInt("acheteur_id"));
+       
+        ArticleVendu article = new ArticleVendu(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, prixVente, vendeur, acheteur, categorie, null);
+        return article;
+    }
 	
 	/**
 	 * Méthode en charge de mapper l'objet Categorie
