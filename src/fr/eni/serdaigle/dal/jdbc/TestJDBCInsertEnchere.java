@@ -41,7 +41,7 @@ public class TestJDBCInsertEnchere extends HttpServlet {
 			Utilisateur acheteur = utm.selectionnerUtilisateur("delphetitoun");
 			
 			
-			ArticleVendu av = new ArticleVendu("nomArticle", "description", LocalDateTime.now(),LocalDateTime.now().plusMinutes(5), 100,vendeur, categorie, false);
+			ArticleVendu av = new ArticleVendu("nomArticle", "description", LocalDateTime.now(),LocalDateTime.now().plusMinutes(5), 100,vendeur, categorie);
 			ArticleManager mger = new ArticleManager();
 			mger.ajouterArticle(av);	
 			

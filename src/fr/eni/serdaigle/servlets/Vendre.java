@@ -80,7 +80,7 @@ public class Vendre extends HttpServlet {
 			//Categorie categorie = catMger.selectionnerCategorie(categorieStr);
 			
 			//Construction de l'objet et requete d'insertion
-			ArticleVendu art = new ArticleVendu(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie, false);
+			ArticleVendu art = new ArticleVendu(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie);
 			artMger.ajouterArticle(art);
 			
 			

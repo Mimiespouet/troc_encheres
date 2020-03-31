@@ -23,7 +23,6 @@ public class ArticleVendu implements Serializable {
 	private Utilisateur vendeur;
 	private Utilisateur acheteur;
 	private Categorie categorie;
-	private boolean etatVente;
 	private List<Enchere> listeEnchere;
 
 	/**
@@ -45,8 +44,7 @@ public class ArticleVendu implements Serializable {
 	 * @param etatVente
 	 */
 	public ArticleVendu(String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, int prixInitial, Utilisateur vendeur, Categorie categorie,
-			boolean etatVente) {
+			LocalDateTime dateFinEncheres, int prixInitial, Utilisateur vendeur, Categorie categorie) {
 		this();
 		this.nomArticle = nomArticle;
 		this.description = description;
@@ -55,7 +53,6 @@ public class ArticleVendu implements Serializable {
 		this.prixInitial = prixInitial;
 		this.vendeur = vendeur;
 		this.categorie = categorie;
-		this.etatVente = etatVente;
 	}
 	
 	/**
@@ -71,9 +68,8 @@ public class ArticleVendu implements Serializable {
 	 * @param etatVente
 	 */
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, int prixInitial, Utilisateur vendeur, Categorie categorie,
-			boolean etatVente) {
-		this(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie, etatVente);
+			LocalDateTime dateFinEncheres, int prixInitial, Utilisateur vendeur, Categorie categorie) {
+		this(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie);
 		this.noArticle = noArticle;
 	}
 
@@ -94,8 +90,8 @@ public class ArticleVendu implements Serializable {
 	 */
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, int prixInitial, int prixVente, Utilisateur vendeur, Utilisateur acheteur,
-			Categorie categorie, boolean etatVente, List<Enchere> listeEnchere) {
-		this(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie, etatVente);
+			Categorie categorie, List<Enchere> listeEnchere) {
+		this(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie);
 		this.prixVente = prixVente;
 		this.acheteur = acheteur;
 		this.listeEnchere = listeEnchere;
@@ -181,14 +177,6 @@ public class ArticleVendu implements Serializable {
 		this.categorie = categorie;
 	}
 
-	public boolean isEtatVente() {
-		return etatVente;
-	}
-
-	public void setEtatVente(boolean etatVente) {
-		this.etatVente = etatVente;
-	}
-
 	public List<Enchere> getListeEnchere() {
 		return listeEnchere;
 	}
@@ -224,7 +212,7 @@ public class ArticleVendu implements Serializable {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", prixInitial="
 				+ prixInitial + ", prixVente=" + prixVente + ", vendeur=" + vendeur + ", acheteur=" + acheteur
-				+ ", categorie=" + categorie + ", etatVente=" + etatVente + ", listeEnchere=" + listeEnchere + "]";
+				+ ", categorie=" + categorie + ", listeEnchere=" + listeEnchere + "]";
 	}
 
 }
