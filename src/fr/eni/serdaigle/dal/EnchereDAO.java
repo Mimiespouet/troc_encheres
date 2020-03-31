@@ -27,6 +27,6 @@ public interface EnchereDAO {
 	 * @return
 	 * @throws BusinessException
 	 */
-	ArticleVendu select(int noArticle) throws BusinessException;
+	Enchere select(int noArticle) throws BusinessException;
 	
 }

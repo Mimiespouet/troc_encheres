@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.bo.Categorie;
+import fr.eni.serdaigle.bo.Enchere;
 import fr.eni.serdaigle.bo.Utilisateur;
 
 /**
@@ -66,36 +67,38 @@ public class Mapping {
 	
 
 	/**
-	 * Méthode en charge du mapping de l'objet ArticleVendu pour l'affichage sur la page afficherDetailEnchere.jsp
+	 * Méthode en charge du mapping de l'objet ArticleVendu pour l'affichage sur afficherDetailEnchere
 	 * @param rs
 	 * @return ArticleVendu
 	 * @throws SQLException
 	 */
-	public static ArticleVendu mappingArticleVenduDetailEnchere(ResultSet rs) throws SQLException {
-        int noArticle = rs.getInt("noArticle");
-        String nomArticle = rs.getString("nomArticle");
-        String description = rs.getString("description");
-        LocalDateTime dateDebutEncheres = rs.getTimestamp("date_debut_encheres").toLocalDateTime();
-        LocalDateTime dateFinEncheres = rs.getTimestamp("date_fin_encheres").toLocalDateTime();
-        int prixInitial = rs.getInt("prix_initial");
-        int prixVente = rs.getInt("prix_vente");
+	public static Enchere mappingDetailEnchereSelonArticle(ResultSet rs) throws SQLException {
+		LocalDateTime dateEnchere = rs.getTimestamp("dateEnchere").toLocalDateTime();
+		int montantEnchere = rs.getInt("montantEnchere");
 
-//        récupération de Catégorie
-        Categorie categorie = new Categorie();
-        categorie.setNoCategorie(rs.getInt("no_categorie"));
-        categorie.setLibelle(rs.getString("cate_libelle"));
-//        récupération du vendeur
+		//récupération de ArticleVendu
+		ArticleVendu article = new ArticleVendu();
+		article.setNoArticle(rs.getInt("noArticle"));
+        article.setNomArticle(rs.getString("nomArticle"));
+        article.setDescription(rs.getString("description"));
+        article.setDateFinEncheres(rs.getTimestamp("date_fin_encheres").toLocalDateTime());
+        article.setPrixInitial(rs.getInt("prix_initial"));
+
+        //récupération de Catégorie
+        Categorie categorie = Mapping.mappingCategorie(rs);
+       
+        //récupération du vendeur
         Utilisateur vendeur = new Utilisateur();
         vendeur.setPseudo(rs.getString("vendeur_pseudo"));
         vendeur.setNoUtilisateur(rs.getInt("vendeur_id"));
         
-//        récupération de l'acheteur
+        //récupération de l'acheteur
         Utilisateur acheteur = new Utilisateur();
-       acheteur.setPseudo(rs.getString("acheteur_pseudo"));
-       acheteur.setNoUtilisateur(rs.getInt("acheteur_id"));
+        acheteur.setPseudo(rs.getString("acheteur_pseudo"));
+        acheteur.setNoUtilisateur(rs.getInt("acheteur_id"));
        
-        ArticleVendu article = new ArticleVendu(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, prixVente, vendeur, acheteur, categorie, null);
-        return article;
+        Enchere enchereConsulte = new Enchere(dateEnchere,montantEnchere,acheteur,article);
+        return enchereConsulte;
     }
 	
 	/**

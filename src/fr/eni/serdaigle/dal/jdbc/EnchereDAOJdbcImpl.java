@@ -8,13 +8,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import fr.eni.serdaigle.bo.ArticleVendu;
-import fr.eni.serdaigle.bo.Categorie;
 import fr.eni.serdaigle.bo.Enchere;
-import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.dal.CodesResultatDAL;
 import fr.eni.serdaigle.dal.ConnectionProvider;
 import fr.eni.serdaigle.dal.EnchereDAO;
@@ -91,19 +88,19 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectById(int)
 	 */
 	@Override
-	public ArticleVendu select(int noArticle) throws BusinessException {
+	public Enchere select(int noArticle) throws BusinessException {
 		BusinessException be = new BusinessException();
 		try (Connection cnx = ConnectionProvider.getConnection();
 			PreparedStatement psmt = cnx.prepareStatement(SELECT_AVEC_MEILLEURE_OFFRE);) {
 			psmt.setInt(1, noArticle);
 			ResultSet rs = psmt.executeQuery();
-			ArticleVendu articleConsulte = null;
+			Enchere enchereConsulte = null;
 			if (rs.next()) {
-				articleConsulte = Mapping.mappingArticleVenduDetailEnchere(rs);
+				enchereConsulte = Mapping.mappingDetailEnchereSelonArticle(rs);
 			}
 			rs.close();
 			psmt.close();
-			return articleConsulte;
+			return enchereConsulte;
 		}catch(SQLException e){
 			e.printStackTrace();
 			BusinessException be = new BusinessException();
