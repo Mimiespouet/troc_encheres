@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
-import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.bo.Enchere;
 import fr.eni.serdaigle.dal.CodesResultatDAL;
 import fr.eni.serdaigle.dal.ConnectionProvider;
@@ -25,7 +24,8 @@ import fr.eni.serdaigle.exception.BusinessException;
  */
 public class EnchereDAOJdbcImpl implements EnchereDAO{
 	private static final String INSERT = "INSERT INTO ENCHERES(no_utilisateur,no_article,date_enchere,montant_enchere) VALUES (?,?,?,?);";
-	private static final String SELECT_AVEC_MEILLEURE_OFFRE = "SELECT av.nom_article, av.description,\r\n" + 
+	private static final String SELECT_VENTE_REMPORTE = "SELECT av.no_article, av.nom_article, av.prix_initial, CONCAT(r.rue,' ', r.code_postal,' ', r.ville) as adresse_retrait, vendeur.no_utilisateur as vendeur_id, vendeur.pseudo as vendeur_pseudo, vendeur.telephone, u.no_utilisateur, u.pseudo as pseudo_max, MAX(e.montant_enchere) as val_max FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article JOIN UTILISATEURS u ON av.no_acheteur = u.no_utilisateur JOIN UTILISATEURS vendeur ON av.no_vendeur = vendeur.no_utilisateur JOIN RETRAITS r ON r.no_article = av.no_article GROUP BY av.no_article, u.no_utilisateur, u.pseudo WHERE av.no_article = ?;";
+    private static final String SELECT_AVEC_MEILLEURE_OFFRE = "SELECT av.nom_article, av.description,\r\n" + 
 			"	c.no_categorie as no_categorie,	c.libelle as c_libelle, acheteur.pseudo as acheteur_pseudo,\r\n" + 
 			"	acheteur.no_utilisateur as acheteur_id,	av.prix_initial, av.date_fin_encheres, r.rue,\r\n" + 
 			"	r.ville, r.code_postal,	vendeur.pseudo as vendeur_pseudo, vendeur.no_utilisateur as vendeur_id,\r\n" + 
@@ -104,7 +104,33 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 		}catch(SQLException e){
 			e.printStackTrace();
 			BusinessException be = new BusinessException();
-			be.ajouterErreur(CodesResultatDAL.SELECT_ECHEC);
+			be.ajouterErreur(CodesResultatDAL.SELECT_MAX_ENCHERE_ECHEC);
+			throw be;
+		}
+	}
+	
+
+	/**
+	 * {@inheritDoc}
+	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectVenteRemporte(fr.eni.serdaigle.bo.Enchere)
+	 */
+	@Override
+	public Enchere selectVenteRemporte(int noArticle) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection();
+				PreparedStatement psmt = cnx.prepareStatement(SELECT_VENTE_REMPORTE);) {
+			psmt.setInt(1, noArticle);
+			ResultSet rs = psmt.executeQuery();
+			Enchere enchereRemporte = null;
+			if (rs.next()) {
+				enchereRemporte = Mapping.mappingEnchereRemporte(rs);
+			}
+			rs.close();
+			psmt.close();
+			return enchereRemporte;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(CodesResultatDAL.SELECT_VENTE_REMPORTE_ECHEC);
 			throw be;
 		}
 	}

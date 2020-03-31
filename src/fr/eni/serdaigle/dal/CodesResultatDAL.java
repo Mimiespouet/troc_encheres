@@ -29,4 +29,6 @@ public abstract class CodesResultatDAL {
 	public static final int UPDATE_ARTICLE_ECHEC = 10009;
 	
 	public static final int SELECT_MAX_ENCHERE_ECHEC = 10010;
+	
+	public static final int SELECT_VENTE_REMPORTE_ECHEC = 10011;
 }

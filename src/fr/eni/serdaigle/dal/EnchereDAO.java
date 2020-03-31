@@ -29,4 +29,11 @@ public interface EnchereDAO {
 	 */
 	Enchere select(int noArticle) throws BusinessException;
 	
+	/**
+	 * Méthode en charge de remporter une enchère
+	 * @param noArticle
+	 * @return l'enchère remporté
+	 * @throws BusinessException
+	 */
+	Enchere selectVenteRemporte(int noArticle) throws BusinessException;
 }
