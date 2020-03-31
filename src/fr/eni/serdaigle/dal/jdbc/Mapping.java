@@ -124,14 +124,14 @@ public class Mapping {
 		
 //      récupération d' ArticleVendu        
 		ArticleVendu article = new ArticleVendu();
-		article.setNoArticle(rs.getInt("noArticle"));
-        article.setNomArticle(rs.getString("nomArticle"));
+		article.setNoArticle(rs.getInt("no_article"));
+        article.setNomArticle(rs.getString("nom_article"));
         article.setPrixInitial(rs.getInt("prix_initial"));
   
         
 //      récupération de retrait
         Retrait retrait = new Retrait();
-        String adresse_retrait = (rs.getString("adresse_retrait"));
+        String adresseRetrait = (rs.getString("adresse_retrait"));
         
 
 //        récupération du vendeur
