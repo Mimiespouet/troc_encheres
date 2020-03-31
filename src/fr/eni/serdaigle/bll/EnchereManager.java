@@ -1,6 +1,5 @@
 package fr.eni.serdaigle.bll;
 
-import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.bo.Enchere;
 import fr.eni.serdaigle.dal.DAOFactory;
 import fr.eni.serdaigle.dal.EnchereDAO;
@@ -36,11 +35,16 @@ public class EnchereManager {
 		}
 	}
 	
-	public ArticleVendu select(int noArticle) throws BusinessException {
+	public Enchere select(int noArticle) throws BusinessException {
 		return enchereDAO.select(noArticle);
 
 	}
+	
+	public Enchere selectVenteRemporte(int noArticle) throws BusinessException{
+		return enchereDAO.selectVenteRemporte(noArticle);
 
+	}
+	
 	public void validerMontantEnchere(Enchere enchere, BusinessException be) {
 		if (enchere.getMontantEnchere() == 0) {
 			be.ajouterErreur(CodesResultatBLL.PRIX_ERREUR);
