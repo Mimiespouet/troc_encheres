@@ -74,7 +74,7 @@ public class Mapping {
 	 */
 	public static Enchere mappingDetailEnchereSelonArticle(ResultSet rs) throws SQLException {
 		LocalDateTime dateEnchere = rs.getTimestamp("dateEnchere").toLocalDateTime();
-		int montantEnchere = rs.getInt("montantEnchere");
+		int montantEnchere = rs.getInt("enchere_max");
 
 		//récupération de ArticleVendu
 		ArticleVendu article = new ArticleVendu();

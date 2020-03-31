@@ -29,7 +29,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			"	c.no_categorie as no_categorie,	c.libelle as c_libelle, acheteur.pseudo as acheteur_pseudo,\r\n" + 
 			"	acheteur.no_utilisateur as acheteur_id,	av.prix_initial, av.date_fin_encheres, r.rue,\r\n" + 
 			"	r.ville, r.code_postal,	vendeur.pseudo as vendeur_pseudo, vendeur.no_utilisateur as vendeur_id,\r\n" + 
-			"	vme.pseudo_max as pseudo_maxi, vme.val_max FROM ARTICLES_VENDUS av \r\n" + 
+			"	vme.pseudo_max as pseudo_max, vme.enchere_max FROM ARTICLES_VENDUS av \r\n" + 
 			"	JOIN RETRAITS r ON av.no_article = r.no_article \r\n" + 
 			"	JOIN UTILISATEURS vendeur ON av.no_vendeur = vendeur.no_utilisateur\r\n" + 
 			"	JOIN UTILISATEURS acheteur ON av.no_acheteur = acheteur.no_utilisateur\r\n" + 
