@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.bo.Categorie;
 import fr.eni.serdaigle.bo.Enchere;
+import fr.eni.serdaigle.bo.Retrait;
 import fr.eni.serdaigle.bo.Utilisateur;
 
 /**
@@ -111,7 +112,40 @@ public class Mapping {
 		Categorie categorie = new Categorie(rs.getInt("no_categorie"),rs.getString("libelle"));
 		return categorie;
 	}
+	/**
+	 * Méthode en charge du mapping de l'objet Enchere pour l'affichage sur la page acquisition.jsp
+	 * @param rs
+	 * @return ArticleVendu
+	 * @throws SQLException
+	 */
+	public static Enchere mappingEnchereRemporte(ResultSet rs) throws SQLException {
+		int meilleurOffre = rs.getInt("val_max"); 
+		
+		
+//      récupération d' ArticleVendu        
+		ArticleVendu article = new ArticleVendu();
+		article.setNoArticle(rs.getInt("noArticle"));
+        article.setNomArticle(rs.getString("nomArticle"));
+        article.setPrixInitial(rs.getInt("prix_initial"));
+  
+        
+//      récupération de retrait
+        Retrait retrait = new Retrait();
+        String adresse_retrait = (rs.getString("adresse_retrait"));
+        
 
+//        récupération du vendeur
+        Utilisateur vendeur = new Utilisateur();
+        vendeur.setPseudo(rs.getString("vendeur_pseudo"));
+        vendeur.setTelephone(rs.getString("vendeur_telephone"));
+        
+       
+        Enchere enchereRemporte = new Enchere(meilleurOffre,vendeur,article);
+        return enchereRemporte;
+       
+
+    }
+	
 }
 
 
