@@ -26,15 +26,15 @@ import fr.eni.serdaigle.exception.BusinessException;
 public class EnchereDAOJdbcImpl implements EnchereDAO{
 	private static final String INSERT = "INSERT INTO ENCHERES(no_utilisateur,no_article,date_enchere,montant_enchere) VALUES (?,?,?,?);";
 	private static final String SELECT_AVEC_MEILLEURE_OFFRE = "SELECT av.nom_article, av.description,\r\n" + 
-			"	c.no_categorie as no_categorie,	c.libelle as cate_libelle, acheteur.pseudo as acheteur_pseudo,\r\n" + 
+			"	c.no_categorie as no_categorie,	c.libelle as c_libelle, acheteur.pseudo as acheteur_pseudo,\r\n" + 
 			"	acheteur.no_utilisateur as acheteur_id,	av.prix_initial, av.date_fin_encheres, r.rue,\r\n" + 
 			"	r.ville, r.code_postal,	vendeur.pseudo as vendeur_pseudo, vendeur.no_utilisateur as vendeur_id,\r\n" + 
-			"	vme.pseudo_max as the_best,	vme.val_max FROM ARTICLES_VENDUS av \r\n" + 
+			"	vme.pseudo_max as pseudo_maxi, vme.val_max FROM ARTICLES_VENDUS av \r\n" + 
 			"	JOIN RETRAITS r ON av.no_article = r.no_article \r\n" + 
 			"	JOIN UTILISATEURS vendeur ON av.no_vendeur = vendeur.no_utilisateur\r\n" + 
 			"	JOIN UTILISATEURS acheteur ON av.no_acheteur = acheteur.no_utilisateur\r\n" + 
 			"	JOIN CATEGORIES c ON c.no_categorie = av.no_categorie\r\n" + 
-			"	JOIN (SELECT av.no_article,	u.no_utilisateur, u.pseudo as pseudo_max, MAX(e.montant_enchere) as val_max\r\n" + 
+			"	JOIN (SELECT av.no_article,	u.no_utilisateur, u.pseudo as pseudo_max, MAX(e.montant_enchere) as enchere_max\r\n" + 
 			"	FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article\r\n" + 
 			"	JOIN UTILISATEURS u ON av.no_acheteur = u.no_utilisateur\r\n" + 
 			"	GROUP BY av.no_article, u.no_utilisateur, u.pseudo) vme ON vme.no_article = av.no_article\r\n" +
