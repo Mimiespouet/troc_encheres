@@ -48,7 +48,7 @@ public class Login extends HttpServlet {
 			response.addCookie(mdp);
 			etatCheckBox = false;
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("accueil");
 		rd.forward(request, response);
 	}
 
@@ -67,7 +67,7 @@ public class Login extends HttpServlet {
 			System.out.println(utilisateurTest); 
 			if (utilisateurTest==null) {
 				request.setAttribute("errorLogin", "Erreur de saisie Login / MDP, veuillez réessayer");
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("connexion");
 				rd.forward(request, response);
 			} else {
 				utilisateur = utilisateurTest;
