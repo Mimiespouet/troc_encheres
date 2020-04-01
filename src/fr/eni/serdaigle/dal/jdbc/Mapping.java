@@ -70,36 +70,51 @@ public class Mapping {
 	/**
 	 * Méthode en charge du mapping de l'objet ArticleVendu pour l'affichage sur afficherDetailEnchere
 	 * @param rs
-	 * @return ArticleVendu
+	 * @return Enchere
 	 * @throws SQLException
 	 */
 	public static Enchere mappingDetailEnchereSelonArticle(ResultSet rs) throws SQLException {
-		LocalDateTime dateEnchere = rs.getTimestamp("dateEnchere").toLocalDateTime();
 		int montantEnchere = rs.getInt("enchere_max");
-
-		//récupération de ArticleVendu
-		ArticleVendu article = new ArticleVendu();
-		article.setNoArticle(rs.getInt("noArticle"));
-        article.setNomArticle(rs.getString("nomArticle"));
-        article.setDescription(rs.getString("description"));
-        article.setDateFinEncheres(rs.getTimestamp("date_fin_encheres").toLocalDateTime());
-        article.setPrixInitial(rs.getInt("prix_initial"));
-
+		
+		//récupération de Retrait
+		Retrait retrait = new Retrait();
+		retrait.setRue(rs.getString("r_rue"));
+		retrait.setVille(rs.getString("r_ville"));
+		retrait.setCodePostal(rs.getString("r_code_postal"));
+		
         //récupération de Catégorie
-        Categorie categorie = Mapping.mappingCategorie(rs);
-       
+        Categorie categorie = new Categorie();
+        categorie.setNoCategorie(rs.getInt("no_categorie"));
+        categorie.setLibelle(rs.getString("libelle"));
+		
         //récupération du vendeur
         Utilisateur vendeur = new Utilisateur();
         vendeur.setPseudo(rs.getString("vendeur_pseudo"));
         vendeur.setNoUtilisateur(rs.getInt("vendeur_id"));
+        vendeur.setRue(rs.getString("vendeur_rue"));
+        vendeur.setVille(rs.getString("vendeur_ville"));
+        vendeur.setCodePostal(rs.getString("vendeur_code_postal"));
+        vendeur.setTelephone(rs.getString("vendeur_telephone"));
         
         //récupération de l'acheteur
         Utilisateur acheteur = new Utilisateur();
         acheteur.setPseudo(rs.getString("acheteur_pseudo"));
         acheteur.setNoUtilisateur(rs.getInt("acheteur_id"));
-       
-        Enchere enchereConsulte = new Enchere(dateEnchere,montantEnchere,acheteur,article);
-        return enchereConsulte;
+        acheteur.setEmail(rs.getString("acheteur_email"));
+        
+		//récupération de ArticleVendu
+		ArticleVendu article = new ArticleVendu();
+		article.setNoArticle(rs.getInt("no_article"));
+        article.setNomArticle(rs.getString("nom_article"));
+        article.setDescription(rs.getString("description"));
+        article.setDateFinEncheres(rs.getTimestamp("date_fin_encheres").toLocalDateTime());
+        article.setPrixInitial(rs.getInt("prix_initial"));
+        article.setCategorie(categorie);
+        article.setAcheteur(acheteur);
+        article.setVendeur(vendeur);
+
+        Enchere enchere = new Enchere(montantEnchere,acheteur,article);
+        return enchere;
     }
 	
 	/**

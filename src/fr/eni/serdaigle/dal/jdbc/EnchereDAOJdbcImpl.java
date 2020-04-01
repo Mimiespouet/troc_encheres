@@ -28,20 +28,25 @@ import fr.eni.serdaigle.exception.BusinessException;
 public class EnchereDAOJdbcImpl implements EnchereDAO{
 	private static final String INSERT = "INSERT INTO ENCHERES(no_utilisateur,no_article,date_enchere,montant_enchere) VALUES (?,?,?,?);";
 	private static final String SELECT_VENTE_REMPORTE = "SELECT av.no_article, av.nom_article, av.prix_initial, r.rue as rue_retrait, r.code_postal as CPO_retrait, r.ville as ville_retrait, vendeur.no_utilisateur as vendeur_id, vendeur.pseudo as vendeur_pseudo, vendeur.telephone, vendeur.rue as rue_vendeur, vendeur.code_postal as CPO_vendeur, vendeur.ville as ville_vendeur, u.no_utilisateur, u.pseudo as pseudo_max, MAX(e.montant_enchere) as val_max FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article JOIN UTILISATEURS u ON av.no_acheteur = u.no_utilisateur JOIN UTILISATEURS vendeur ON av.no_vendeur = vendeur.no_utilisateur JOIN RETRAITS r ON r.no_article = av.no_article GROUP BY av.no_article, u.no_utilisateur, u.pseudo WHERE av.no_article = ?;";;
-    private static final String SELECT_AVEC_MEILLEURE_OFFRE = "SELECT av.nom_article, av.description,\r\n" + 
-			"	c.no_categorie as no_categorie,	c.libelle as c_libelle, acheteur.pseudo as acheteur_pseudo,\r\n" + 
-			"	acheteur.no_utilisateur as acheteur_id,	av.prix_initial, av.date_fin_encheres, r.rue,\r\n" + 
-			"	r.ville, r.code_postal,	vendeur.pseudo as vendeur_pseudo, vendeur.no_utilisateur as vendeur_id,\r\n" + 
-			"	vme.pseudo_max as pseudo_max, vme.enchere_max FROM ARTICLES_VENDUS av \r\n" + 
-			"	JOIN RETRAITS r ON av.no_article = r.no_article \r\n" + 
-			"	JOIN UTILISATEURS vendeur ON av.no_vendeur = vendeur.no_utilisateur\r\n" + 
-			"	JOIN UTILISATEURS acheteur ON av.no_acheteur = acheteur.no_utilisateur\r\n" + 
-			"	JOIN CATEGORIES c ON c.no_categorie = av.no_categorie\r\n" + 
-			"	JOIN (SELECT av.no_article,	u.no_utilisateur, u.pseudo as pseudo_max, MAX(e.montant_enchere) as enchere_max\r\n" + 
-			"	FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article\r\n" + 
-			"	JOIN UTILISATEURS u ON av.no_acheteur = u.no_utilisateur\r\n" + 
-			"	GROUP BY av.no_article, u.no_utilisateur, u.pseudo) vme ON vme.no_article = av.no_article\r\n" +
-			"	WHERE av.no_article = ?";
+	private static final String SELECT_AVEC_MEILLEURE_OFFRE = "SELECT TOP 1\r\n" + 
+			"	vme.enchere_max, vme.pseudo as acheteur_pseudo, vme.no_utilisateur as acheteur_id, vme.email as acheteur_email,\r\n" + 
+			"	av.nom_article, av.no_article, av.description, av.prix_initial, av.date_fin_encheres, c.no_categorie, c.libelle,\r\n" + 
+			"	r.rue as r_rue,	r.ville as r_ville,	r.code_postal as r_code_postal,	vendeur.pseudo as vendeur_pseudo,\r\n" + 
+			"	vendeur.no_utilisateur as vendeur_id, vendeur.rue as vendeur_rue, vendeur.ville as vendeur_ville, vendeur.code_postal as vendeur_code_postal,\r\n" + 
+			"	vendeur.telephone as vendeur_telephone\r\n" +
+			"	FROM ARTICLES_VENDUS av\r\n" + 
+			"	LEFT JOIN RETRAITS r ON av.no_article = r.no_article\r\n" + 
+			"	JOIN UTILISATEURS vendeur ON av.no_vendeur = vendeur.no_utilisateur \r\n" + 
+			"	JOIN CATEGORIES c ON c.no_categorie = av.no_categorie \r\n" + 
+			"	JOIN \r\n" + 
+			"	(SELECT \r\n" + 
+			"			MAX(e.montant_enchere) as enchere_max, av.no_article, u.pseudo,	u.no_utilisateur, u.email\r\n" + 
+			"		    FROM ENCHERES e \r\n" + 
+			"			JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article\r\n" + 
+			"			JOIN UTILISATEURS u ON u.no_utilisateur = e.no_utilisateur\r\n" + 
+			"		  GROUP BY 	av.no_article,u.pseudo,u.no_utilisateur)\r\n" + 
+			"	vme ON vme.no_article = av.no_article\r\n" + 
+			"	WHERE av.no_article = ? ORDER BY vme.enchere_max DESC;";
 	private static final String SELECT_ALL_ENCHERES_EN_COURS = "SELECT DISTINCT a.nom_article, a.date_fin_encheres, a.prix_initial, u.pseudo, r.rue, r.ville, vme.val_max FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE a.date_debut_encheres < GETDATE();";
 	
 	/**
@@ -88,13 +93,13 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			PreparedStatement psmt = cnx.prepareStatement(SELECT_AVEC_MEILLEURE_OFFRE);) {
 			psmt.setInt(1, noArticle);
 			ResultSet rs = psmt.executeQuery();
-			Enchere enchereConsulte = null;
+			Enchere enchere = null;
 			if (rs.next()) {
-				enchereConsulte = Mapping.mappingDetailEnchereSelonArticle(rs);
+				enchere = Mapping.mappingDetailEnchereSelonArticle(rs);
 			}
 			rs.close();
 			psmt.close();
-			return enchereConsulte;
+			return enchere;
 		}catch(SQLException e){
 			e.printStackTrace();
 			be.ajouterErreur(CodesResultatDAL.SELECT_MAX_ENCHERE_ECHEC);
