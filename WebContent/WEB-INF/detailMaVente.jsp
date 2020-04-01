@@ -63,6 +63,10 @@
 				</div>
 				
 				<div class="col-lg-6 col-sm-12">
+					<a href="ModifierVente?noArticle=${enchere.article.noArticle}">Modifier ma vente</a>
+				</div>
+				
+				<div class="col-lg-6 col-sm-12">
 					<a id="back" href="accueil" class="btn btn-primary">Retour</a>
 				</div>
 		
