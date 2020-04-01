@@ -19,7 +19,12 @@ public interface EnchereDAO {
 	
 	void insert(Enchere enchere) throws BusinessException;
 	
-	List<Enchere> select(Enchere enchere) throws BusinessException;
+	/**
+	 * Méthode en charge de récupérer toutes les encheres en cours pour affichage sur la page d'accueil
+	 * @return Liste Enchere
+	 * @throws BusinessException
+	 */
+	List<Enchere> selectAllEnCours() throws BusinessException;
 
 	/**
 	 * Méthode en charge de
@@ -27,6 +32,14 @@ public interface EnchereDAO {
 	 * @return
 	 * @throws BusinessException
 	 */
-	ArticleVendu select(int noArticle) throws BusinessException;
+Enchere select(int noArticle) throws BusinessException;
+	
+	/**
+	 * Méthode en charge de remporter une enchère
+	 * @param noArticle
+	 * @return l'enchère remporté
+	 * @throws BusinessException
+	 */
+	Enchere selectVenteRemporte(int noArticle) throws BusinessException;
 	
 }
