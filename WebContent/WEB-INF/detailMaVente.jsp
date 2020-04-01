@@ -41,16 +41,20 @@
 					<br>
 					
 					<p>Adresse de retrait :</p>
-	                
-	                <p>${enchere.article.retrait.rue}</p>
-	                <p>${enchere.article.retrait.ville}</p>
-	                <p>${enchere.article.retrait.codePostal}</p>
-					<br>
-					<p>${enchere.article.vendeur.rue}</p>
-					<p>${enchere.article.vendeur.ville}</p>
-					<p>${enchere.article.vendeur.codepostal}</p>
-					<br>
-					
+
+					<c:choose>
+						<c:when test="${enchere.article.retrait.rue != null}">
+							<p>Retrait : ${enchere.article.retrait.rue}
+							${enchere.article.retrait.codePostal}
+							${enchere.article.retrait.ville}</p>
+						</c:when>
+						<c:otherwise>
+							<p>Retrait : ${enchere.article.vendeur.rue}
+							${enchere.article.vendeur.codePostal}
+							${enchere.article.vendeur.ville}</p>
+						</c:otherwise>
+					</c:choose>
+
 					<p>Vendeur de l'article : ${enchere.article.utilisateur.vendeur.pseudo}</p> 
 					<br>
 

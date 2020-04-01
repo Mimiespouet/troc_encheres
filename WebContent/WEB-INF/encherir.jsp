@@ -30,54 +30,46 @@
 			
 	           
 	            <!-- changer les label en paragraphe car ce n'est pas un formulaire -->
-	                <p>Nom de l'article :</p>
-	                <p>${articleVendu.nomArticle}</p>
+	                <p>Nom de l'article : ${enchere.article.nomArticle}</p>
 					<br>
 	
-	                <p>Description :</p>
-	                <p>${articleVendu.description}</p>
+	                <p>Description : ${enchere.article.description}</p>
 					<br>
 					
-					<p>Catégorie :</p>
-	                <p>${categorie.libelle}</p> <!-- articleVendu.categorie.libelle-->
+					<p>Catégorie : ${enchere.article.categorie.libelle}</p> <!-- articleVendu.categorie.libelle-->
 					<br>
 	
-					<p>Meilleure offre :</p>
-	             	<p>${enchere.montantEnchere}</p>
+					<p>Meilleure offre : ${enchere.montantEnchere}</p>
 					<br>
 					
-					<p>Mise à prix :</p>
-	                <p>${articleVendu.prixInitial}</p>
+					<p>Mise à prix : ${enchere.article.prixInitial}</p>
 					<br>
 					
-					<p>Date de début de l'enchère :</p>
-	                <p>${articleVendu.dateDebutEnchere}</p>
+					<p>Date de début de l'enchère : ${enchere.article.dateDebutEnchere}</p>
 					<br>
 					
-					<p>Date de fin de l'enchère :</p>
-	                <p>${articleVendu.dateFinEnchere}</p>
+					<p>Date de fin de l'enchère : ${enchere.article.dateFinEnchere}</p>
 					<br>
 					
 					<label for="adress">Adresse de retrait :</label>
 	                
 	                 <!-- articleVendu.retrait-->
 	                <c:choose>
-					        <c:when test="${ retrait != null }">
-					             <div>
-					                 <p>${retrait.rue}</p>
-					                 <p>${retrait.codePostal} ${retrait.ville}</p>
+					        <c:when test="${enchere.article.retrait=null}">
+								 </div>
+					                 <p>${enchere.article.retrait.rue}</p> 
+					                 <p>${enchere.article.retrait.codePostal} ${enchere.article.retrait.ville}</p>
 					             </div>
 					        </c:when>
 					        <c:otherwise>
 					             <div>
-					                 <p>${vendeur.rue}</p>
-					                 <p>${vendeur.codePostal}  ${vendeur.ville}</p>
+					                 <p>${enchere.article.vendeur.rue}</p> 
+					                 <p> ${enchere.article.vendeur.codePostal}  ${enchere.article.vendeur.ville}</p>
 					             </div>
 					        </c:otherwise>
 					 </c:choose>
 					
-					<p>Vendeur de l'article :</p>
-	                <p>${utilisateur.vendeur}</p> <!-- articleVendu.vendeur.pseudo -->
+					<p>Vendeur de l'article : ${enchere.article.vendeur.pseudo}</p> <!-- articleVendu.vendeur.pseudo -->
 					<br>
 					
 

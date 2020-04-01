@@ -27,44 +27,37 @@
 			<h3 class="my-4 col-lg-12 col-sm-12">Vous avez remporté l'enchère</h3>
 			
 			
-	                <p>Nom de l'article : ${articleVendu.nomArticle}</p>
+	                <p>Nom de l'article : ${enchere.article.nomArticle}</p>
 					<br>
-	
-	
-					<p>Meilleure offre :</p>
-	             	<p>${enchere.montantEnchere}</p>
+
+					<p>Meilleure offre : ${enchere.montantEnchere}</p>
 					<br>
 					
-					<p>Mise à prix :</p>
-	                <p>${articleVendu.prixInitial}</p>
+					<p>Mise à prix : ${enchere.article.prixInitial}</p>
 					<br>
-					
-					
-					
+
 					<p>Retrait :</p> 
 					   <c:choose>
-					        <c:when test="${ retrait != null }">
+					        <c:when test="${enchere.article.retrait != null }">
 					             <div>
-					                 <p>${retrait.rue}</p>
-					                 <p>${retrait.codePostal} ${retrait.ville}</p>
+					                 <p>${enchere.article.retrait.rue}</p>
+					                 <p>${enchere.article.retrait.codePostal} ${enchere.article.retrait.ville}</p>
 					             </div>
 					        </c:when>
 					        <c:otherwise>
 					             <div>
-					                 <p>${vendeur.rue}</p>
-					                 <p>${vendeur.codePostal}  ${vendeur.ville}</p>
+					                 <p>${enchere.article.vendeur.rue}</p>
+					                 <p>${enchere.article.vendeur.codePostal}  ${enchere.article.vendeur.ville}</p>
 					             </div>
 					        </c:otherwise>
 					      </c:choose>
 									
 					<p>Vendeur de l'article :</p>
-	                <p>${utilisateur.vendeur}</p> <!-- articleVendu.vendeur.pseudo -->
+	                <p>${enchere.article.vendeur.pseudo}</p>
 	                <p>Tel :</p>
-	                <p>${articleVendu.vendeur.telephone}</p> <!-- articleVendu.vendeur.telephone -->
+	                <p>${enchere.article.vendeur.telephone}</p> 
 					<br>
 					
-
-				
 				<div class="col-lg-6 col-sm-12">
 					<a id="retraitOK" href="accueil" class="btn btn-primary">Retrait effectué</a>
 				</div>
