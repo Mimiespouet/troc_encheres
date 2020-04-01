@@ -12,13 +12,20 @@ public class Enchere implements Serializable {
 
 	public Enchere() {
 	}
-
-	public Enchere(LocalDateTime dateEnchere, int montantEnchere, Utilisateur utilisateur, ArticleVendu article) {
+	
+	public Enchere(int montantEnchere, Utilisateur utilisateur, ArticleVendu article) {
 		this();
-		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 		this.utilisateur = utilisateur;
 		this.article = article;
+	}
+
+	
+	
+	
+	public Enchere(LocalDateTime dateEnchere, int montantEnchere, Utilisateur utilisateur, ArticleVendu article) {
+		this(montantEnchere, utilisateur, article);
+		this.dateEnchere = dateEnchere;
 	}
 
 	public LocalDateTime getDateEnchere() {
