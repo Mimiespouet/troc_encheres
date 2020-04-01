@@ -102,7 +102,7 @@ public class AfficherDetailEnchere extends HttpServlet {
 				// sinon si l'utilisa n'est pas l'acheteur	
 				} else if (utilisateur.getNoUtilisateur()==enchere.getArticle().getVendeur().getNoUtilisateur()){
 					// alors renvoie à la page pour enchérir sur l'article				
-					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/detailMaVente.jsp"); //redirection à changer sur detailMaVenteFinEnchere
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/detailMaVenteFinEnchere.jsp"); 
 					rd.forward(request, response);
 				} else if (utilisateur.getNoUtilisateur()!=enchere.getArticle().getAcheteur().getNoUtilisateur()){
 				// alors renvoie à la page pour enchérir sur l'article				
