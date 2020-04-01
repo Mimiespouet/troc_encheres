@@ -87,9 +87,13 @@
 		</c:if>	
 --%>
 				
-				<div class="col-lg-6 col-sm-12">
-					<a id="retour" href="accueil" class="btn btn-primary">Retour</a>
-				</div>
+				 <div class="col-lg-6 col-sm-12">
+	            	<form action="modifierVente" method="post">
+	            		<button id="annulerVente" name="annulerVente">Annuler la vente</button>
+	            		<button id="modifierVente" name="vendreArticle">Modifier</button>
+	            		<button id="retour" name="vendreArticle" >Retour</button>
+	            	</form>
+	            </div>
 		
 		</div>
 			

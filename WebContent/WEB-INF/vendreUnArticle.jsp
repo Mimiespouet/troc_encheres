@@ -29,17 +29,15 @@
 					<label for="nom">Article :</label>
 					<input type="text" placeholder="Entrer le nom de l'article" id="nom" name="nom" size="30" required>
 				</div>
-
 				<div>
-					<label for="categorie">Catégorie :</label> 
-					<select id="categorie" name="categorie">				      				    	
-					        <option value="Informatique">Informatique</option>
-					        <option value="Livres">Livres</option>
-					        <option value="Nourriture">Nourriture</option>
-					        <option value="Vêtements">Vêtements</option>
-					</select>
-				</div>
-
+                    <label for="categorie">Catégorie :</label> 
+                    <select id="categorie" name="categorie">                                              
+                            <option value="Informatique">Informatique</option>
+                            <option value="Livres">Livres</option>
+                            <option value="Nourriture">Nourriture</option>
+                            <option value="Vêtements">Vêtements</option>
+                    </select>
+                </div>
 				<div>
 					<label for="description">Description :</label><br>
 					<textarea id="description" name="description" rows="5" cols="33" maxlength="100" placeholder="Entrer la description de l'article" required></textarea>
