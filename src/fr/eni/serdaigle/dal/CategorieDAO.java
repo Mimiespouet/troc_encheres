@@ -25,7 +25,7 @@ public interface CategorieDAO {
 	
 	/**
 	 * Méthode en charge de sélectionner toutes les catégories présentes en BDD
-	 * @return List<Categorie>
+	 * @return List Categorie 
 	 * @throws BusinessException
 	 */
 	List<Categorie> selectAll() throws BusinessException;

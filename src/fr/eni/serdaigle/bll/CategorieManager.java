@@ -21,9 +21,15 @@ public class CategorieManager {
 		categorieDAO = DAOFactory.getCategorieDAO();
 	}
 	
+	/**
+	 * Méthode en charge de retourner toutes les catégories afin de les afficher dans le menu déroulant
+	 * @return List Categorie
+	 * @throws BusinessException
+	 */
 	public List<Categorie> selectAll() throws BusinessException{
 		List<Categorie> listeCategorie = new ArrayList<Categorie>();
 		listeCategorie = categorieDAO.selectAll();
 		return listeCategorie;
 	}
+	
 }
