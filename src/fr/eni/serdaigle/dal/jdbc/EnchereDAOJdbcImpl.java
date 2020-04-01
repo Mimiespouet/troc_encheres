@@ -13,10 +13,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.serdaigle.bo.ArticleVendu;
-import fr.eni.serdaigle.bo.Categorie;
 import fr.eni.serdaigle.bo.Enchere;
-import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.dal.CodesResultatDAL;
 import fr.eni.serdaigle.dal.ConnectionProvider;
 import fr.eni.serdaigle.dal.EnchereDAO;
@@ -100,13 +97,11 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			return enchereConsulte;
 		}catch(SQLException e){
 			e.printStackTrace();
-			BusinessException be = new BusinessException();
 			be.ajouterErreur(CodesResultatDAL.SELECT_MAX_ENCHERE_ECHEC);
 			throw be;
 		}
 	}
 	
-
 	/**
 	 * {@inheritDoc}
 	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectVenteRemporte(fr.eni.serdaigle.bo.Enchere)

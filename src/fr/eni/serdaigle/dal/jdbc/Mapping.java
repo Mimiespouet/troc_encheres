@@ -68,7 +68,7 @@ public class Mapping {
 	
 
 	/**
-	 * Méthode en charge du mapping de l'objet ArticleVendu pour l'affichage sur la page afficherDetailEnchere.jsp
+	 * Méthode en charge du mapping de l'objet ArticleVendu pour l'affichage sur afficherDetailEnchere
 	 * @param rs
 	 * @return ArticleVendu
 	 * @throws SQLException
@@ -174,6 +174,7 @@ public class Mapping {
 		enchere.setMontantEnchere(rs.getInt("val_max"));
 		return enchere;
 	}
+
 }
 
 

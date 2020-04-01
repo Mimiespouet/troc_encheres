@@ -32,7 +32,7 @@ public interface EnchereDAO {
 	 * @return
 	 * @throws BusinessException
 	 */
-Enchere select(int noArticle) throws BusinessException;
+	Enchere select(int noArticle) throws BusinessException;
 	
 	/**
 	 * Méthode en charge de remporter une enchère
@@ -41,5 +41,5 @@ Enchere select(int noArticle) throws BusinessException;
 	 * @throws BusinessException
 	 */
 	Enchere selectVenteRemporte(int noArticle) throws BusinessException;
-	
+
 }
