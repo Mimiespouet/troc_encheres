@@ -55,7 +55,7 @@
 						</c:otherwise>
 					</c:choose>
 
-					<p>Vendeur de l'article : ${enchere.article.utilisateur.vendeur.pseudo}</p> 
+					<p>Vendeur de l'article : ${enchere.article.vendeur.pseudo}</p> 
 					<br>
 
 				<div class="col-lg-6 col-sm-12">

@@ -74,7 +74,7 @@
 					
 
 	<!--comparer avec l'heure actuelle, si c'est après l'heure actuelle ça n'apparait plus-->
-		<c:if test="${LocalDateTime.now().isAfter(article.dateFinEncheres)}"> 
+		<c:if test="${utilisateur!=null}"> 
 		
 			<form action="" method="post">
 				<label for="proposition">Ma proposition :</label>

@@ -100,9 +100,13 @@ public class AfficherDetailEnchere extends HttpServlet {
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/acquisition.jsp");
 					rd.forward(request, response);
 				// sinon si l'utilisa n'est pas l'acheteur	
+				} else if (utilisateur.getNoUtilisateur()==enchere.getArticle().getVendeur().getNoUtilisateur()){
+					// alors renvoie à la page pour enchérir sur l'article				
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/detailMaVente.jsp"); //redirection à changer sur detailMaVenteFinEnchere
+					rd.forward(request, response);
 				} else if (utilisateur.getNoUtilisateur()!=enchere.getArticle().getAcheteur().getNoUtilisateur()){
 				// alors renvoie à la page pour enchérir sur l'article				
-				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/encherir.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("accueil");
 				rd.forward(request, response);
 				}
 			}
