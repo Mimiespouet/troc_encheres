@@ -30,7 +30,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	private static final String SELECT_VENTE_REMPORTE = "SELECT av.no_article, av.nom_article, av.prix_initial, r.rue as rue_retrait, r.code_postal as CPO_retrait, r.ville as ville_retrait, vendeur.no_utilisateur as vendeur_id, vendeur.pseudo as vendeur_pseudo, vendeur.telephone, vendeur.rue as rue_vendeur, vendeur.code_postal as CPO_vendeur, vendeur.ville as ville_vendeur, u.no_utilisateur, u.pseudo as pseudo_max, MAX(e.montant_enchere) as val_max FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article JOIN UTILISATEURS u ON av.no_acheteur = u.no_utilisateur JOIN UTILISATEURS vendeur ON av.no_vendeur = vendeur.no_utilisateur JOIN RETRAITS r ON r.no_article = av.no_article GROUP BY av.no_article, u.no_utilisateur, u.pseudo WHERE av.no_article = ?;";;
 	private static final String SELECT_AVEC_MEILLEURE_OFFRE = "SELECT TOP 1\r\n" + 
 			"	vme.enchere_max, vme.pseudo as acheteur_pseudo, vme.no_utilisateur as acheteur_id, vme.email as acheteur_email,\r\n" + 
-			"	av.nom_article, av.no_article, av.description, av.prix_initial, av.date_fin_encheres, c.no_categorie, c.libelle,\r\n" + 
+			"	av.nom_article, av.no_article, av.description, av.prix_initial, av.date_debut_encheres, av.date_fin_encheres, c.no_categorie, c.libelle,\r\n" + 
 			"	r.rue as r_rue,	r.ville as r_ville,	r.code_postal as r_code_postal,	vendeur.pseudo as vendeur_pseudo,\r\n" + 
 			"	vendeur.no_utilisateur as vendeur_id, vendeur.rue as vendeur_rue, vendeur.ville as vendeur_ville, vendeur.code_postal as vendeur_code_postal,\r\n" + 
 			"	vendeur.telephone as vendeur_telephone\r\n" +

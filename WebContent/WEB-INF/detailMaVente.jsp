@@ -37,7 +37,7 @@
 					<p>Mise à prix : ${enchere.article.prixInitial}</p>
 					<br>
 					
-					<p>Date de fin de l'enchère : ${enchere.article.dateFinEnchere}</p>
+					<p>Date de fin de l'enchère : ${enchere.article.dateFinEncheres}</p>
 					<br>
 					
 					<p>Adresse de retrait :</p>

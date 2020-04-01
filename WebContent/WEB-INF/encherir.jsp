@@ -45,10 +45,10 @@
 					<p>Mise à prix : ${enchere.article.prixInitial}</p>
 					<br>
 					
-					<p>Date de début de l'enchère : ${enchere.article.dateDebutEnchere}</p>
+					<p>Date de début de l'enchère : ${enchere.article.dateDebutEncheres}</p>
 					<br>
 					
-					<p>Date de fin de l'enchère : ${enchere.article.dateFinEnchere}</p>
+					<p>Date de fin de l'enchère : ${enchere.article.dateFinEncheres}</p>
 					<br>
 					
 					<label for="adress">Adresse de retrait :</label>
@@ -74,7 +74,7 @@
 					
 
 	<!--comparer avec l'heure actuelle, si c'est après l'heure actuelle ça n'apparait plus-->
-		<c:if test="${LocalDateTime.now().isAfter(article.dateFinEnchere)}"> 
+		<c:if test="${LocalDateTime.now().isAfter(article.dateFinEncheres)}"> 
 		
 			<form action="" method="post">
 				<label for="proposition">Ma proposition :</label>
