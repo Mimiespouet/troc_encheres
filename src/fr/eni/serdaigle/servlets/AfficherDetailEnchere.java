@@ -33,6 +33,8 @@ public class AfficherDetailEnchere extends HttpServlet {
 		emger = new EnchereManager();
 		
 	}
+
+	
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */

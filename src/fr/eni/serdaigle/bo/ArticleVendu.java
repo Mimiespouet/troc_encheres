@@ -1,10 +1,7 @@
 package fr.eni.serdaigle.bo;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Classe en charge de l'objet Article
@@ -23,13 +20,12 @@ public class ArticleVendu implements Serializable {
 	private Utilisateur vendeur;
 	private Utilisateur acheteur;
 	private Categorie categorie;
-	private List<Enchere> listeEnchere;
+	private Retrait retrait;
 
 	/**
 	 * Constructeur
 	 */
 	public ArticleVendu() {
-		this.listeEnchere = new ArrayList<Enchere>();
 	}
 
 	/**
@@ -86,15 +82,15 @@ public class ArticleVendu implements Serializable {
 	 * @param acheteur
 	 * @param categorie
 	 * @param etatVente
-	 * @param listeEnchere
+	 * @param retrait
 	 */
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
 			LocalDateTime dateFinEncheres, int prixInitial, int prixVente, Utilisateur vendeur, Utilisateur acheteur,
-			Categorie categorie, List<Enchere> listeEnchere) {
+			Categorie categorie, Retrait retrait) {
 		this(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie);
 		this.prixVente = prixVente;
 		this.acheteur = acheteur;
-		this.listeEnchere = listeEnchere;
+		this.retrait = retrait;
 	}
 
 	public int getNoArticle() {
@@ -177,12 +173,12 @@ public class ArticleVendu implements Serializable {
 		this.categorie = categorie;
 	}
 
-	public List<Enchere> getListeEnchere() {
-		return listeEnchere;
+	public Retrait getRetrait() {
+		return retrait;
 	}
 
-	public void setListeEnchere(List<Enchere> listeEnchere) {
-		this.listeEnchere = listeEnchere;
+	public void setRetrait(Retrait retrait) {
+		this.retrait = retrait;
 	}
 
 	@Override
@@ -212,7 +208,7 @@ public class ArticleVendu implements Serializable {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", prixInitial="
 				+ prixInitial + ", prixVente=" + prixVente + ", vendeur=" + vendeur + ", acheteur=" + acheteur
-				+ ", categorie=" + categorie + ", listeEnchere=" + listeEnchere + "]";
+				+ ", categorie=" + categorie + ", retrait=" + retrait + "]";
 	}
 
 }

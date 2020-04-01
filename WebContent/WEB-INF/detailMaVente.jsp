@@ -24,7 +24,7 @@
 		
 		<div class="col-lg-6 col-sm-12">
 			
-			<h3 class="my-4 col-lg-12 col-sm-12">${articleVendu.nomArticle}</h3>
+			<h3 class="my-4 col-lg-12 col-sm-12">${enchere.article.nomArticle}</h3>
 			
 				<p>${error}</p>
 	
@@ -42,11 +42,13 @@
 					
 					<p>Adresse de retrait :</p>
 	                
-	                 <!-- articleVendu.retrait-->
-	                <p>${retrait.rue}</p>
+	                <p>${enchere.article.retrait.rue}</p>
+	                <p>${enchere.article.retrait.ville}</p>
+	                <p>${enchere.article.retrait.codePostal}</p>
 					<br>
-					<p>${retrait.codepostal}</p>
-					<p>${retrait.ville}</p>
+					<p>${enchere.article.vendeur.rue}</p>
+					<p>${enchere.article.vendeur.ville}</p>
+					<p>${enchere.article.vendeur.codepostal}</p>
 					<br>
 					
 					<p>Vendeur de l'article : ${enchere.article.utilisateur.vendeur.pseudo}</p> 
