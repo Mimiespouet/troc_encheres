@@ -43,48 +43,70 @@ public class AfficherDetailEnchere extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// récupération de la session		
 		HttpSession session =  request.getSession();
+		
+		// initialisation et récupération de l'utilisateur de la session		
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+		
+		// initialisation de la date à comparer avec la date de fin d'enchère		
 		LocalDateTime date = LocalDateTime.now();
+		
+		// initilisation et récupération du numéro d'article en paramètre pour la requête select		
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
+		
+		// initilisation de l'enchère a null pour éviter exception		
 		Enchere enchere = null;
-		try {
+		
+		// initilisation de l'enchère manager pour la requête select avec seter de l'attribut enchère et son objet enchère
+		try {			
 			enchere = emger.select(noArticle);
-			
 		} catch (BusinessException e) {
 			e.printStackTrace();
 		}
 		request.setAttribute("enchere",enchere);
+		
+		// si la date est avant la date de fin d'enchère de l'article de l'enchère		
 		if (date.isBefore(enchere.getArticle().getDateFinEncheres())) {
+			// et si l'utilisateur n'est pas connecté			
 			if (utilisateur==null) {
+				// alors renvoie sur la page enchérir avec le bouton enchérir bloqué				
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/encherir.jsp");
 				rd.forward(request, response);
 			} else {
+				// sinon si le numéro d'utilisateur est connecté mais n'est pas le vendeur			
 				if (utilisateur.getNoUtilisateur()!=enchere.getArticle().getVendeur().getNoUtilisateur()) {
+					// alors renvoie sur la page enchérir avec le bouton enchérir accessible					
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/encherir.jsp");
 					rd.forward(request, response);
+				// sinon si l'utilisateur est connecté et qu'il est le vendeur					
 				} else if (utilisateur.getNoUtilisateur()==enchere.getArticle().getVendeur().getNoUtilisateur()){
+					// alors renvoie sur la page détail de ma vente
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/detailMaVente.jsp");
 					rd.forward(request, response);
 				}
 			}
-			
+		// sinon si la date est après la date de fin d'enchère de l'article de l'enchère			
 		} else if (date.isAfter(enchere.getArticle().getDateFinEncheres())){
+			// et si l'utilisateur n'est pas connecté
 			if (utilisateur==null) {
+				// alors renvoie à l'accueil				
 				RequestDispatcher rd = request.getRequestDispatcher("accueil");
 				rd.forward(request, response);
 			} else {
+				// sinon si l'utilisateur est l'acheteur			
 				if (utilisateur.getNoUtilisateur()==enchere.getArticle().getAcheteur().getNoUtilisateur()) {
+					// alors renvoie à la page acquisition de l'article enchéri					
 					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/acquisition.jsp");
 					rd.forward(request, response);
+				// sinon si l'utilisa n'est pas l'acheteur	
 				} else if (utilisateur.getNoUtilisateur()!=enchere.getArticle().getAcheteur().getNoUtilisateur()){
+				// alors renvoie à la page pour enchérir sur l'article				
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/encherir.jsp");
 				rd.forward(request, response);
 				}
 			}
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/detailMaVente.jsp");
-		rd.forward(request, response);
 	}
 
 	/**
