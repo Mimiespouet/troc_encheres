@@ -183,6 +183,7 @@ public class Mapping {
 		article.setNomArticle(rs.getString("nom_article"));
 		article.setDateFinEncheres(rs.getTimestamp("date_fin_encheres").toLocalDateTime());
 		article.setPrixInitial(rs.getInt("prix_initial"));
+		article.setRetrait(retrait);
 		article.setVendeur(vendeur);
 		
 		Enchere enchere = new Enchere();

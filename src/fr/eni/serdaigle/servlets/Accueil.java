@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.serdaigle.bll.CategorieManager;
+import fr.eni.serdaigle.bll.EnchereManager;
 import fr.eni.serdaigle.bo.Categorie;
+import fr.eni.serdaigle.bo.Enchere;
 import fr.eni.serdaigle.exception.BusinessException;
 
 /**
@@ -26,11 +28,22 @@ public class Accueil extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		CategorieManager catMger = new CategorieManager();
+		EnchereManager enchMger = new EnchereManager();
 		List<Categorie> listeCategorie = new ArrayList<Categorie>();
+		List<Enchere> listeEnchere = new ArrayList<Enchere>();
 		try {
+			
+			// Recuperation de la liste des categories en BDD pour le select html
 			listeCategorie = catMger.selectAll();
 			request.setAttribute("listeCategorie", listeCategorie);
+			
+			// Recuperation de la liste des encheres en cours
+			listeEnchere = enchMger.selectAllEnCours();
+			System.out.println(listeEnchere);
+			
+			request.setAttribute("listeEnchere", listeEnchere);
 		} catch (BusinessException be) {
 			request.setAttribute("error", be.getMessage());
 		}

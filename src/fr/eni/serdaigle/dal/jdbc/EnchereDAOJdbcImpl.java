@@ -47,7 +47,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			"		  GROUP BY 	av.no_article,u.pseudo,u.no_utilisateur, u.email)\r\n" + 
 			"	vme ON vme.no_article = av.no_article\r\n" + 
 			"	WHERE av.no_article = ? ORDER BY vme.enchere_max DESC;";
-	private static final String SELECT_ALL_ENCHERES_EN_COURS = "SELECT DISTINCT a.nom_article, a.date_fin_encheres, a.prix_initial, u.pseudo, r.rue, r.ville, vme.val_max FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE a.date_debut_encheres < GETDATE();";
+	private static final String SELECT_ALL_ENCHERES_EN_COURS = "SELECT DISTINCT a.nom_article, a.no_article, a.date_fin_encheres, a.prix_initial, u.pseudo, u.no_utilisateur as no_vendeur, u.rue as rue_vendeur, u.code_postal as code_postal_vendeur, u.ville as ville_vendeur, r.rue as rue_retrait, r.ville as ville_retrait, r.code_postal as code_postal_retrait, vme.val_max FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE a.date_debut_encheres < GETDATE();";
 	
 	/**
 	 * {@inheritDoc}
@@ -150,6 +150,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 				rs.close();
 				smt.close();
 			}catch(SQLException e){
+				e.printStackTrace();
 				be.ajouterErreur(CodesResultatDAL.SELECT_ALL_ENCHERE_ECHEC);
 				throw be;
 			}

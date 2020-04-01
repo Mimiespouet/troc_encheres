@@ -67,10 +67,8 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 			cnx = ConnectionProvider.getConnection();
 			Statement smt = cnx.createStatement();
 			ResultSet rs = smt.executeQuery(SELECT_ALL);
-			System.out.println("1");
 			while (rs.next()) {
 				Categorie categorie = Mapping.mappingCategorie(rs);
-				System.out.println("2");
 				listeCategorie.add(categorie);
 			}
 			smt.close();
