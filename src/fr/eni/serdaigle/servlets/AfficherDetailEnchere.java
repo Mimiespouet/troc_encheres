@@ -1,6 +1,9 @@
 package fr.eni.serdaigle.servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
@@ -23,7 +26,8 @@ import fr.eni.serdaigle.exception.BusinessException;
 public class AfficherDetailEnchere extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private EnchereManager emger;
-	/**
+	
+    /**
 	 * {@inheritDoc}
 	 * @see javax.servlet.GenericServlet#init()
 	 */
@@ -41,6 +45,7 @@ public class AfficherDetailEnchere extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session =  request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
+		LocalDateTime date = LocalDateTime.now();
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
 		Enchere enchere = null;
 		try {
@@ -50,6 +55,34 @@ public class AfficherDetailEnchere extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("enchere",enchere);
+		if (date.isBefore(enchere.getArticle().getDateFinEncheres())) {
+			if (utilisateur==null) {
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/encherir.jsp");
+				rd.forward(request, response);
+			} else {
+				if (utilisateur.getNoUtilisateur()!=enchere.getArticle().getVendeur().getNoUtilisateur()) {
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/encherir.jsp");
+					rd.forward(request, response);
+				} else if (utilisateur.getNoUtilisateur()==enchere.getArticle().getVendeur().getNoUtilisateur()){
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/detailMaVente.jsp");
+					rd.forward(request, response);
+				}
+			}
+			
+		} else if (date.isAfter(enchere.getArticle().getDateFinEncheres())){
+			if (utilisateur==null) {
+				RequestDispatcher rd = request.getRequestDispatcher("accueil");
+				rd.forward(request, response);
+			} else {
+				if (utilisateur.getNoUtilisateur()==enchere.getArticle().getAcheteur().getNoUtilisateur()) {
+					RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/acquisition.jsp");
+					rd.forward(request, response);
+				} else if (utilisateur.getNoUtilisateur()!=enchere.getArticle().getAcheteur().getNoUtilisateur()){
+				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/encherir.jsp");
+				rd.forward(request, response);
+				}
+			}
+		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/detailMaVente.jsp");
 		rd.forward(request, response);
 	}
