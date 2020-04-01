@@ -131,14 +131,17 @@ public class Mapping {
         
 //      récupération de retrait
         Retrait retrait = new Retrait();
-        String adresseRetrait = (rs.getString("adresse_retrait"));
+        retrait.setRue(rs.getString("rue_retrait"));
+        retrait.setCodePostal("CPO_retrait");
+        retrait.setVille("ville_retrait");
         
-
 //        récupération du vendeur
         Utilisateur vendeur = new Utilisateur();
         vendeur.setPseudo(rs.getString("vendeur_pseudo"));
         vendeur.setTelephone(rs.getString("vendeur_telephone"));
-        
+        vendeur.setRue(rs.getString("rue_vendeur"));
+        vendeur.setCodePostal(rs.getString("CPO_vendeur"));
+        vendeur.setVille(rs.getString("ville_vendeur"));
        
         Enchere enchereRemporte = new Enchere(meilleurOffre,vendeur,article);
         return enchereRemporte;
