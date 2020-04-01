@@ -38,7 +38,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			"	LEFT JOIN RETRAITS r ON av.no_article = r.no_article\r\n" + 
 			"	JOIN UTILISATEURS vendeur ON av.no_vendeur = vendeur.no_utilisateur \r\n" + 
 			"	JOIN CATEGORIES c ON c.no_categorie = av.no_categorie \r\n" + 
-			"	JOIN \r\n" + 
+			"	LEFT JOIN \r\n" + 
 			"	(SELECT \r\n" + 
 			"			MAX(e.montant_enchere) as enchere_max, av.no_article, u.pseudo,	u.no_utilisateur, u.email\r\n" + 
 			"		    FROM ENCHERES e \r\n" + 
