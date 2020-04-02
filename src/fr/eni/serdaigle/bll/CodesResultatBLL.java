@@ -16,4 +16,10 @@ public abstract class CodesResultatBLL {
 	public static final int MOT_DE_PASSE_DIFFERENT  = 20007;
 	public static final int PRIX_ERREUR = 20008;
 	public static final int DATE_MODIFICATION_DEPASSE = 20009;
+	public static final int CHAMP_RUE_OBLIGATOIRE = 20010;
+	public static final int CHAMP_RUE_TAILLE_DEPASSEE = 20011;
+	public static final int CHAMP_CPO_OBLIGATOIRE = 20012;
+	public static final int CHAMP_CPO_TAILLE_DEPASSEE = 20013;
+	public static final int CHAMP_VILLE_OBLIGATOIRE = 20014;
+	public static final int CHAMP_VILLE_TAILLE_DEPASSEE = 20015;
 }
