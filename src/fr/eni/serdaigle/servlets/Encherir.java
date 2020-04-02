@@ -26,7 +26,6 @@ import fr.eni.serdaigle.exception.BusinessException;
 public class Encherir extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-  
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -40,11 +39,6 @@ public class Encherir extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//JUSTE APPELER MANAGER ET L'INSERT
-		
-		
-		// Récupération de l'utilisateur en session qui est le vendeur
 		HttpSession session = request.getSession();
 		Utilisateur acheteur = (Utilisateur) session.getAttribute("utilisateur");
 		
@@ -55,21 +49,19 @@ public class Encherir extends HttpServlet {
 		LocalDateTime dateEnchere = LocalDateTime.now();
 		
 		try {
-			EnchereManager enchMger = new EnchereManager();
-			BusinessException be = new BusinessException();
-			
-	
+			EnchereManager emger = new EnchereManager();
 			ArticleVendu article = new ArticleVendu();
 			article.setNoArticle(noArticle);
+			
 			//Construction de l'objet et requete d'insertion
-			Enchere ench = new Enchere(dateEnchere, montantEnchere, acheteur, article);
-			enchMger.ajouterEnchere(ench);
+			Enchere enchere = new Enchere(dateEnchere, montantEnchere, acheteur, article);
+			emger.ajouterEnchere(enchere);
 			
 			
 			// Redirection 
 			request.setAttribute("success", "L'enchère a bien été prise en compte");
-			request.setAttribute("articleVendu", article);
-			request.setAttribute("enchere", ench);
+			request.setAttribute("noArticle", noArticle);
+			request.setAttribute("enchere", enchere);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("afficherDetailEnchere");
 			rd.forward(request, response);

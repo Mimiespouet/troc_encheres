@@ -43,22 +43,19 @@ public class AfficherDetailEnchere extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// récupération de la session		
 		HttpSession session =  request.getSession();
-		
-		// initialisation et récupération de l'utilisateur de la session		
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		
-		// initialisation de la date à comparer avec la date de fin d'enchère		
 		LocalDateTime date = LocalDateTime.now();
-		
-		// initilisation et récupération du numéro d'article en paramètre pour la requête select		
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
 		
-		// initilisation de l'enchère a null pour éviter exception		
+		if (request.getParameter("noArticle")!=null) {
+			noArticle = Integer.parseInt(request.getParameter("noArticle"));
+		} else { 
+			request.setAttribute("noArticle",noArticle);
+		}
 		Enchere enchere = null;
 		
-		// initilisation de l'enchère manager pour la requête select avec seter de l'attribut enchère et son objet enchère
 		try {			
 			enchere = emger.select(noArticle);
 		} catch (BusinessException e) {
