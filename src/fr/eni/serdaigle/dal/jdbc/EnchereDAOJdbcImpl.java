@@ -50,7 +50,6 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			"	vme ON vme.no_article = av.no_article\r\n" + 
 			"	WHERE av.no_article = ? ORDER BY vme.enchere_max DESC;";
 
-	private static final String SELECT_ENCHERES_EN_COURS = "SELECT DISTINCT a.nom_article, a.no_article, a.date_fin_encheres, a.prix_initial, u.pseudo, u.no_utilisateur as no_vendeur, u.rue as rue_vendeur, u.code_postal as code_postal_vendeur, u.ville as ville_vendeur, r.rue as rue_retrait, r.ville as ville_retrait, r.code_postal as code_postal_retrait, vme.val_max FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE a.date_debut_encheres < GETDATE();";
 	private static final String SELECT_ENCHERES_CONTAINS_BY_CATEGORIE = "SELECT DISTINCT a.nom_article, a.no_article, a.date_fin_encheres, a.prix_initial, u.pseudo, u.no_utilisateur as no_vendeur, u.rue as rue_vendeur, u.code_postal as code_postal_vendeur, u.ville as ville_vendeur, r.rue as rue_retrait, r.ville as ville_retrait, r.code_postal as code_postal_retrait, vme.val_max, c.libelle FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur JOIN CATEGORIES c ON a.no_categorie = c.no_categorie LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE c.libelle LIKE ? and nom_article LIKE ? and a.date_debut_encheres < GETDATE() and a.date_fin_encheres > GETDATE();";
 	private static final String SELECT_MES_ENCHERES = "SELECT DISTINCT a.nom_article, a.no_article, a.date_fin_encheres, a.prix_initial, u.pseudo, u.no_utilisateur as no_vendeur, u.rue as rue_vendeur, u.code_postal as code_postal_vendeur, u.ville as ville_vendeur, r.rue as rue_retrait, r.ville as ville_retrait, r.code_postal as code_postal_retrait, vme.val_max, c.libelle FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur JOIN CATEGORIES c ON a.no_categorie = c.no_categorie LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE c.libelle LIKE ? and nom_article LIKE ? and e.no_utilisateur = ? and a.date_debut_encheres < GETDATE() and a.date_fin_encheres > GETDATE();";
 	//private static final String SELECT_ENCHERES_REMPORTEES = "SELECT DISTINCT a.nom_article, a.no_article, a.date_fin_encheres, a.prix_initial, u.pseudo, u.no_utilisateur as no_vendeur, u.rue as rue_vendeur, u.code_postal as code_postal_vendeur, u.ville as ville_vendeur, r.rue as rue_retrait, r.ville as ville_retrait, r.code_postal as code_postal_retrait, vme.val_max, c.libelle FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur JOIN CATEGORIES c ON a.no_categorie = c.no_categorie LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE a.date_debut_encheres < GETDATE() and c.libelle LIKE ? and nom_article LIKE ?;";
@@ -172,13 +171,18 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 				rs.close();
 			}catch(SQLException e){
 				e.printStackTrace();
-				be.ajouterErreur(CodesResultatDAL.SELECT_ALL_CONTAINS_ECHEC);
+				be.ajouterErreur(CodesResultatDAL.SELECT_ENCHERES);
 				throw be;
 			}
 		return listeEnchere;
 	}
 	
 
+	/**
+	 * {@inheritDoc}
+	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectMesEncheres(java.lang.String, java.lang.String, int)
+	 */
+	@Override
 	public List<Enchere> selectMesEncheres(String categorie, String recherche, int noUtilisateur) throws BusinessException {
 		BusinessException be = new BusinessException();
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
@@ -195,23 +199,22 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 				rs.close();
 			}catch(SQLException e){
 				e.printStackTrace();
-				be.ajouterErreur(CodesResultatDAL.SELECT_ALL_CONTAINS_ECHEC);
+				be.ajouterErreur(CodesResultatDAL.SELECT_ENCHERES);
 				throw be;
 			}
 		return listeEnchere;
 	}
 	
-	public List<Enchere> selectMesVentes(String categorie, String recherche, int noUtilisateur, String etat) throws BusinessException {
+	/**
+	 * {@inheritDoc}
+	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectMesVentes(java.lang.String, java.lang.String, int)
+	 */
+	@Override
+	public List<Enchere> selectMesVentes(String categorie, String recherche, int noUtilisateur) throws BusinessException {
 		BusinessException be = new BusinessException();
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
 		Enchere enchere = null;
-		try (Connection cnx = ConnectionProvider.getConnection(); 
-				if(etat.equals("ventes_en_cours")) {
-				PreparedStatement psmt = cnx.prepareStatement(SELECT_MES_VENTES_EN_COURS);
-				}else {
-					PreparedStatement psmt = cnx.prepareStatement(SELECT_MES_VENTES_EN_COURS);	
-				}
-				) {
+		try (Connection cnx = ConnectionProvider.getConnection(); PreparedStatement psmt = cnx.prepareStatement(SELECT_MES_VENTES_EN_COURS);) {
 			psmt.setString(1, "%"+categorie+"%");
 			psmt.setString(2, "%"+recherche+"%");
 			psmt.setInt(3, noUtilisateur);
@@ -223,12 +226,72 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 				rs.close();
 			}catch(SQLException e){
 				e.printStackTrace();
-				be.ajouterErreur(CodesResultatDAL.SELECT_ALL_CONTAINS_ECHEC);
+				be.ajouterErreur(CodesResultatDAL.SELECT_ENCHERES);
 				throw be;
 			}
 		return listeEnchere;
 	}
+	
+	
+	/**
+	 * {@inheritDoc}
+	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectMesVentesNonDebutees(java.lang.String, java.lang.String, int)
+	 */
+	@Override
+	public List<Enchere> selectMesVentesNonDebutees(String categorie, String recherche, int noUtilisateur) throws BusinessException {
+		BusinessException be = new BusinessException();
+		List<Enchere> listeEnchere = new ArrayList<Enchere>();
+		Enchere enchere = null;
+		try (Connection cnx = ConnectionProvider.getConnection(); PreparedStatement psmt = cnx.prepareStatement(SELECT_MES_VENTES_NON_DEBUTEES);) {
+			psmt.setString(1, "%"+categorie+"%");
+			psmt.setString(2, "%"+recherche+"%");
+			psmt.setInt(3, noUtilisateur);
+				ResultSet rs = psmt.executeQuery();
+				while (rs.next()) {
+					enchere = Mapping.mappingEnchere(rs);
+					listeEnchere.add(enchere);
+				}
+				rs.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+				be.ajouterErreur(CodesResultatDAL.SELECT_ENCHERES);
+				throw be;
+			}
+		return listeEnchere;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectMesVentesTerminees(java.lang.String, java.lang.String, int)
+	 */
+	@Override
+	public List<Enchere> selectMesVentesTerminees(String categorie, String recherche, int noUtilisateur) throws BusinessException {
+		BusinessException be = new BusinessException();
+		List<Enchere> listeEnchere = new ArrayList<Enchere>();
+		Enchere enchere = null;
+		try (Connection cnx = ConnectionProvider.getConnection(); PreparedStatement psmt = cnx.prepareStatement(SELECT_MES_VENTES_TERMINEES);) {
+			psmt.setString(1, "%"+categorie+"%");
+			psmt.setString(2, "%"+recherche+"%");
+			psmt.setInt(3, noUtilisateur);
+				ResultSet rs = psmt.executeQuery();
+				while (rs.next()) {
+					enchere = Mapping.mappingEnchere(rs);
+					listeEnchere.add(enchere);
+				}
+				rs.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+				be.ajouterErreur(CodesResultatDAL.SELECT_ENCHERES);
+				throw be;
+			}
+		return listeEnchere;
+	}
+	
 
+	/**
+	 * {@inheritDoc}
+	 * @see fr.eni.serdaigle.dal.EnchereDAO#updateEnchere(fr.eni.serdaigle.bo.Enchere)
+	 */
 	@Override
 	public void updateEnchere(Enchere enchere) throws BusinessException {
 		Connection cnx = null;
@@ -256,7 +319,12 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 		}
 
 	}
-		
+	
+	/**
+	 * {@inheritDoc}
+	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectByUtilisateur(int, int)
+	 */
+	@Override
 	public Enchere selectByUtilisateur(int noUtilisateur,int noArticle) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection();
 			PreparedStatement psmt = cnx.prepareStatement(SELECT_BY_UTILISATEUR);) {

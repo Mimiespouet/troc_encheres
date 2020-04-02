@@ -44,6 +44,47 @@ public interface EnchereDAO {
 	Enchere selectVenteRemporte(int noArticle) throws BusinessException;
 
 
+	/**
+	 * Méthode en charge de selectionner les enchères sur lesquelles l'utilisateur a deja encherit
+	 * @param categorie
+	 * @param recherche
+	 * @param noUtilisateur
+	 * @return Liste Enchere
+	 * @throws BusinessException
+	 */
+	List<Enchere> selectMesEncheres(String categorie, String recherche, int noUtilisateur) throws BusinessException;
+	
+	/**
+	 * Méthode en charge de selectionner les ventes non débutées d'un utilisateur
+	 * @param categorie
+	 * @param recherche
+	 * @param noUtilisateur
+	 * @return Liste Enchere
+	 * @throws BusinessException
+	 */
+	List<Enchere> selectMesVentesNonDebutees(String categorie, String recherche, int noUtilisateur)
+			throws BusinessException;
+	
+	/**
+	 * Méthode en charge de selectionner les ventes en cours d'un utilisateur
+	 * @param categorie
+	 * @param recherche
+	 * @param noUtilisateur
+	 * @return
+	 * @throws BusinessException
+	 */
+	List<Enchere> selectMesVentes(String categorie, String recherche, int noUtilisateur) throws BusinessException;
+	
+	/**
+	 * Méthode en charge de selectionner les ventes terminées d'un utilisateur
+	 * @param categorie
+	 * @param recherche
+	 * @param noUtilisateur
+	 * @return
+	 * @throws BusinessException
+	 */
+	List<Enchere> selectMesVentesTerminees(String categorie, String recherche, int noUtilisateur)
+			throws BusinessException;
 	
 	/**
 	 * Méthode en charge de
@@ -53,10 +94,16 @@ public interface EnchereDAO {
 	Enchere selectByUtilisateur(int noUtilisateur,int noArticle) throws BusinessException;
 
 	/**
-	 * Méthode en charge de
+	 * Méthode en charge de mettre à jour une enchere
 	 * @param enchere
 	 * @throws BusinessException
 	 */
 	void updateEnchere(Enchere enchere) throws BusinessException;
+
+	
+
+	
+
+	
 
 }

@@ -59,7 +59,24 @@ public class EnchereManager {
 		return enchereDAO.selectAllEnCours(categorie, recherche);
 	}
 	
-
+	public List<Enchere> selectMesEncheres(String categorie, String recherche, int noUtilisateur) throws BusinessException {
+		return enchereDAO.selectMesEncheres(categorie, recherche, noUtilisateur);
+	}
+	
+	public List<Enchere> selectMesVentes(String categorie, String recherche, int noUtilisateur) throws BusinessException {
+		return enchereDAO.selectMesVentes(categorie, recherche, noUtilisateur);
+	}
+	
+	public List<Enchere> selectMesVentesNonDebutees(String categorie, String recherche, int noUtilisateur) throws BusinessException {
+		return enchereDAO.selectMesVentesNonDebutees(categorie, recherche, noUtilisateur);
+	}
+	
+	public List<Enchere> selectMesVentesTerminees(String categorie, String recherche, int noUtilisateur) throws BusinessException {
+		return enchereDAO.selectMesVentesTerminees(categorie, recherche, noUtilisateur);
+	}
+	
+	
+	
 	public void validerMontantEnchere(Enchere enchere, BusinessException be) {
 		if (enchere.getMontantEnchere() == 0) {
 			be.ajouterErreur(CodesResultatBLL.PRIX_ERREUR);
