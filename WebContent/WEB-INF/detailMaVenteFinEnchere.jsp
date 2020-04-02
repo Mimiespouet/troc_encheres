@@ -24,17 +24,17 @@
 		
 		<div class="col-lg-6 col-sm-12">
 			
-			<h3 class="my-4 col-lg-12 col-sm-12">${enchere.article.nomArticle}</h3>
+			<h3 class="my-4 col-lg-12 col-sm-12">${enchere.article.acheteur.pseudo} a remporté l'enchère</h3>
 			
 				<p>${error}</p>
 	
-	                <p>Description : ${enchere.article.description}</p>
+	                <h3>${enchere.article.nomArticle}</h3>
 					<br>
 	
-					<p>Meilleure offre : ${enchere.montantEnchere}</p>
+					<p>Meilleure offre : ${enchere.montantEnchere} pts par ${enchere.article.acheteur.pseudo}</p>
 					<br>
 					
-					<p>Mise à prix : ${enchere.article.prixInitial}</p>
+					<p>Mise à prix : ${enchere.article.prixInitial} pts</p>
 					<br>
 					
 					<p>Date de fin de l'enchère : ${enchere.article.dateFinEncheres}</p>
@@ -48,7 +48,7 @@
 							<p>${enchere.article.retrait.codePostal} ${enchere.article.retrait.ville}</p>
 						</c:when>
 						<c:otherwise>
-							<p>Retrait : ${enchere.article.vendeur.rue}</p>
+							<p>${enchere.article.vendeur.rue}</p>
 							<p>${enchere.article.vendeur.codePostal} ${enchere.article.vendeur.ville}</p>
 						</c:otherwise>
 					</c:choose>
@@ -57,15 +57,15 @@
 					<br>
 
 				<div class="col-lg-6 col-sm-12">
-					<a id="cancel" href="accueil" class="btn btn-primary">Annuler la vente</a>
-				</div>
-				
-				<div class="col-lg-6 col-sm-12">
-					<a href="ModifierVente?noArticle=${enchere.article.noArticle}">Modifier ma vente</a>
-				</div>
-				
-				<div class="col-lg-6 col-sm-12">
 					<a id="back" href="accueil" class="btn btn-primary">Retour</a>
+				</div>
+				
+				<div class="col-lg-6 col-sm-12">
+					<a href="mailto:EMAILADDRESS">Contacter ${enchere.article.acheteur.pseudo}</a>
+				</div>
+				
+				<div class="col-lg-6 col-sm-12">
+					<a id="done" href="accueil" class="btn btn-primary">Retrait effectué</a>
 				</div>
 		
 		</div>

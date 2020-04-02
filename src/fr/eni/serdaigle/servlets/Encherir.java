@@ -32,7 +32,7 @@ public class Encherir extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/afficherDetailEnchere.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("afficherDetailEnchere");
 		rd.forward(request, response);	
 		}
 
@@ -48,9 +48,7 @@ public class Encherir extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utilisateur acheteur = (Utilisateur) session.getAttribute("utilisateur");
 		
-		// Penser à faire un request.setAttribute dans la JSP
-		ArticleVendu article = (ArticleVendu) request.getAttribute("article");
-
+		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
 		int montantEnchere = Integer.parseInt(request.getParameter("proposition"));
 		
 		// Initialisation variables
@@ -61,7 +59,8 @@ public class Encherir extends HttpServlet {
 			BusinessException be = new BusinessException();
 			
 	
-			
+			ArticleVendu article = new ArticleVendu();
+			article.setNoArticle(noArticle);
 			//Construction de l'objet et requete d'insertion
 			Enchere ench = new Enchere(dateEnchere, montantEnchere, acheteur, article);
 			enchMger.ajouterEnchere(ench);
@@ -72,7 +71,7 @@ public class Encherir extends HttpServlet {
 			request.setAttribute("articleVendu", article);
 			request.setAttribute("enchere", ench);
 			
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/afficherDetailEnchere.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("afficherDetailEnchere");
 			rd.forward(request, response);
 
 		} catch (BusinessException be) {
