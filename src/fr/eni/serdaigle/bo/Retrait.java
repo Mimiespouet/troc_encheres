@@ -8,15 +8,34 @@ public class Retrait implements Serializable {
 	private String codePostal;
 	private String ville;
 
+	/**
+	 * Constructeur
+	 */
 	public Retrait() {
 	}
 
-	public Retrait(ArticleVendu article, String rue, String codePostal, String ville) {
+	/**
+	 * Constructeur
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 */
+	public Retrait(String rue, String codePostal, String ville) {
 		this();
-		this.article = article;
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;
+	}/**
+	 * Constructeur
+	 * @param article
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 */
+	public Retrait(ArticleVendu article, String rue, String codePostal, String ville) {
+		this(rue, codePostal, ville);
+		this.article = article;
+
 	}
 
 	public ArticleVendu getArticle() {

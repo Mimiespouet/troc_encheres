@@ -13,7 +13,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.bo.Enchere;
+import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.dal.CodesResultatDAL;
 import fr.eni.serdaigle.dal.ConnectionProvider;
 import fr.eni.serdaigle.dal.EnchereDAO;
@@ -47,6 +49,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			"		  GROUP BY 	av.no_article,u.pseudo,u.no_utilisateur, u.email)\r\n" + 
 			"	vme ON vme.no_article = av.no_article\r\n" + 
 			"	WHERE av.no_article = ? ORDER BY vme.enchere_max DESC;";
+<<<<<<< HEAD
 	private static final String SELECT_ENCHERES_EN_COURS = "SELECT DISTINCT a.nom_article, a.no_article, a.date_fin_encheres, a.prix_initial, u.pseudo, u.no_utilisateur as no_vendeur, u.rue as rue_vendeur, u.code_postal as code_postal_vendeur, u.ville as ville_vendeur, r.rue as rue_retrait, r.ville as ville_retrait, r.code_postal as code_postal_retrait, vme.val_max FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE a.date_debut_encheres < GETDATE();";
 	private static final String SELECT_ENCHERES_CONTAINS_BY_CATEGORIE = "SELECT DISTINCT a.nom_article, a.no_article, a.date_fin_encheres, a.prix_initial, u.pseudo, u.no_utilisateur as no_vendeur, u.rue as rue_vendeur, u.code_postal as code_postal_vendeur, u.ville as ville_vendeur, r.rue as rue_retrait, r.ville as ville_retrait, r.code_postal as code_postal_retrait, vme.val_max, c.libelle FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur JOIN CATEGORIES c ON a.no_categorie = c.no_categorie LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE c.libelle LIKE ? and nom_article LIKE ? and a.date_debut_encheres < GETDATE() and a.date_fin_encheres > GETDATE();";
 	private static final String SELECT_MES_ENCHERES = "SELECT DISTINCT a.nom_article, a.no_article, a.date_fin_encheres, a.prix_initial, u.pseudo, u.no_utilisateur as no_vendeur, u.rue as rue_vendeur, u.code_postal as code_postal_vendeur, u.ville as ville_vendeur, r.rue as rue_retrait, r.ville as ville_retrait, r.code_postal as code_postal_retrait, vme.val_max, c.libelle FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur JOIN CATEGORIES c ON a.no_categorie = c.no_categorie LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE c.libelle LIKE ? and nom_article LIKE ? and e.no_utilisateur = ? and a.date_debut_encheres < GETDATE() and a.date_fin_encheres > GETDATE();";
@@ -54,6 +57,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	private static final String SELECT_MES_VENTES_EN_COURS = "SELECT DISTINCT a.nom_article, a.no_article, a.date_fin_encheres, a.prix_initial, u.pseudo, u.no_utilisateur as no_vendeur, u.rue as rue_vendeur, u.code_postal as code_postal_vendeur, u.ville as ville_vendeur, r.rue as rue_retrait, r.ville as ville_retrait, r.code_postal as code_postal_retrait, vme.val_max, c.libelle FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur JOIN CATEGORIES c ON a.no_categorie = c.no_categorie LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE c.libelle LIKE ? and nom_article LIKE ? and a.no_vendeur = ? and a.date_debut_encheres < GETDATE() and a.date_fin_encheres > GETDATE();";
 	private static final String SELECT_MES_VENTES_NON_DEBUTEES = "SELECT DISTINCT a.nom_article, a.no_article, a.date_fin_encheres, a.prix_initial, u.pseudo, u.no_utilisateur as no_vendeur, u.rue as rue_vendeur, u.code_postal as code_postal_vendeur, u.ville as ville_vendeur, r.rue as rue_retrait, r.ville as ville_retrait, r.code_postal as code_postal_retrait, vme.val_max, c.libelle FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur JOIN CATEGORIES c ON a.no_categorie = c.no_categorie LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE c.libelle LIKE ? and nom_article LIKE ? and a.no_vendeur = ? and a.date_debut_encheres > GETDATE();";
 	private static final String SELECT_MES_VENTES_TERMINEES = "SELECT DISTINCT a.nom_article, a.no_article, a.date_fin_encheres, a.prix_initial, u.pseudo, u.no_utilisateur as no_vendeur, u.rue as rue_vendeur, u.code_postal as code_postal_vendeur, u.ville as ville_vendeur, r.rue as rue_retrait, r.ville as ville_retrait, r.code_postal as code_postal_retrait, vme.val_max, c.libelle FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur JOIN CATEGORIES c ON a.no_categorie = c.no_categorie LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE c.libelle LIKE ? and nom_article LIKE ? and a.no_vendeur = ? AND a.date_fin_encheres < GETDATE();";
+=======
+	private static final String SELECT_ALL_ENCHERES_EN_COURS = "SELECT DISTINCT a.nom_article, a.no_article, a.date_fin_encheres, a.prix_initial, u.pseudo, u.no_utilisateur as no_vendeur, u.rue as rue_vendeur, u.code_postal as code_postal_vendeur, u.ville as ville_vendeur, r.rue as rue_retrait, r.ville as ville_retrait, r.code_postal as code_postal_retrait, vme.val_max FROM ARTICLES_VENDUS a JOIN UTILISATEURS u ON u.no_utilisateur = a.no_vendeur LEFT JOIN ENCHERES e ON e.no_article = a.no_article LEFT JOIN RETRAITS r ON a.no_article = r.no_article LEFT JOIN (SELECT MAX(e.montant_enchere) as val_max, av.no_article FROM ENCHERES e JOIN ARTICLES_VENDUS av ON e.no_article = av.no_article GROUP BY av.no_article) vme ON vme.no_article = a.no_article WHERE a.date_debut_encheres < GETDATE();";
+>>>>>>> refs/remotes/origin/master
 	private static final String UPDATE_BY_UTILISATEUR_ARTICLE = "UPDATE ENCHERES SET montant_enchere=?, dateEnchere=? WHERE no_article=? AND no_utilisateur=?;";
 	private static final String SELECT_BY_UTILISATEUR ="SELECT \r\n" + 
 			"av.no_article, \r\n" + 
@@ -175,6 +181,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 		return listeEnchere;
 	}
 	
+<<<<<<< HEAD
 	public List<Enchere> selectMesEncheres(String categorie, String recherche, int noUtilisateur) throws BusinessException {
 		BusinessException be = new BusinessException();
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
@@ -239,6 +246,67 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			psmt.setInt(4, enchere.getUtilisateur().getNoUtilisateur());
 			psmt.executeUpdate();
 			psmt.close();
+=======
+	@Override
+	public void updateEnchere(Enchere enchere) throws BusinessException {
+		Connection cnx = null;
+		BusinessException be = new BusinessException();
+		try {
+			cnx = ConnectionProvider.getConnection();
+			// Pour prendre la main sur la transaction
+			PreparedStatement psmt = cnx.prepareStatement(UPDATE_BY_UTILISATEUR_ARTICLE);
+			psmt.setInt(1, enchere.getMontantEnchere());
+			psmt.setTimestamp(2, Timestamp.valueOf(enchere.getDateEnchere()));
+			psmt.setInt(3, enchere.getArticle().getNoArticle());
+			psmt.setInt(4, enchere.getUtilisateur().getNoUtilisateur());
+			psmt.executeUpdate();
+			psmt.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			be.ajouterErreur(CodesResultatDAL.UPDATE_UTILISATEUR_ECHEC); //*TODO erreur à refaire, pas la bonne
+		} finally {
+			try {
+				cnx.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+	}
+	
+	public Enchere selectByUtilisateur(int noUtilisateur,int noArticle) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection();
+			PreparedStatement psmt = cnx.prepareStatement(SELECT_BY_UTILISATEUR);) {
+			
+			psmt.setInt(1, noUtilisateur);
+			psmt.setInt(2, noArticle);
+			ResultSet rs = psmt.executeQuery();
+			Enchere enchere = null;
+			if (rs.next()) {
+				Utilisateur acheteur = new Utilisateur();
+				acheteur.setNoUtilisateur(rs.getInt("no_utilisateur"));
+				ArticleVendu article = new ArticleVendu();
+				article.setNoArticle(rs.getInt("no_article"));
+				article.setDateDebutEncheres(rs.getTimestamp("date_debut_encheres").toLocalDateTime());
+		        article.setDateFinEncheres(rs.getTimestamp("date_fin_encheres").toLocalDateTime());
+		       
+		        enchere=new Enchere();
+		        enchere.setUtilisateur(acheteur);
+		        enchere.setArticle(article);
+			}
+			rs.close();
+			psmt.close();
+			return enchere;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.ajouterErreur(CodesResultatDAL.SELECT_LOGIN_ECHEC);//*TODO refaire l'erreur, pas la bonne
+			throw be;
+		}
+
+	}
+>>>>>>> refs/remotes/origin/master
 
 		} catch (Exception e) {
 			e.printStackTrace();
