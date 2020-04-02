@@ -40,9 +40,6 @@ public class EnchereManager {
 		return enchereDAO.selectVenteRemporte(noArticle);
 	}
 	
-	public List<Enchere> selectAllEnCours() throws BusinessException{
-		return enchereDAO.selectAllEnCours();
-	}
 	
 	public void updateEnchere(Enchere enchere) throws BusinessException{
 		BusinessException be = new BusinessException();
@@ -57,12 +54,12 @@ public class EnchereManager {
 		return enchereDAO.selectByUtilisateur(noUtilisateur,noArticle);
 	}
 	
-<<<<<<< HEAD
+
 	public List<Enchere> selectAllEnCours(String categorie, String recherche) throws BusinessException{
 		return enchereDAO.selectAllEnCours(categorie, recherche);
+	}
 	
-=======
->>>>>>> refs/remotes/origin/master
+
 	public void validerMontantEnchere(Enchere enchere, BusinessException be) {
 		if (enchere.getMontantEnchere() == 0) {
 			be.ajouterErreur(CodesResultatBLL.PRIX_ERREUR);
