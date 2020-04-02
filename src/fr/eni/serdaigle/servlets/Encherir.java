@@ -22,7 +22,7 @@ import fr.eni.serdaigle.exception.BusinessException;
 /**
  * Servlet implementation class Encherir
  */
-@WebServlet("/Encherir")
+@WebServlet("/encherir")
 public class Encherir extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -47,21 +47,29 @@ public class Encherir extends HttpServlet {
 		
 		// Initialisation variables
 		LocalDateTime dateEnchere = LocalDateTime.now();
+		EnchereManager emger = new EnchereManager();
 		
 		try {
-			EnchereManager emger = new EnchereManager();
-			ArticleVendu article = new ArticleVendu();
-			article.setNoArticle(noArticle);
+			Enchere enchereCheck = emger.selectByUtilisateur(acheteur.getNoUtilisateur(),noArticle);
+			Enchere enchereEnCours = null;
+			System.out.println(dateEnchere);
+			System.out.println(enchereEnCours);
+			//verification qu'il n'y a pas déja une enchere de l'utilisateur	
+		
+			if (enchereCheck==null) {
+				enchereEnCours = new Enchere(dateEnchere, montantEnchere, acheteur, enchereCheck.getArticle());
+				emger.ajouterEnchere(enchereEnCours);
+			} else {
+				enchereEnCours = new Enchere(dateEnchere, montantEnchere, acheteur, enchereCheck.getArticle());
+				emger.updateEnchere(enchereEnCours);
+			}
 			
-			//Construction de l'objet et requete d'insertion
-			Enchere enchere = new Enchere(dateEnchere, montantEnchere, acheteur, article);
-			emger.ajouterEnchere(enchere);
 			
 			
 			// Redirection 
 			request.setAttribute("success", "L'enchère a bien été prise en compte");
 			request.setAttribute("noArticle", noArticle);
-			request.setAttribute("enchere", enchere);
+			request.setAttribute("enchere", enchereEnCours);
 			
 			RequestDispatcher rd = request.getRequestDispatcher("afficherDetailEnchere");
 			rd.forward(request, response);

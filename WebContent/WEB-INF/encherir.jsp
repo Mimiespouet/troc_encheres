@@ -76,7 +76,7 @@
 	<!--comparer avec l'heure actuelle, si c'est après l'heure actuelle ça n'apparait plus-->
 		<c:if test="${utilisateur!=null}"> 
 		
-			<form action="" method="post">
+			<form action="encherir" method="post">
 				<label for="proposition">Ma proposition :</label>
 	                <input type="number"id="proposition" name="proposition" value="${enchere.montantEnchere + 1}" min="${enchere.montantEnchere + 1}">
 					<br> 

@@ -7,6 +7,7 @@ import java.util.List;
 
 import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.bo.Enchere;
+import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.exception.BusinessException;
 
 /**
@@ -41,5 +42,21 @@ public interface EnchereDAO {
 	 * @throws BusinessException
 	 */
 	Enchere selectVenteRemporte(int noArticle) throws BusinessException;
+
+
+	
+	/**
+	 * Méthode en charge de
+	 * @param noUtilisateur, noArticle
+	 * @throws BusinessException
+	 */
+	Enchere selectByUtilisateur(int noUtilisateur,int noArticle) throws BusinessException;
+
+	/**
+	 * Méthode en charge de
+	 * @param enchere
+	 * @throws BusinessException
+	 */
+	void updateEnchere(Enchere enchere) throws BusinessException;
 
 }
