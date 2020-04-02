@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import fr.eni.serdaigle.bo.ArticleVendu;
+import fr.eni.serdaigle.bo.Enchere;
 import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.dal.ArticleDAO;
 
@@ -27,6 +28,11 @@ public class ArticleManager {
 		BusinessException be = new BusinessException();
 		
 		return null;
+	}
+	
+	public ArticleVendu select(int noArticle) throws BusinessException {
+		return articleDAO.select(noArticle);
+
 	}
 
 	public void ajouterArticle(ArticleVendu article)

@@ -33,14 +33,24 @@
 				</div>
 
 				<div>
-					<label for="categorie">Catégorie :</label> 
-					<c:forEach var="categorie" items="${listeCategorie}">
-  						<option value="${categorie}">${categorie.libelle}</option>
-					</c:forEach>
+					<label for="categorie">Catégorie :</label>
+					 <select>
+						 <c:forEach var="categorie" items="${listeCategorie}">
+						 	<c:choose>
+							 	<c:when test="${articleVendu.categorie.libelle == categorie.libelle}">
+							 		<option value="${categorie}" selected>${categorie.libelle}</option>
+							 	</c:when>
+							 	<c:otherwise>
+							 		<option value="${categorie}">${categorie.libelle}</option>
+							 	</c:otherwise>
+						 	</c:choose>
+						</c:forEach>
+					 </select>
 				</div>
+				
 				<div>
 					<label for="description">Description :</label><br>
-					<textarea id="description" name="description" rows="5" cols="33" maxlength="100" value="${articleVendu.description}" required></textarea>
+					<textarea id="description" name="description" rows="5" cols="33" maxlength="100" value="${articleVendu.description}" required>${articleVendu.description}</textarea>
 				</div>
 
 				<div>
@@ -66,13 +76,14 @@
 							id="dateFin" type="datetime-local" name="dateFin"
 							value="${articleVendu.dateFinEncheres}" required>
 					</div>
-					<label for="adresse">Retrait :</label> 
+					
+					<label for="adresse">Retrait :</label>
 					<c:choose>
-						<c:when test="${ retrait != null }">
+						<c:when test="${ articleVendu.retrait != null }">
 							<div>
 								<input
 									type="text"
-									value="${retrait.rue}  ${retrait.codePostal}  ${retrait.ville}"
+									value="${articleVendu.retrait.rue} ${articleVendu.retrait.codePostal} ${articleVendu.retrait.ville}"
 									id="adresse" name="adresse"  size="40">
 							</div>
 						</c:when>
@@ -80,21 +91,22 @@
 							<div>
 								<input
 									type="text"
-									value="${vendeur.rue}  ${vendeur.codePostal}  ${vendeur.ville}"
-									id="adresse" name="adresse"  size="40">
+									value="${utilisateur.rue} ${utilisateur.codePostal} ${utilisateur.ville}"
+									id="adresse" name="adresse" size="40">
 							</div>
 						</c:otherwise>
 					</c:choose>
-					
+					<button id="saveModif" name='modifierVente'>Enregistrer</button>
 			</form>
 			<div class="col-lg-6 col-sm-12">
-						<a id="saveModif" href='modifierVente' class="btn btn-primary">Enregistrer</a>
-						<a id="annulerVente" href="accueil" class="btn btn-primary">Annuler</a>
-					</div>
+				<form action="modifierVente" method="post">
+						
+						<button id="annulerVente" name="accueil">Annuler</button>
+				</form>
+			</div>
 		</div>
-
 	</div>
 
-	<%@ include file="piedDePage.html" %>
+	<%@ include file="piedDePage.html"%>
 </body>
 </html>

@@ -13,4 +13,11 @@ public interface ArticleDAO {
 			throws BusinessException;
 	
 	void update(ArticleVendu article) throws BusinessException;
+
+	/**
+	 * Méthode en charge de retourner un article par son numéro
+	 * @param noArticle
+	 * @return ArticleVendu
+	 */
+	public ArticleVendu select(int noArticle) throws BusinessException;
 }
