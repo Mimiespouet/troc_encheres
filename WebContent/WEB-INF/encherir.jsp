@@ -80,11 +80,11 @@
 				<label for="proposition">Ma proposition :</label>
 	                <input type="number"id="proposition" name="proposition" value="${enchere.montantEnchere + 1}" min="${enchere.montantEnchere + 1}">
 					<br> 
-			</form>
+				<input type="hidden" name="noArticle" value="${enchere.article.noArticle}">
 				<div class="col-lg-6 col-sm-12">
-					<a id="validerMaProposition" href="" class="btn btn-primary">Enchérir</a>
+					<input type="submit" name="nvEnchere" value="Enchérir">
 				</div> 
-		
+		</form>
 		</c:if>	
 
 				
