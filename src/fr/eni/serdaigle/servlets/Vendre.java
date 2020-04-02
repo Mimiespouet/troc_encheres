@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import fr.eni.serdaigle.bll.ArticleManager;
+import fr.eni.serdaigle.bll.RetraitManager;
 import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.bo.Categorie;
+import fr.eni.serdaigle.bo.Retrait;
 import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.exception.BusinessException;
 
@@ -74,6 +76,16 @@ public class Vendre extends HttpServlet {
 				e.printStackTrace();
 				request.setAttribute("error", "Erreur de saisie dans les données de type numérique");
 			}
+			
+			// récupere les 3 champs de RETRAIT, et creer un objet avec
+			
+			String rue = request.getParameter("rue").trim();
+			String codePostal = request.getParameter("codePostal").trim();
+			String ville = request.getParameter("ville").trim();
+						
+			Retrait retrait = new Retrait(rue, codePostal, ville);
+			RetraitManager retMger = new RetraitManager();
+			retMger.ajouterRetrait(retrait);
 			
 			// ***A utiliser une fois le categoriemanager operationnel***
 			//Categorie categorie = catMger.selectionnerCategorie(categorieStr);
