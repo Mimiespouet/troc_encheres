@@ -44,6 +44,22 @@ public class EnchereManager {
 		return enchereDAO.selectAllEnCours();
 	}
 	
+	public void updateEnchere(Enchere enchere) throws BusinessException{
+		BusinessException be = new BusinessException();
+		if (!be.hasErreurs()) {
+			enchereDAO.updateEnchere(enchere);
+		} else {
+			throw be;
+		}
+	}
+	
+	public Enchere selectByUtilisateur(int noUtilisateur,int noArticle) throws BusinessException{
+		return enchereDAO.selectByUtilisateur(noUtilisateur,noArticle);
+	}
+	
+	public List<Enchere> selectAllEnCours(String categorie, String recherche) throws BusinessException{
+		return enchereDAO.selectAllEnCours(categorie, recherche);
+	
 	public void validerMontantEnchere(Enchere enchere, BusinessException be) {
 		if (enchere.getMontantEnchere() == 0) {
 			be.ajouterErreur(CodesResultatBLL.PRIX_ERREUR);
@@ -51,7 +67,7 @@ public class EnchereManager {
 	}
 	
 	private void validerDateEnchere(Enchere enchere, BusinessException be) {
-		if(enchere.getDateEnchere() == null || enchere.getDateEnchere().isAfter(enchere.getArticle().getDateFinEncheres()) 
+		if(enchere.getDateEnchere().isAfter(enchere.getArticle().getDateFinEncheres()) 
 				|| enchere.getDateEnchere().isBefore(enchere.getArticle().getDateDebutEncheres()) ){
 			be.ajouterErreur(CodesResultatBLL.DATE_ERREUR);
 		}

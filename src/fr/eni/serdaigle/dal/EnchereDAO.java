@@ -24,7 +24,7 @@ public interface EnchereDAO {
 	 * @return Liste Enchere
 	 * @throws BusinessException
 	 */
-	List<Enchere> selectAllEnCours() throws BusinessException;
+	List<Enchere> selectAllEnCours(String categorie, String recherche) throws BusinessException;
 
 	/**
 	 * Méthode en charge de

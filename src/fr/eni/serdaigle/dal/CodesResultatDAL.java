@@ -33,4 +33,6 @@ public abstract class CodesResultatDAL {
 	public static final int SELECT_VENTE_REMPORTE_ECHEC = 10011;
 
 	public static final int SELECT_ALL_ENCHERE_ECHEC = 10012;
+
+	public static final int INSERT_RETRAIT_ECHEC = 10013;
 }
