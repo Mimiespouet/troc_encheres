@@ -47,11 +47,9 @@ public class AfficherDetailEnchere extends HttpServlet {
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		
 		LocalDateTime date = LocalDateTime.now();
-<<<<<<< HEAD
+		
 		int noArticle = 0;
-=======
-		int noArticle;
->>>>>>> refs/remotes/origin/master
+
 		
 		if (request.getParameter("noArticle")!=null) {
 			noArticle = Integer.parseInt(request.getParameter("noArticle"));
