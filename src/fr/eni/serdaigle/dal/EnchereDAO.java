@@ -11,8 +11,8 @@ import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.exception.BusinessException;
 
 /**
- * Classe en charge de
- * @author Emeline
+ * Classe en charge de gérer les enchères sur les articles mis en vente
+ * @author serdaigle
  * @version ProjetTrocEncheres - v1.0
  * @date 27 mars 2020
  */

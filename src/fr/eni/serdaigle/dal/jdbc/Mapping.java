@@ -129,6 +129,7 @@ public class Mapping {
 		Categorie categorie = new Categorie(rs.getInt("no_categorie"),rs.getString("libelle"));
 		return categorie;
 	}
+	
 	/**
 	 * Méthode en charge du mapping de l'objet Enchere pour l'affichage sur la page acquisition.jsp
 	 * @param rs
@@ -166,12 +167,20 @@ public class Mapping {
 
     }
 	
+	/**
+	 * Méthode en charge du mapping de l'objet Enchere selon sa valeur max et son article
+	 * @param rs
+	 * @return Enchere
+	 * @throws SQLException
+	 */
 	public static Enchere mappingEnchere(ResultSet rs) throws SQLException {
+//      récupération de retrait
 		Retrait retrait = new Retrait();
 		retrait.setCodePostal(rs.getString("code_postal_retrait"));
 		retrait.setRue(rs.getString("rue_retrait"));
 		retrait.setVille(rs.getString("ville_retrait"));
 		
+//      récupération du vendeur
 		Utilisateur vendeur = new Utilisateur();
 		vendeur.setNoUtilisateur(rs.getInt("no_vendeur"));
 		vendeur.setPseudo(rs.getString("pseudo"));
@@ -179,6 +188,7 @@ public class Mapping {
 		vendeur.setCodePostal(rs.getString("code_postal_vendeur"));
 		vendeur.setVille(rs.getString("ville_vendeur"));
 		
+//      récupération d' ArticleVendu   
 		ArticleVendu article = new ArticleVendu();
 		article.setNoArticle(rs.getInt("no_article"));
 		article.setNomArticle(rs.getString("nom_article"));

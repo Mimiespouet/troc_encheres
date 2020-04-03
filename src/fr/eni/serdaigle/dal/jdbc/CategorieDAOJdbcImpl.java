@@ -20,11 +20,16 @@ import fr.eni.serdaigle.dal.CodesResultatDAL;
 import fr.eni.serdaigle.dal.ConnectionProvider;
 import fr.eni.serdaigle.exception.BusinessException;
 
+/**
+ * Classe en charge de gérer les requêtes sur catégorie
+ * @author serdaigle
+ * @version troc_encheres - v1.0
+ * @date 26 mars 2020
+ */
 public class CategorieDAOJdbcImpl implements CategorieDAO {
 
 	private static final String INSERT = "INSERT INTO CATEGORIE(libelle) VALUES (?);";
 	private static final String SELECT_ALL = "SELECT no_categorie, libelle FROM CATEGORIES;";
-	private static final String SELECT_BY_LIBELLE = "SELECT no_categorie, libelle FROM CATEGORIES WHERE libelle LIKE ?;";
 		
 	/**
 	 * {@inheritDoc}

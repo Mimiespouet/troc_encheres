@@ -5,7 +5,7 @@ import fr.eni.serdaigle.exception.BusinessException;
 
 /**
  * Classe en charge de gérer les Articles en vente
- * @author Jean-François
+ * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 26 mars 2020
  */
