@@ -42,7 +42,6 @@
 			</div>
 		</c:if>
 
-
 		<!-- Page Heading -->
 		<form action="accueil" method="post">
 			<c:if test="${utilisateur != null}">
