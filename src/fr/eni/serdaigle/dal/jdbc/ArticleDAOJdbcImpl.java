@@ -20,8 +20,9 @@ import fr.eni.serdaigle.exception.BusinessException;
 public class ArticleDAOJdbcImpl implements ArticleDAO{
 
 	private static final String INSERT = "INSERT INTO ARTICLES_VENDUS(nom_article, description, date_debut_encheres, date_fin_encheres, prix_initial, prix_vente, no_vendeur, no_categorie) VALUES (?,?,?,?,?,?,?,?);";
-	private static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, prix_vente=?, no_vendeur=?, no_categorie=? WHERE no_article=?;";
+	private static final String UPDATE = "UPDATE ARTICLES_VENDUS SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, no_vendeur=?, no_categorie=? WHERE no_article=?;";
 	private static final String SELECT_BY_ID = "SELECT av.nom_article, av.no_article,c.no_categorie,c.libelle as cate_libelle, av.description, av.no_vendeur, av.prix_initial, av.date_debut_encheres, av.date_fin_encheres, r.rue as retrait_rue, r.ville as retrait_ville, r.code_postal as retrait_cp, u.rue, u.ville, u.code_postal FROM ARTICLES_VENDUS av JOIN CATEGORIES c ON c.no_categorie = av.no_categorie LEFT JOIN RETRAITS r ON av.no_article = r.no_article JOIN UTILISATEURS u ON u.no_utilisateur = av.no_vendeur WHERE av.no_article = ?";
+	private static final String INSERT_RETRAIT = "INSERT INTO RETRAITS (no_article,rue, code_postal, ville) VALUES (?,?,?,?);";
 /*
  * 	SELECT av.* FROM ARTICLES_VENDUS av
  * WHERE av.no_categorie = ? AND av.nom_article LIKE ?
@@ -34,6 +35,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO{
 		BusinessException be = new BusinessException();
 		try {
 			cnx = ConnectionProvider.getConnection();
+			cnx.setAutoCommit(false);
+			//Pour prendre la main sur la transaction
 			PreparedStatement psmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			psmt.setString(1, article.getNomArticle());
 			psmt.setString(2, article.getDescription());
@@ -57,25 +60,38 @@ public class ArticleDAOJdbcImpl implements ArticleDAO{
 			}
 			psmt.close();
 
-		} catch (Exception e) {
-			e.printStackTrace();
-			be.ajouterErreur(CodesResultatDAL.INSERT_ARTICLE_ECHEC);
-		} finally {
-			try {
-				cnx.close();
-			} catch (SQLException e) {
+			psmt = cnx.prepareStatement(INSERT_RETRAIT);
+			psmt.setInt(1, article.getNoArticle());
+			psmt.setString(2, article.getRetrait().getRue());
+			psmt.setString(3, article.getRetrait().getCodePostal());
+			psmt.setString(3, article.getRetrait().getVille());
+			psmt.executeUpdate();
+			psmt.close();
+			
+			cnx.commit();
+		
+		}catch (Exception e) {
 				e.printStackTrace();
-			}
-			if (be.hasErreurs()) {
-				throw be;
+				be.ajouterErreur(CodesResultatDAL.INSERT_RETRAIT_ECHEC);
+				try {
+					cnx.rollback();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+			}finally {
+				try {
+					cnx.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				if(be.hasErreurs()) {
+					throw be;
+				}
 			}
 		}
-
-	}
 	
 	
 	public void update(ArticleVendu article) throws BusinessException{
-		
 		Connection cnx = null;
 		BusinessException be = new BusinessException();
 		try {
@@ -86,12 +102,11 @@ public class ArticleDAOJdbcImpl implements ArticleDAO{
 			psmt.setTimestamp(3, Timestamp.valueOf(article.getDateDebutEncheres()));
 			psmt.setTimestamp(4, Timestamp.valueOf(article.getDateFinEncheres()));
 			psmt.setInt(5, article.getPrixInitial());
-			psmt.setInt(6, article.getPrixVente());
-			psmt.setInt(7, article.getVendeur().getNoUtilisateur());
-			psmt.setInt(8, article.getCategorie().getNoCategorie());
+			psmt.setInt(6, article.getVendeur().getNoUtilisateur());
+			psmt.setInt(7, article.getCategorie().getNoCategorie());
+			psmt.setInt(8, article.getNoArticle());
 			psmt.executeUpdate();
 			psmt.close();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			be.ajouterErreur(CodesResultatDAL.UPDATE_ARTICLE_ECHEC);
@@ -105,7 +120,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO{
 				throw be;
 			}
 		}
-		
 	}
 	
 	public ArticleVendu select(int noArticle) throws BusinessException {
@@ -120,7 +134,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO{
 			
 			if (rs.next()) {
 
-				
+				article.setNoArticle(rs.getInt("no_article"));
 				article.setNomArticle(rs.getString("nom_article"));
 				article.setDescription(rs.getString("description"));
 				article.setDateDebutEncheres(rs.getTimestamp("date_debut_encheres").toLocalDateTime());
@@ -144,7 +158,6 @@ public class ArticleDAOJdbcImpl implements ArticleDAO{
 			e.printStackTrace();
 			//code resultat DAL à changer !!
 			be.ajouterErreur(CodesResultatDAL.LOGIN_INCORRECT);
-			
 			throw be;
 		}
 		
