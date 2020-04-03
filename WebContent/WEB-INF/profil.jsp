@@ -74,6 +74,6 @@
 	        	</div>
 		<%@ include file="piedDePage.html" %>
 	</div>	
-	
+	<script src="${pageContext.request.contextPath}/jquery/jquery.min.js"></script>
 </body>
 </html>
