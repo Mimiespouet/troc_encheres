@@ -86,27 +86,4 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 		}
 		return listeCategorie;
 	}
-
-	/**
-	 * {@inheritDoc}
-	 * @see fr.eni.serdaigle.dal.CategorieDAO#selectByLibelle(java.lang.String)
-	 */
-	@Override
-	public Categorie selectById(int noCategorie) throws BusinessException {
-		BusinessException be = new BusinessException();
-		Categorie categorie = null;
-		try (Connection cnx = ConnectionProvider.getConnection();
-			PreparedStatement psmt = cnx.prepareStatement(SELECT_BY_LIBELLE);){
-			psmt.setString(1, "%"+libelle+"%");
-			ResultSet rs = psmt.executeQuery();
-			if (rs.next()) {
-					categorie = Mapping.mappingCategorie(rs);
-				}
-		} catch (Exception e) {
-			e.printStackTrace();
-			be.ajouterErreur(CodesResultatDAL.SELECT_CATEGORIE_ECHEC);
-		}
-		return categorie;
-	}	
-
 }

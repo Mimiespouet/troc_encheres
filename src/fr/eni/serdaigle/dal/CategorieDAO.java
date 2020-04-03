@@ -14,15 +14,7 @@ import fr.eni.serdaigle.exception.BusinessException;
  * @version Trocencheres - v1.0
  * @date 26 mars 2020
  */
-public interface CategorieDAO {
-	/**
-	 * Méthode en charge de selectionner une catégorie par son id
-	 * @param libelle
-	 * @return Categorie
-	 * @throws BusinessException
-	 */
-	Categorie selectById(int noCategorie) throws BusinessException;
-	
+public interface CategorieDAO {	
 	/**
 	 * Méthode en charge de sélectionner toutes les catégories présentes en BDD
 	 * @return List Categorie 
