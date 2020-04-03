@@ -12,12 +12,17 @@ import fr.eni.serdaigle.exception.BusinessException;
 
 /**
  * Classe en charge de
- * @author cracb
+ * @author Emeline
  * @version ProjetTrocEncheres - v1.0
  * @date 27 mars 2020
  */
 public interface EnchereDAO {
 	
+	/**
+	 * Méthode en charge d'inserer une enchère
+	 * @param enchere
+	 * @throws BusinessException
+	 */
 	void insert(Enchere enchere) throws BusinessException;
 	
 	/**
@@ -28,9 +33,9 @@ public interface EnchereDAO {
 	List<Enchere> selectAllEnCours(String categorie, String recherche) throws BusinessException;
 
 	/**
-	 * Méthode en charge de
+	 * Méthode en charge de retourner un article selon son numéro
 	 * @param noArticle
-	 * @return
+	 * @return numero article
 	 * @throws BusinessException
 	 */
 	Enchere select(int noArticle) throws BusinessException;
@@ -70,7 +75,7 @@ public interface EnchereDAO {
 	 * @param categorie
 	 * @param recherche
 	 * @param noUtilisateur
-	 * @return
+	 * @return categorie, recherche, numéro d'utilisateur
 	 * @throws BusinessException
 	 */
 	List<Enchere> selectMesVentes(String categorie, String recherche, int noUtilisateur) throws BusinessException;
@@ -80,14 +85,14 @@ public interface EnchereDAO {
 	 * @param categorie
 	 * @param recherche
 	 * @param noUtilisateur
-	 * @return
+	 * @return categorie, recherche, numéro d'utilisateur
 	 * @throws BusinessException
 	 */
 	List<Enchere> selectMesVentesTerminees(String categorie, String recherche, int noUtilisateur)
 			throws BusinessException;
 	
 	/**
-	 * Méthode en charge de
+	 * Méthode en charge de selectionner une enchère selon le numéro d'utilisateur et le numéro d'article
 	 * @param noUtilisateur, noArticle
 	 * @throws BusinessException
 	 */
