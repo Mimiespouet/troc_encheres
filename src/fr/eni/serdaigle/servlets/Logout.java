@@ -13,6 +13,12 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class accueil
  */
+/**
+ * Classe en charge de se deconnecter
+ * @author serdaigle
+ * @version troc_encheres - v1.0
+ * @date 26 mars 2020
+ */
 @WebServlet("/logout")
 public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;

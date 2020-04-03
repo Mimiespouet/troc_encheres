@@ -17,6 +17,12 @@ import fr.eni.serdaigle.exception.BusinessException;
 /**
  * Servlet implementation class accueil
  */
+/**
+ * Classe en charge de se connecter à son compte
+ * @author serdaigle
+ * @version troc_encheres - v1.0
+ * @date 26 mars 2020
+ */
 @WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;

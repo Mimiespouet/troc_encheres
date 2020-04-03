@@ -21,6 +21,12 @@ import fr.eni.serdaigle.exception.BusinessException;
 /**
  * Servlet implementation class Encherir
  */
+/**
+ * Classe en charge d'encherir sur un article
+ * @author serdaigle
+ * @version troc_encheres - v1.0
+ * @date 1 avril 2020
+ */
 @WebServlet("/encherir")
 public class Encherir extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -23,6 +23,12 @@ import fr.eni.serdaigle.exception.BusinessException;
 /**
  * Servlet implementation class modifArticle
  */
+/**
+ * Classe en charge de modifier une vente
+ * @author serdaigle
+ * @version troc_encheres - v1.0
+ * @date 2 avril 2020
+ */
 @WebServlet("/modifierVente")
 public class ModifierVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;

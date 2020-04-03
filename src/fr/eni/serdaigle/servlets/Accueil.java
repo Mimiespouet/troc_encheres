@@ -22,6 +22,12 @@ import fr.eni.serdaigle.exception.BusinessException;
 /**
  * Servlet implementation class Accueil
  */
+/**
+ * Classe en charge d'aller sur la page principale du site
+ * @author serdaigle
+ * @version troc_encheres - v1.0
+ * @date 31 mars 2020
+ */
 @WebServlet("/accueil")
 public class Accueil extends HttpServlet {
 	private static final long serialVersionUID = 1L;

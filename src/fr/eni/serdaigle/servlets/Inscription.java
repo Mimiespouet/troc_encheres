@@ -16,6 +16,12 @@ import fr.eni.serdaigle.exception.BusinessException;
 /**
  * Servlet implementation class Accueil
  */
+/**
+ * Classe en charge de s'inscrire comme nouvel utilisateur
+ * @author serdaigle
+ * @version troc_encheres - v1.0
+ * @date 27 mars 2020
+ */
 @WebServlet("/inscription")
 public class Inscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;

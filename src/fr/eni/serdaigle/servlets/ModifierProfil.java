@@ -17,6 +17,12 @@ import fr.eni.serdaigle.exception.BusinessException;
 /**
  * Servlet implementation class Accueil
  */
+/**
+ * Classe en charge de modifier son profil
+ * @author serdaigle
+ * @version troc_encheres - v1.0
+ * @date 27 mars. 2020
+ */
 @WebServlet("/modifierProfil")
 public class ModifierProfil extends HttpServlet {
 	private static final long serialVersionUID = 1L;

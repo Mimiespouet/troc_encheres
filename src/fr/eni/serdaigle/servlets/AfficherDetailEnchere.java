@@ -22,6 +22,12 @@ import fr.eni.serdaigle.exception.BusinessException;
 /**
  * Servlet implementation class AfficherDetailEnchere
  */
+/**
+ * Classe en charge de pouvoir afficher le détail d'un article avec son enchère selon l'état de l'utilisateur
+ * @author serdaigle
+ * @version troc_encheres - v1.0
+ * @date 1 avr. 2020
+ */
 @WebServlet("/afficherDetailEnchere")
 public class AfficherDetailEnchere extends HttpServlet {
 	private static final long serialVersionUID = 1L;

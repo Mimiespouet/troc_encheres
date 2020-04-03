@@ -25,6 +25,12 @@ import fr.eni.serdaigle.exception.BusinessException;
 /**
  * Servlet implementation class Accueil
  */
+/**
+ * Classe en charge de permettre de faire une nouvelle vente
+ * @author serdaigle
+ * @version troc_encheres - v1.0
+ * @date 31 mars 2020
+ */
 @WebServlet("/vendreArticle")
 public class Vendre extends HttpServlet {
 	private static final long serialVersionUID = 1L;
