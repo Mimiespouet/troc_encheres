@@ -11,7 +11,7 @@ import fr.eni.serdaigle.exception.BusinessException;
  * Classe en charge de gérer les requêtes sur les enchères
  * @author serdaigle
  * @version troc_encheres - v1.0
- * @date 26 mars 2020
+ * @date 28 mars 2020
  */
 public class EnchereManager {
 	private EnchereDAO enchereDAO;
