@@ -24,11 +24,16 @@
 							<p>${errorLogin}</p>
 						</div>
 					</div>
-		</c:if>error}</p>	
+		</c:if>	
 		<div class="col-lg-6 col-sm-12">
-			
-			<h3 class="my-4 col-lg-12 col-sm-12">${enchere.article.acheteur.pseudo} a remporté l'enchère</h3>
-			
+			<c:choose>
+				<c:when test="${enchere.utilisateur.pseudo != null}">
+					<h3 class="my-4 col-lg-12 col-sm-12">${enchere.utilisateur.pseudo} a remporté l'enchère</h3>
+				</c:when>
+				<c:otherwise>
+					<h3 class="my-4 col-lg-12 col-sm-12">Enchère terminée. Personne n'a enchérit sur votre article</h3>
+				</c:otherwise>
+			</c:choose>	
 				<p>${error}</p>
 	
 	                <h3>${enchere.article.nomArticle}</h3>
@@ -62,15 +67,17 @@
 				<div class="col-lg-6 col-sm-12">
 					<a id="back" href="accueil" class="btn btn-primary">Retour</a>
 				</div>
-				
-				<div class="col-lg-6 col-sm-12">
-					<a href="mailto:EMAILADDRESS">Contacter ${enchere.article.acheteur.pseudo}</a>
+								
+				<c:if test="${enchere.utilisateur.pseudo != null}">
+					<div class="col-lg-6 col-sm-12">
+					<a href="mailto:${enchere.utilisateur.email}">Contacter ${enchere.utilisateur.pseudo}</a>
 				</div>
 				
 				<div class="col-lg-6 col-sm-12">
 					<a id="done" href="accueil" class="btn btn-primary">Retrait effectué</a>
 				</div>
-		
+				</c:if>
+			
 		</div>
 			
 		<%@ include file="piedDePage.html"%>
