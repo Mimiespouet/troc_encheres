@@ -59,11 +59,7 @@ public class ArticleDAOJdbcImpl implements ArticleDAO{
 				be.ajouterErreur(CodesResultatDAL.INSERT_ARTICLE_ECHEC);
 			}
 			psmt.close();
-<<<<<<< HEAD
 
-=======
-			
->>>>>>> branch 'master' of https://github.com/Mimiespouet/troc_encheres.git
 			psmt = cnx.prepareStatement(INSERT_RETRAIT);
 			psmt.setInt(1, article.getNoArticle());
 			psmt.setString(2, article.getRetrait().getRue());
