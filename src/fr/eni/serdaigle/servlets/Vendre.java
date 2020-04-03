@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,6 +38,16 @@ public class Vendre extends HttpServlet {
 		HttpSession session = request.getSession();
 		Utilisateur vendeur = (Utilisateur) session.getAttribute("utilisateur");
 		request.setAttribute("vendeur", vendeur);
+		CategorieManager catMger = new CategorieManager();
+		List<Categorie> listeCategorie = new ArrayList<Categorie>();
+		
+		//Recuperation des categories pour les afficher dans le menu deroulant
+				try {
+					listeCategorie = catMger.selectAll();
+					request.setAttribute("listeCategorie", listeCategorie);
+				} catch (BusinessException ex) {
+					request.setAttribute("error", ex.getMessage());
+				}
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vendreUnArticle.jsp");
 		rd.forward(request, response);
@@ -42,24 +55,26 @@ public class Vendre extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		// Récupération de l'utilisateur en session qui est le vendeur
 		HttpSession session = request.getSession();
 		Utilisateur vendeur = (Utilisateur) session.getAttribute("utilisateur");
 		
+		// Récupération des données du formulaire
 		String nomArticle = request.getParameter("nom").trim();
 		String description = request.getParameter("description").trim();
 		String dateDebutEncheresStr = request.getParameter("dateDebut");
 		String dateFinEncheresStr = request.getParameter("dateFin");
-		String categorieStr = request.getParameter("categorie");
+		int noCategorie = Integer.parseInt(request.getParameter("noCategorie"));
 		int noArticle;
 		
+		// Initialisation variables
 		LocalDateTime dateFinEncheres = null;
 		LocalDateTime dateDebutEncheres = null;
 		int prixInitial = 0;
 		
 		try {
 			ArticleManager artMger = new ArticleManager();
-			CategorieManager catMger = new CategorieManager();
 			BusinessException be = new BusinessException();
 			
 			//Conversion pour les dates
@@ -85,7 +100,8 @@ public class Vendre extends HttpServlet {
 			String codePostal = request.getParameter("codePostal").trim();
 			String ville = request.getParameter("ville").trim();
 			Retrait retrait = new Retrait(rue, codePostal, ville);
-			Categorie categorie = catMger.selectByLibelle(categorieStr);
+			Categorie categorie = new Categorie();
+			categorie.setNoCategorie(noCategorie);
 			ArticleVendu art = new ArticleVendu(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie);
 			
 			//Test si l'adresse de retrait a été remplie puis insert en fonction
