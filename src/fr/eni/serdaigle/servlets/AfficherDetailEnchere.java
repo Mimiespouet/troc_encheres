@@ -47,15 +47,16 @@ public class AfficherDetailEnchere extends HttpServlet {
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		
 		LocalDateTime date = LocalDateTime.now();
-		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
+		int noArticle = 0;
 		
 		if (request.getParameter("noArticle")!=null) {
 			noArticle = Integer.parseInt(request.getParameter("noArticle"));
 		} else { 
-			request.setAttribute("noArticle",noArticle);
+			noArticle = (int) request.getAttribute("noArticle");
 		}
-		Enchere enchere = null;
 		
+		Enchere enchere = null;
+		System.out.println("numero article :" + noArticle);
 		try {			
 			enchere = emger.select(noArticle);
 		} catch (BusinessException e) {

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import fr.eni.serdaigle.bll.ArticleManager;
-import fr.eni.serdaigle.bll.RetraitManager;
+import fr.eni.serdaigle.bll.CategorieManager;
 import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.bo.Categorie;
 import fr.eni.serdaigle.bo.Retrait;
@@ -25,7 +25,9 @@ public class Vendre extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+		HttpSession session = request.getSession();
+		Utilisateur vendeur = (Utilisateur) session.getAttribute("utilisateur");
+		request.setAttribute("vendeur", vendeur);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vendreUnArticle.jsp");
 		rd.forward(request, response);
@@ -44,9 +46,8 @@ public class Vendre extends HttpServlet {
 		String dateDebutEncheresStr = request.getParameter("dateDebut");
 		String dateFinEncheresStr = request.getParameter("dateFin");
 		String categorieStr = request.getParameter("categorie");
+		int noArticle;
 		
-		// ***Pour le test uniquement, à supprimer une fois requete selectbylibelle de Categorie opérationelle***
-		Categorie categorie = new Categorie(2,"Informatique");
 		
 		// Initialisation variables
 		LocalDateTime dateFinEncheres = null;
@@ -55,8 +56,7 @@ public class Vendre extends HttpServlet {
 		
 		try {
 			ArticleManager artMger = new ArticleManager();
-			// ***A utiliser une fois le categoriemanager operationnel***	
-			// CategorieManager catMger = new CategorieManager();
+			CategorieManager catMger = new CategorieManager();
 			BusinessException be = new BusinessException();
 			
 			//Conversion pour les dates
@@ -77,29 +77,32 @@ public class Vendre extends HttpServlet {
 				request.setAttribute("error", "Erreur de saisie dans les données de type numérique");
 			}
 			
-			// récupere les 3 champs de RETRAIT, et creer un objet avec
-			
+			// récupere les 3 champs de RETRAIT, puis construction des objets
 			String rue = request.getParameter("rue").trim();
 			String codePostal = request.getParameter("codePostal").trim();
 			String ville = request.getParameter("ville").trim();
-						
 			Retrait retrait = new Retrait(rue, codePostal, ville);
-			RetraitManager retMger = new RetraitManager();
-			retMger.ajouterRetrait(retrait);
-			
-			// ***A utiliser une fois le categoriemanager operationnel***
-			//Categorie categorie = catMger.selectionnerCategorie(categorieStr);
-			
-			//Construction de l'objet et requete d'insertion
+			Categorie categorie = catMger.selectByLibelle(categorieStr);
 			ArticleVendu art = new ArticleVendu(nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie);
-			artMger.ajouterArticle(art);
 			
+			//Test si l'adresse de retrait a été remplie puis insert en fonction
+			if(retrait.getRue().isEmpty() || retrait.getCodePostal().isEmpty() || retrait.getVille().isEmpty()) {
+				noArticle = artMger.ajouterArticle(art);
+			}else {
+				art.setRetrait(retrait);
+				noArticle = artMger.ajouterArticleRetrait(art);
+			}
 			
-			// Redirection à changer
-			request.setAttribute("success", "L'article a bien été mis en vente");
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/vendreUnArticle.jsp");
-			rd.forward(request, response);
-
+			//Test erreur
+			if (noArticle==0) {
+				request.setAttribute("error", "Erreur lors de l'insertion de l'article");
+				doGet(request, response);
+			}else {
+				request.setAttribute("success", "L'article a bien été mis en vente");
+				request.setAttribute("noArticle", noArticle);
+				RequestDispatcher rd = request.getRequestDispatcher("afficherDetailEnchere");
+				rd.forward(request, response);
+			}
 		} catch (BusinessException be) {
 			System.out.println(be.getMessage());
 			request.setAttribute("error", be.getMessage());

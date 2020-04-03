@@ -16,7 +16,6 @@ public class ArticleVendu implements Serializable {
 	private LocalDateTime dateDebutEncheres;
 	private LocalDateTime dateFinEncheres;
 	private int prixInitial;
-	private int prixVente;
 	private Utilisateur vendeur;
 	private Utilisateur acheteur;
 	private Categorie categorie;
@@ -85,10 +84,9 @@ public class ArticleVendu implements Serializable {
 	 * @param retrait
 	 */
 	public ArticleVendu(int noArticle, String nomArticle, String description, LocalDateTime dateDebutEncheres,
-			LocalDateTime dateFinEncheres, int prixInitial, int prixVente, Utilisateur vendeur, Utilisateur acheteur,
+			LocalDateTime dateFinEncheres, int prixInitial, Utilisateur vendeur, Utilisateur acheteur,
 			Categorie categorie, Retrait retrait) {
 		this(noArticle, nomArticle, description, dateDebutEncheres, dateFinEncheres, prixInitial, vendeur, categorie);
-		this.prixVente = prixVente;
 		this.acheteur = acheteur;
 		this.retrait = retrait;
 	}
@@ -139,14 +137,6 @@ public class ArticleVendu implements Serializable {
 
 	public void setPrixInitial(int prixInitial) {
 		this.prixInitial = prixInitial;
-	}
-
-	public int getPrixVente() {
-		return prixVente;
-	}
-
-	public void setPrixVente(int prixVente) {
-		this.prixVente = prixVente;
 	}
 
 	public Utilisateur getVendeur() {
@@ -207,7 +197,7 @@ public class ArticleVendu implements Serializable {
 	public String toString() {
 		return "ArticleVendu [noArticle=" + noArticle + ", nomArticle=" + nomArticle + ", description=" + description
 				+ ", dateDebutEncheres=" + dateDebutEncheres + ", dateFinEncheres=" + dateFinEncheres + ", prixInitial="
-				+ prixInitial + ", prixVente=" + prixVente + ", vendeur=" + vendeur + ", acheteur=" + acheteur
+				+ prixInitial + ", vendeur=" + vendeur + ", acheteur=" + acheteur
 				+ ", categorie=" + categorie + ", retrait=" + retrait + "]";
 	}
 

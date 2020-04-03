@@ -3,7 +3,6 @@ package fr.eni.serdaigle.dal;
 import fr.eni.serdaigle.dal.jdbc.ArticleDAOJdbcImpl;
 import fr.eni.serdaigle.dal.jdbc.CategorieDAOJdbcImpl;
 import fr.eni.serdaigle.dal.jdbc.EnchereDAOJdbcImpl;
-import fr.eni.serdaigle.dal.jdbc.RetraitDAOJdbcImpl;
 import fr.eni.serdaigle.dal.jdbc.UtilisateurDAOJdbcImpl;
 
 public abstract class DAOFactory {
@@ -22,9 +21,5 @@ public abstract class DAOFactory {
 	public static CategorieDAO getCategorieDAO() {
 		return new CategorieDAOJdbcImpl();
 	}
-	
-	public static RetraitDAO getRetraitDAO() {
-		return new RetraitDAOJdbcImpl();
-	}
-	
+		
 }

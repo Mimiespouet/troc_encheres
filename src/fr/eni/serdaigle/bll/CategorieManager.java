@@ -32,4 +32,12 @@ public class CategorieManager {
 		return listeCategorie;
 	}
 	
+	
+	public Categorie selectByLibelle(String libelle) throws BusinessException{
+		Categorie categorie = categorieDAO.selectByLibelle(libelle);
+		return categorie;
+	}
+	
+	
+	
 }

@@ -36,7 +36,7 @@ public interface CategorieDAO {
 	 * @throws BusinessException
 	 */
 	void insert(Categorie categorie) throws BusinessException;
-	
+
 	
 }
 

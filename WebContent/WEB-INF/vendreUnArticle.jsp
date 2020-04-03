@@ -69,9 +69,9 @@
 
 					<div>
 						<label for="adresse">Retrait :</label> 
-						<input type="text" placeholder="Entrer la rue du retrait de l'article" id="rue" name="rue"  size="40">
-						<input type="text" placeholder="Entrer le code postal du retrait de l'article" id="codePostal" name="codePostal"  size="40">
-						<input type="text" placeholder="Entrer la ville du retrait de l'article" id="ville" name="ville"  size="40">
+						<input type="text" placeholder="${vendeur.rue}" id="rue" name="rue"  size="40">
+						<input type="text" placeholder="${vendeur.codePostal}" id="codePostal" name="codePostal"  size="40">
+						<input type="text" placeholder="${vendeur.ville}" id="ville" name="ville"  size="40">
 					</div>
 
 					<div>
