@@ -12,6 +12,12 @@ import fr.eni.serdaigle.bo.Enchere;
 import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.dal.ArticleDAO;
 
+/**
+ * Classe en charge de gérer les requêtes sur les article
+ * @author serdaigle
+ * @version troc_encheres - v1.0
+ * @date 26 mars 2020
+ */
 public class ArticleManager {
 	private ArticleDAO articleDAO;
 	private static final int CHAMPS_VARCHAR_15 = 15;

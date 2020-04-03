@@ -5,6 +5,12 @@ import fr.eni.serdaigle.dal.DAOFactory;
 import fr.eni.serdaigle.dal.UtilisateurDAO;
 import fr.eni.serdaigle.exception.BusinessException;
 
+/**
+ * Classe en charge de gérer les requêtes sur utilisateur
+ * @author serdaigle
+ * @version troc_encheres - v1.0
+ * @date 26 mars 2020
+ */
 public class UtilisateurManager {
 	private UtilisateurDAO utilisateurDAO;
 	private static final int CHAMPS_VARCHAR_30 = 30;

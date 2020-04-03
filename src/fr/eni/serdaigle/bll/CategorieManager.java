@@ -13,6 +13,12 @@ import fr.eni.serdaigle.bo.Categorie;
 import fr.eni.serdaigle.dal.ArticleDAO;
 import fr.eni.serdaigle.dal.CategorieDAO;
 
+/**
+ * Classe en charge de gérer les requêtes sur les catégories
+ * @author serdaigle
+ * @version troc_encheres - v1.0
+ * @date 26 mars 2020
+ */
 public class CategorieManager {
 	private CategorieDAO categorieDAO;
 	private static final int CHAMPS_VARCHAR_30 = 30;
@@ -34,19 +40,5 @@ public class CategorieManager {
 		listeCategorie = categorieDAO.selectAll();
 		return listeCategorie;
 	}
-	
-	
-	/**
-	 * Méthode en charge de récupérer une catégorie par son id
-	 * @param noCategorie
-	 * @return Categorie
-	 * @throws BusinessException
-	 */
-	public Categorie selectById(int noCategorie) throws BusinessException{
-		Categorie categorie = categorieDAO.selectById(noCategorie);
-		return categorie;
-	}
-	
-	
 	
 }
