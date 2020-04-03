@@ -120,29 +120,45 @@ public class EnchereManager {
 	}
 	
 	/**
-	 * Méthode en charge de permettre 
+	 * Méthode en charge de permettre  permettre à un utilisateur de selectionner ses ventes non débutées
 	 * @param categorie
 	 * @param recherche
 	 * @param noUtilisateur
-	 * @return
+	 * @return enchereDAO.selectMesVentesNonDebutees(categorie, recherche, noUtilisateur)
 	 * @throws BusinessException
 	 */
 	public List<Enchere> selectMesVentesNonDebutees(String categorie, String recherche, int noUtilisateur) throws BusinessException {
 		return enchereDAO.selectMesVentesNonDebutees(categorie, recherche, noUtilisateur);
 	}
 	
+	/**
+	 * Méthode en charge de permettre à un utilisateur de selectionner ses ventes terminées
+	 * @param categorie
+	 * @param recherche
+	 * @param noUtilisateur
+	 * @return enchereDAO.selectMesVentesTerminees(categorie, recherche, noUtilisateur)
+	 * @throws BusinessException
+	 */
 	public List<Enchere> selectMesVentesTerminees(String categorie, String recherche, int noUtilisateur) throws BusinessException {
 		return enchereDAO.selectMesVentesTerminees(categorie, recherche, noUtilisateur);
 	}
 	
-	
-	
+	/**
+	 * Méthode en charge de valider un montant d'enchère s'il n'est pas négatif
+	 * @param enchere
+	 * @param be
+	 */
 	public void validerMontantEnchere(Enchere enchere, BusinessException be) {
 		if (enchere.getMontantEnchere() == 0) {
 			be.ajouterErreur(CodesResultatBLL.PRIX_ERREUR);
 		}
 	}
 	
+	/**
+	 * Méthode en charge de valider la date d'une enchère (pas de date de fin avant la date de début)
+	 * @param enchere
+	 * @param be
+	 */
 	private void validerDateEnchere(Enchere enchere, BusinessException be) {
 		if(enchere.getDateEnchere().isAfter(enchere.getArticle().getDateFinEncheres()) 
 				|| enchere.getDateEnchere().isBefore(enchere.getArticle().getDateDebutEncheres()) ){
