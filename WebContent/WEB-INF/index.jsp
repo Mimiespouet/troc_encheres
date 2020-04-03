@@ -52,7 +52,7 @@
 					<p>Achats</p>
 					<input type="radio" id="encheresOuvertes" name="filtre" value="encheresOuvertes"> <label for="encheresOuvertes">enchères ouvertes</label> 
 					<input type="radio" id="mesEncheres" name="filtre" value="mesEncheres"> <label for="mesEncheres">mes enchères en cours</label> 
-					<input type="radio" id="encheresRemportees" name="filtre" value="encheresRemportees"> <label for="encheresRemportees">mes enchères remportées</label> 
+					<!-- <input type="radio" id="encheresRemportees" name="filtre" value="encheresRemportees"> <label for="encheresRemportees">mes enchères remportées</label> -->
 					<br>
 					<p>Ventes</p> 
 					<input type="radio" id="mesVentes" name="filtre" value="mesVentes"> <label for="mesVentes">mes ventes en cours</label> 

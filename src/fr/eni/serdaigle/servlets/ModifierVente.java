@@ -71,10 +71,6 @@ public class ModifierVente extends HttpServlet {
 		// Récupération n°Article
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
 
-		// ***Pour le test uniquement, à supprimer une fois requete selectbylibelle de
-		// Categorie opérationelle***
-		Categorie categorie = new Categorie(2, "Informatique");
-
 		// Initialisation variables
 		LocalDateTime dateFinEncheres = null;
 		LocalDateTime dateDebutEncheres = null;
@@ -82,6 +78,7 @@ public class ModifierVente extends HttpServlet {
 		try {
 			ArticleManager artMger = new ArticleManager();
 			BusinessException be = new BusinessException();
+			CategorieManager catMger = new CategorieManager();
 			// Conversion pour les dates
 			try {
 				DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
@@ -98,8 +95,8 @@ public class ModifierVente extends HttpServlet {
 				e.printStackTrace();
 				request.setAttribute("error", "Erreur de saisie dans les données de type numérique");
 			}
-			// ***A utiliser une fois le categoriemanager operationnel***
-			// Categorie categorie = catMger.selectionnerCategorie(categorieStr);
+			
+			Categorie categorie = catMger.selectByLibelle(categorieStr);
 
 			// Construction de l'objet et requete d'update
 			ArticleVendu art = new ArticleVendu(nomArticle, description, dateDebutEncheres, dateFinEncheres,
