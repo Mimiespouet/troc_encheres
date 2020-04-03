@@ -23,7 +23,8 @@ import fr.eni.serdaigle.exception.BusinessException;
  * Servlet implementation class AfficherDetailEnchere
  */
 /**
- * Classe en charge de pouvoir afficher le détail d'un article avec son enchère selon l'état de l'utilisateur
+ * Classe en charge de pouvoir renvoyer le détail d'un article avec son enchère selon l'état de l'utilisateur 
+ * (detailMaVente.jsp | detailMaVenteFinEnchere.jsp | acquisition.jsp | encherir.jsp)
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 1 avr. 2020

@@ -26,7 +26,7 @@ import fr.eni.serdaigle.exception.BusinessException;
  * Servlet implementation class Accueil
  */
 /**
- * Classe en charge de permettre de faire une nouvelle vente
+ * Classe en charge de renvoyer les informations concernant un nouvel article mis en vente (vendreUnArticle.jsp | afficherDetailEnchere.jsp)
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 31 mars 2020

@@ -18,7 +18,7 @@ import fr.eni.serdaigle.exception.BusinessException;
  * Servlet implementation class accueil
  */
 /**
- * Classe en charge de se connecter à son compte
+ * Classe en charge de renvoyer les infos sur pseudo et mot de passe si traitement se souvenir de moi effectué (connexion.jsp)
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 26 mars 2020

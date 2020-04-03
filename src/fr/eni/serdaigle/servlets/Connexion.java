@@ -16,7 +16,7 @@ import fr.eni.serdaigle.bo.Utilisateur;
  * Servlet implementation class Accueil
  */
 /**
- * Classe en charge de faire la connexion à un compte utilisateur
+ * Classe en charge de renvoyer la connexion à un compte utilisateur
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 26 mars 2020

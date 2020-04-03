@@ -8,7 +8,7 @@ import fr.eni.serdaigle.dal.EnchereDAO;
 import fr.eni.serdaigle.exception.BusinessException;
 
 /**
- * Classe en charge de gérer les requêtes sur les enchères
+ * Classe en charge de gérer l'application des requêtes (EnchereDAO) sur les enchères
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 28 mars 2020

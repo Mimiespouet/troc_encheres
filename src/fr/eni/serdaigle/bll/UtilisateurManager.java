@@ -6,7 +6,7 @@ import fr.eni.serdaigle.dal.UtilisateurDAO;
 import fr.eni.serdaigle.exception.BusinessException;
 
 /**
- * Classe en charge de gérer les requêtes sur utilisateur
+ * Classe en charge de gérer l'application des requêtes (UtilisateurDAO) sur utilisateur
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 28 mars 2020

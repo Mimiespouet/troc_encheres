@@ -14,7 +14,7 @@ import fr.eni.serdaigle.dal.ArticleDAO;
 import fr.eni.serdaigle.dal.CategorieDAO;
 
 /**
- * Classe en charge de gérer les requêtes sur les catégories
+ * Classe en charge de gérer l'application des requêtes (CategorieDAO) sur les catégories
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 28 mars 2020

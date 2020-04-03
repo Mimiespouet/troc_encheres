@@ -11,15 +11,15 @@ import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.exception.BusinessException;
 
 /**
- * Classe en charge de
- * @author Emeline
+ * Classe en charge de gérer les enchères sur les articles mis en vente en BDD
+ * @author serdaigle
  * @version ProjetTrocEncheres - v1.0
  * @date 27 mars 2020
  */
 public interface EnchereDAO {
 	
 	/**
-	 * Méthode en charge d'inserer une enchère
+	 * Méthode en charge d'inserer une nouvelle enchère
 	 * @param enchere
 	 * @throws BusinessException
 	 */
@@ -33,7 +33,7 @@ public interface EnchereDAO {
 	List<Enchere> selectAllEnCours(String categorie, String recherche) throws BusinessException;
 
 	/**
-	 * Méthode en charge de retourner un article selon son numéro
+	 * Méthode en charge de retourner un article 
 	 * @param noArticle
 	 * @return numero article
 	 * @throws BusinessException
@@ -41,7 +41,7 @@ public interface EnchereDAO {
 	Enchere select(int noArticle) throws BusinessException;
 	
 	/**
-	 * Méthode en charge de remporter une enchère
+	 * Méthode en charge de retourner une enchère remportée
 	 * @param noArticle
 	 * @return l'enchère remporté
 	 * @throws BusinessException

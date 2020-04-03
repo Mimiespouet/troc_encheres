@@ -9,9 +9,9 @@ import fr.eni.serdaigle.exception.BusinessException;
 
 /**
  * Classe en charge de gérer les retraits en BDD
- * @author Delphe
+ * @author serdaigle
  * @version Trocencheres - v1.0
- * @date 2 avril 2020
+ * @date 1 avril 2020
  */
 public interface RetraitDAO {
 	
@@ -24,7 +24,3 @@ public interface RetraitDAO {
 	
 	
 }
-
-
-
-

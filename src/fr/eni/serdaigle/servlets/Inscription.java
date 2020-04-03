@@ -17,7 +17,7 @@ import fr.eni.serdaigle.exception.BusinessException;
  * Servlet implementation class Accueil
  */
 /**
- * Classe en charge de s'inscrire comme nouvel utilisateur
+ * Classe en charge de renvoyer la création d'un compte pour ensuite se conneter (creerUnCompte.jsp | connexion.jsp)
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 27 mars 2020

@@ -22,8 +22,8 @@ import fr.eni.serdaigle.dal.EnchereDAO;
 import fr.eni.serdaigle.exception.BusinessException;
 
 /**
- * Classe en charge de
- * @author cracb
+ * Classe en charge de gérer les requêtes en BDD sur Enchere
+ * @author serdaigle
  * @version ProjetTrocEncheres - v1.0
  * @date 27 mars 2020
  */

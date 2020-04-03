@@ -6,7 +6,7 @@ import java.util.List;
 
  
 /**
- * Classe en charge de
+ * Classe en charge de l'objet Categorie
  * @author Max
  * @version troc_encheres - v1.0
  * @date 28 mars 2020

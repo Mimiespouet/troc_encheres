@@ -13,7 +13,7 @@ import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.dal.ArticleDAO;
 
 /**
- * Classe en charge de gérer les requêtes sur les article
+ * Classe en charge de gérer l'application des requêtes (ArticleDAO) sur les article
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 28 mars 2020
