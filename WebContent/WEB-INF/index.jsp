@@ -33,7 +33,7 @@
 		</div>
 
 		<c:if test="${utilisateur != null}">
-			<div class="col-lg-12 col-sm-12 d-flex justify-content-between">
+			<div class="col-lg-12 col-sm-12 d-flex justify-content-around">
 				<a href="vendreArticle">Vendre un article</a> <a href="profil">Mon
 					profil</a> <a href="logout">Déconnexion</a>
 			</div>
