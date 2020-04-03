@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.serdaigle.bll.ArticleManager;
 import fr.eni.serdaigle.bll.EnchereManager;
 import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.bo.Enchere;
@@ -44,23 +45,23 @@ public class Encherir extends HttpServlet {
 		int montantEnchere = Integer.parseInt(request.getParameter("proposition"));
 		
 		LocalDateTime dateEnchere = LocalDateTime.now();
-		EnchereManager emger = new EnchereManager();
+		EnchereManager eMger = new EnchereManager();
+		ArticleManager aMger = new ArticleManager();
 		
 		try {
-			Enchere enchereCheck = emger.selectByUtilisateur(acheteur.getNoUtilisateur(),noArticle);
+			Enchere enchereCheck = eMger.selectByUtilisateur(acheteur.getNoUtilisateur(),noArticle);
 			Enchere enchereEnCours = null;
 			
 			//verification qu'il n'y a pas déja une enchere de l'utilisateur	
 			if (enchereCheck==null) {
-				ArticleVendu article = new ArticleVendu();
-				article.setNoArticle(noArticle);
-			
-				enchereEnCours = new Enchere(dateEnchere, montantEnchere, acheteur, enchereCheck.getArticle());
-				emger.ajouterEnchere(enchereEnCours);
+				
+				ArticleVendu article = aMger.select(noArticle);
+				enchereEnCours = new Enchere(dateEnchere, montantEnchere, acheteur, article);
+				eMger.ajouterEnchere(enchereEnCours);
 				
 			} else {
 				enchereEnCours = new Enchere(dateEnchere, montantEnchere, acheteur, enchereCheck.getArticle());
-				emger.updateEnchere(enchereEnCours);
+				eMger.updateEnchere(enchereEnCours);
 			}
 			
 			request.setAttribute("success", "L'enchère a bien été prise en compte");
