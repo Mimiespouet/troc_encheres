@@ -16,11 +16,10 @@
 	rel="stylesheet">
 </head>
 <body>
-	<div id="container">
+	<div class="container-fluid">
 		
-		<div class="col-lg-6 col-sm-12">
-			<%@ include file="entete.html"%>
-		</div>
+		
+		<%@ include file="entete.html"%>
 		
 		<div class="col-lg-6 col-sm-12">
 			
@@ -63,9 +62,9 @@
 				</div>
 		
 		</div>
-			
+		<%@ include file="piedDePage.html" %>
 	</div>	
 	
-	<%@ include file="piedDePage.html" %>
+	
 </body>
 </html>

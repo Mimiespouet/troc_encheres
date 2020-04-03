@@ -16,10 +16,8 @@
 	rel="stylesheet">
 </head>
 <body>
-	<div id="container">
-		<div class="col-lg-6 col-sm-12">
-			<%@ include file="entete.html"%>
-		</div>
+	<div class="container-fluid">
+		<%@ include file="entete.html"%>
 
 		<div class="col-lg-6 col-sm-12">
 	
@@ -81,9 +79,9 @@
             <a id="annuler" href="accueil" class="btn btn-primary">Annuler</a>
             	
            </div>
-            
+           
+        <%@ include file="piedDePage.html" %>
 	</div>
-	<%@ include file="piedDePage.html" %>
 	
 </body>
 </html>

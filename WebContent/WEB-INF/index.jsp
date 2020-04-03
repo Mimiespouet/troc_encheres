@@ -16,7 +16,6 @@
 </head>
 <body>
 	<div class="container-fluid">
-		
 			<%@ include file="entete.html"%>
 		
 

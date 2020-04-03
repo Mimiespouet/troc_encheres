@@ -16,10 +16,9 @@
 	rel="stylesheet">
 </head>
 <body>
-	<div id="container">
-		<div class="col-lg-6 col-sm-12">
+	<div class="container-fluid">
 			<%@ include file="entete.html"%>
-		</div>
+			
 		<div class="col-lg-6 col-sm-12">
 			<h3 class="my-4 col-lg-12 col-sm-12">Modification de la vente</h3>
 			<form action="modifierVente" method="post">
@@ -101,7 +100,7 @@
 				</form>
 			</div>
 		</div>
-	</div>
-	<%@ include file="piedDePage.html"%>
+		<%@ include file="piedDePage.html" %>
+	</div>	
 </body>
 </html>

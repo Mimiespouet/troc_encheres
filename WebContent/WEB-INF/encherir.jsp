@@ -18,9 +18,8 @@
 <body>
 	<div id="container">
 		
-		<div class="col-lg-6 col-sm-12">
+		<div class="container-fluid">
 			<%@ include file="entete.html"%>
-		</div>
 		
 		<div class="col-lg-6 col-sm-12">
 			
@@ -94,8 +93,7 @@
 		
 		</div>
 			
+		<%@ include file="piedDePage.html" %>
 	</div>	
-	
-	<%@ include file="piedDePage.html" %>
 </body>
 </html>
