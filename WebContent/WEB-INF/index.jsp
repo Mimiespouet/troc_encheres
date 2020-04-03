@@ -33,8 +33,7 @@
 		</div>
 
 		<c:if test="${utilisateur != null}">
-			<div class="col-lg-6 col-sm-12">
-
+			<div class="col-lg-12 col-sm-12 d-flex justify-content-between">
 				<a href="vendreArticle">Vendre un article</a> <a href="profil">Mon
 					profil</a> <a href="logout">Déconnexion</a>
 			</div>
@@ -50,18 +49,14 @@
 				<div class="col-lg-6 col-sm-12">
 					<h3 class="my-4 col-lg-12 col-sm-12">Filtres :</h3>
 					<p>Achats</p>
-					<div class="d-flex flex-column">
-						<input type="radio" id="encheresOuvertes" name="filtre" value="encheresOuvertes"> <label for="encheresOuvertes">enchères ouvertes</label> 
-						<input type="radio" id="mesEncheres" name="filtre" value="mesEncheres"> <label for="mesEncheres">mes enchères en cours</label> 
-						<!-- <input type="radio" id="encheresRemportees" name="filtre" value="encheresRemportees"> <label for="encheresRemportees">mes enchères remportées</label> -->
-					</div>
+					<input type="radio" id="encheresOuvertes" name="filtre" value="encheresOuvertes"> <label for="encheresOuvertes">enchères ouvertes</label> 
+					<input type="radio" id="mesEncheres" name="filtre" value="mesEncheres"> <label for="mesEncheres">mes enchères en cours</label> 
+					<!-- <input type="radio" id="encheresRemportees" name="filtre" value="encheresRemportees"> <label for="encheresRemportees">mes enchères remportées</label> -->
 					<br>
 					<p>Ventes</p> 
-					<div class="d-flex flex-column">
-						<input type="radio" id="mesVentes" name="filtre" value="mesVentes"> <label for="mesVentes">mes ventes en cours</label> 
-						<input type="radio" id="ventesNonDebutees" name="filtre" value="ventesNonDebutees"> <label for="ventesNonDebutees">ventes non débutées</label> 
-						<input type="radio" id="ventesTerminees" name="filtre" value="ventesTerminees"> <label for="ventesTerminees">ventes terminées</label> 
-					</div>
+					<input type="radio" id="mesVentes" name="filtre" value="mesVentes"> <label for="mesVentes">mes ventes en cours</label> 
+					<input type="radio" id="ventesNonDebutees" name="filtre" value="ventesNonDebutees"> <label for="ventesNonDebutees">ventes non débutées</label> 
+					<input type="radio" id="ventesTerminees" name="filtre" value="ventesTerminees"> <label for="ventesTerminees">ventes terminées</label> 
 				</div>
 			</c:if>			
 			<label for="categorie">Catégories : </label> 
