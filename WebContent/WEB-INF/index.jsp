@@ -11,20 +11,14 @@
 	href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link href="${pageContext.request.contextPath}/css/4-col-portfolio.css"
+<link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet">
-
 </head>
 <body>
-
-	<!-- ${request.getAttribute} -->
-
-	<div id="container">
-
-		<div class="col-lg-6 col-sm-12">
+	<div class="container-fluid">
+		
 			<%@ include file="entete.html"%>
-		</div>
+		
 
 		<div class="col-lg-6 col-sm-12">
 			<c:if test="${utilisateur == null}">
@@ -68,9 +62,9 @@
 				</c:forEach>
 			</select> 
 			<br> 
-			<input type="text" placeholder="Le nom de l'article contient" id="nomArticleContient" name="nomArticleContient"> 
+			<input class="col-lg-2 col-sm-6" type="text" placeholder="Le nom de l'article contient" id="nomArticleContient" name="nomArticleContient"> 
 			<br>
-			<button class="col-lg-2 col-sm-11 h-25" id="research" name="research">Rechercher</button>
+			<button class="col-lg-2 col-sm-12" id="research" name="research">Rechercher</button>
 			<br>
 		</form>
 		
@@ -118,7 +112,8 @@
 
 			</div>
 		</c:forEach>
-	</div>
 		<%@ include file="piedDePage.html"%>
+	</div>
+		
 </body>
 </html>
