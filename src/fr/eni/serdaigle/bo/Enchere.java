@@ -4,15 +4,30 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+/**
+ * Classe en charge de l'objet Enchere
+ * @author Max
+ * @version Trocencheres - v1.0
+ * @date 28 mars 2020
+ */
 public class Enchere implements Serializable {
 	private LocalDateTime dateEnchere;
 	private int montantEnchere;
 	private Utilisateur utilisateur;
 	private ArticleVendu article;
 
+	/**
+	 * Constructeur par défaut
+	 */
 	public Enchere() {
 	}
 	
+	/**
+	 * Constructeur 
+	 * @param montantEnchere
+	 * @param utilisateur
+	 * @param article
+	 */
 	public Enchere(int montantEnchere, Utilisateur utilisateur, ArticleVendu article) {
 		this();
 		this.montantEnchere = montantEnchere;
@@ -20,9 +35,13 @@ public class Enchere implements Serializable {
 		this.article = article;
 	}
 
-	
-	
-	
+	/**
+	 * Constructeur pour servlet Encherir
+	 * @param dateEnchere
+	 * @param montantEnchere
+	 * @param utilisateur
+	 * @param article
+	 */
 	public Enchere(LocalDateTime dateEnchere, int montantEnchere, Utilisateur utilisateur, ArticleVendu article) {
 		this(montantEnchere, utilisateur, article);
 		this.dateEnchere = dateEnchere;

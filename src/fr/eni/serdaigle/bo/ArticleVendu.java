@@ -76,7 +76,6 @@ public class ArticleVendu implements Serializable {
 	 * @param dateDebutEncheres
 	 * @param dateFinEncheres
 	 * @param prixInitial
-	 * @param prixVente
 	 * @param vendeur
 	 * @param acheteur
 	 * @param categorie

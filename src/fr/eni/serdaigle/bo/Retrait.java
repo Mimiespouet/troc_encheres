@@ -2,6 +2,12 @@ package fr.eni.serdaigle.bo;
 
 import java.io.Serializable;
 
+/**
+ * Classe en charge de l'objet Retrait
+ * @author Max
+ * @version Trocencheres - v1.0
+ * @date 28 mars 2020
+ */
 public class Retrait implements Serializable {
 	private ArticleVendu article;
 	private String rue;
@@ -9,13 +15,13 @@ public class Retrait implements Serializable {
 	private String ville;
 
 	/**
-	 * Constructeur
+	 * Constructeur par défaut
 	 */
 	public Retrait() {
 	}
 
 	/**
-	 * Constructeur
+	 * Constructeur pour servlet Vendre
 	 * @param rue
 	 * @param codePostal
 	 * @param ville
@@ -25,7 +31,9 @@ public class Retrait implements Serializable {
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;
-	}/**
+	}
+	
+	/**
 	 * Constructeur
 	 * @param article
 	 * @param rue

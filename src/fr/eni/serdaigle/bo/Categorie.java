@@ -4,15 +4,30 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+ 
+/**
+ * Classe en charge de
+ * @author Max
+ * @version troc_encheres - v1.0
+ * @date 28 mars 2020
+ */
 public class Categorie implements Serializable {
 	private int noCategorie;
 	private String libelle;
 	private List<ArticleVendu> listeArticle;
 
+	/**
+	 * Constructeur par défaut
+	 */
 	public Categorie()  {
 		this.listeArticle = new ArrayList<ArticleVendu>();
 	}
 
+	/**
+	 * Constructeur
+	 * @param noCategorie
+	 * @param libelle
+	 */
 	public Categorie(int noCategorie, String libelle) {
 		this();
 		this.noCategorie = noCategorie;
@@ -34,7 +49,7 @@ public class Categorie implements Serializable {
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
-	
+
 	public List<ArticleVendu> getListeArticle() {
 		return listeArticle;
 	}
@@ -77,6 +92,4 @@ public class Categorie implements Serializable {
 				+ "]";
 	}
 
-
-	
 }

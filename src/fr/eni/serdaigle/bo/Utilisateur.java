@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Classe en charge de l'objet Utilisateur
+ * @author Max
+ * @version Trocencheres - v1.0
+ * @date 28 mars 2020
+ */
 public class Utilisateur implements Serializable {
 	private int noUtilisateur;
 	private String pseudo;
@@ -22,23 +28,41 @@ public class Utilisateur implements Serializable {
 	private List<Enchere> listeEnchere;
 	
 
-	
+	/**
+	 * Constructeur par défaut
+	 */
 	public Utilisateur() {
 		this.listeEnchere = new ArrayList<Enchere>();
 		this.listeAchat = new ArrayList<ArticleVendu>();
 		this.listeVente = new ArrayList<ArticleVendu>();
 	}
 	
+	/**
+	 * Constructeur pour servlet Login et Connexion
+	 * @param pseudo
+	 * @param motDePasse
+	 */
 	public Utilisateur(String pseudo,String motDePasse) {
 		this();
 		this.pseudo = pseudo;
 		this.motDePasse = motDePasse;
 	}
 	
+	/**
+	 * Constructeur pour servlet modifierProfil
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @param motDePasse
+	 */
 	public Utilisateur(String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse) {
-		this();
-		this.pseudo = pseudo;
+		this(pseudo,motDePasse);
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
@@ -49,6 +73,19 @@ public class Utilisateur implements Serializable {
 		this.motDePasse = motDePasse;
 	}
 	
+	/**
+	 * Constructeur complet
+	 * @param noUtilisateur
+	 * @param pseudo
+	 * @param nom
+	 * @param prenom
+	 * @param email
+	 * @param telephone
+	 * @param rue
+	 * @param codePostal
+	 * @param ville
+	 * @param motDePasse
+	 */
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String motDePasse) {
 		this(pseudo,nom,prenom,email,telephone,rue,codePostal,ville,motDePasse);
@@ -175,7 +212,6 @@ public class Utilisateur implements Serializable {
 		this.listeEnchere = listeEnchere;
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
