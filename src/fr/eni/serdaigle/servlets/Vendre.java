@@ -19,10 +19,17 @@ import fr.eni.serdaigle.bo.Retrait;
 import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.exception.BusinessException;
 
+/**
+ * Servlet implementation class Accueil
+ */
 @WebServlet("/vendreArticle")
 public class Vendre extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * {@inheritDoc}
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
@@ -36,11 +43,9 @@ public class Vendre extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// Récupération de l'utilisateur en session qui est le vendeur
 		HttpSession session = request.getSession();
 		Utilisateur vendeur = (Utilisateur) session.getAttribute("utilisateur");
 		
-		// Récupération des données du forulaire
 		String nomArticle = request.getParameter("nom").trim();
 		String description = request.getParameter("description").trim();
 		String dateDebutEncheresStr = request.getParameter("dateDebut");
@@ -48,8 +53,6 @@ public class Vendre extends HttpServlet {
 		String categorieStr = request.getParameter("categorie");
 		int noArticle;
 		
-		
-		// Initialisation variables
 		LocalDateTime dateFinEncheres = null;
 		LocalDateTime dateDebutEncheres = null;
 		int prixInitial = 0;

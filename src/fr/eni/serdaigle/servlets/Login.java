@@ -22,6 +22,10 @@ public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Utilisateur utilisateur;
 	
+	/**
+	 * {@inheritDoc}
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Cookie pseudo;
@@ -64,7 +68,7 @@ public class Login extends HttpServlet {
 
 			// A modifier
 			Utilisateur utilisateurTest = mger.selectionnerConnexion(username, password);
-			System.out.println(utilisateurTest); 
+
 			if (utilisateurTest==null) {
 				request.setAttribute("errorLogin", "Erreur de saisie Login / MDP, veuillez réessayer");
 				RequestDispatcher rd = request.getRequestDispatcher("connexion");

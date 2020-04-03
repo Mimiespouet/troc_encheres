@@ -19,6 +19,10 @@ import fr.eni.serdaigle.bo.Utilisateur;
 public class Connexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * {@inheritDoc}
+	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String pseudo = null;
@@ -43,6 +47,10 @@ public class Connexion extends HttpServlet {
 		rd.forward(request, response);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);

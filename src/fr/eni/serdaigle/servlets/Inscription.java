@@ -35,6 +35,7 @@ public class Inscription extends HttpServlet {
 		try {
 			String motDePasse = request.getParameter("password").trim();
 			String checkMotDePasse = request.getParameter("checkPassword").trim();
+			
 			if(motDePasse.equals(checkMotDePasse)) {
 				UtilisateurManager mger = new UtilisateurManager();
 				String pseudo = request.getParameter("pseudo").trim();
@@ -45,9 +46,12 @@ public class Inscription extends HttpServlet {
 				String rue = request.getParameter("rue").trim();
 				String codePostal = request.getParameter("cpo").trim();
 				String ville = request.getParameter("ville").trim();
+				
 				Utilisateur utilisateur = new Utilisateur(pseudo, nom, prenom, email, telephone, rue, codePostal, ville, motDePasse);
 				mger.ajouterUtilisateur(utilisateur);
+				
 				request.setAttribute("success", "Compte créé avec succès");
+				
 				RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/connexion.jsp");
 				rd.forward(request, response);	
 			}else {

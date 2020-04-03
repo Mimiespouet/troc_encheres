@@ -2,8 +2,6 @@ package fr.eni.serdaigle.servlets;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,28 +43,26 @@ public class Encherir extends HttpServlet {
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
 		int montantEnchere = Integer.parseInt(request.getParameter("proposition"));
 		
-		// Initialisation variables
 		LocalDateTime dateEnchere = LocalDateTime.now();
 		EnchereManager emger = new EnchereManager();
 		
 		try {
 			Enchere enchereCheck = emger.selectByUtilisateur(acheteur.getNoUtilisateur(),noArticle);
 			Enchere enchereEnCours = null;
-			System.out.println(dateEnchere);
-			System.out.println(enchereEnCours);
+			
 			//verification qu'il n'y a pas déja une enchere de l'utilisateur	
-		
 			if (enchereCheck==null) {
+				ArticleVendu article = new ArticleVendu();
+				article.setNoArticle(noArticle);
+			
 				enchereEnCours = new Enchere(dateEnchere, montantEnchere, acheteur, enchereCheck.getArticle());
 				emger.ajouterEnchere(enchereEnCours);
+				
 			} else {
 				enchereEnCours = new Enchere(dateEnchere, montantEnchere, acheteur, enchereCheck.getArticle());
 				emger.updateEnchere(enchereEnCours);
 			}
 			
-			
-			
-			// Redirection 
 			request.setAttribute("success", "L'enchère a bien été prise en compte");
 			request.setAttribute("noArticle", noArticle);
 			request.setAttribute("enchere", enchereEnCours);

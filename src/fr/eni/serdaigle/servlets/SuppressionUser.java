@@ -37,9 +37,12 @@ public class SuppressionUser extends HttpServlet {
 				HttpSession session = request.getSession();
 				Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 				UtilisateurManager mger = new UtilisateurManager();
+				
 				mger.supprimerUtilisateur(utilisateur);
+				
 				request.setAttribute("success", "Compte supprimé avec succès");
 				doGet(request, response);
+				
 		} catch (BusinessException be) {
 			request.setAttribute("error", be.getMessage());
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/modifierProfil.jsp");
