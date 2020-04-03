@@ -11,8 +11,7 @@
 	href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link href="${pageContext.request.contextPath}/css/4-col-portfolio.css"
+<link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet">
 </head>
 <body>
@@ -20,22 +19,24 @@
 		
 		<div class="container-fluid">
 			<%@ include file="entete.html"%>
-		
+		<c:if test="${error != null}">
+					<div class="col-lg-6 col-sm-12">
+						<div class="alert alert-danger" role="alert">
+							<p>${errorLogin}</p>
+						</div>
+					</div>
+		</c:if>
 		<div class="col-lg-6 col-sm-12">
 			
 			<h3 class="my-4 col-lg-12 col-sm-12">Détail vente</h3>
-			
-				<p>${error}</p>
-			
 	           
-	            <!-- changer les label en paragraphe car ce n'est pas un formulaire -->
 	                <p>Nom de l'article : ${enchere.article.nomArticle}</p>
 					<br>
 	
 	                <p>Description : ${enchere.article.description}</p>
 					<br>
 					
-					<p>Catégorie : ${enchere.article.categorie.libelle}</p> <!-- articleVendu.categorie.libelle-->
+					<p>Catégorie : ${enchere.article.categorie.libelle}</p>
 					<br>
 	
 					<p>Meilleure offre : ${enchere.montantEnchere}</p>
@@ -52,7 +53,6 @@
 					
 					<label for="adress">Adresse de retrait :</label>
 	                
-	                 <!-- articleVendu.retrait-->
 	                <c:choose>
 					        <c:when test="${enchere.article.retrait=null}">
 								 </div>
@@ -68,11 +68,9 @@
 					        </c:otherwise>
 					 </c:choose>
 					
-					<p>Vendeur de l'article : ${enchere.article.vendeur.pseudo}</p> <!-- articleVendu.vendeur.pseudo -->
-					<br>
-					
+					<p>Vendeur de l'article : ${enchere.article.vendeur.pseudo}</p>
+					<br>	
 
-	<!--comparer avec l'heure actuelle, si c'est après l'heure actuelle ça n'apparait plus-->
 		<c:if test="${utilisateur!=null}"> 
 		
 			<form action="encherir" method="post">
@@ -83,14 +81,11 @@
 				<div class="col-lg-6 col-sm-12">
 					<input type="submit" name="nvEnchere" value="Enchérir">
 				</div> 
-		</form>
+			</form>
 		</c:if>	
-
 				
-				<div class="col-lg-6 col-sm-12">
-					<a id="retour" href="accueil" class="btn btn-primary">Retour</a>
-				</div>
-		
+		<div class="col-lg-6 col-sm-12">
+			<a id="retour" href="accueil" class="btn btn-primary">Retour</a>
 		</div>
 			
 		<%@ include file="piedDePage.html" %>

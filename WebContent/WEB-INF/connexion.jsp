@@ -11,28 +11,24 @@
 	href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link href="${pageContext.request.contextPath}/css/4-col-portfolio.css"
+<link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet">
 </head>
 <body>
 	<div class="container-fluid">
 
 		<%@ include file="entete.html"%>
-
-		<div class="col-lg-6 col-sm-12">
-
-			<p>${success}</p>
-			<form action="login" method="post">
-
-				<c:if test="${errorLogin != null}">
-
-					<div class="col-lg-6 col-sm-4">
+		<c:if test="${error != null}">
+					<div class="col-lg-6 col-sm-12">
 						<div class="alert alert-danger" role="alert">
 							<p>${errorLogin}</p>
 						</div>
 					</div>
-				</c:if>
+		</c:if>
+		<p>${success}</p>
+		<div class="col-lg-6 col-sm-12">
+			<form action="login" method="post">
+
 				<label for="username"><b>Identifiant : </b></label>
 				<c:choose>
 					<c:when test="${utilisateur.pseudo != null }">

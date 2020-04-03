@@ -11,14 +11,20 @@
 	href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 
-<!-- Custom styles for this template -->
-<link href="${pageContext.request.contextPath}/css/4-col-portfolio.css"
+<link href="${pageContext.request.contextPath}/css/style.css"
 	rel="stylesheet">
 </head>
 <body>
 	<div class="container-fluid">
 			<%@ include file="entete.html"%>
-
+		<p>${success}</p>
+		<c:if test="${error != null}">
+			<div class="col-lg-6 col-sm-12">
+				<div class="alert alert-danger" role="alert">
+					<p>${errorLogin}</p>
+				</div>
+			</div>
+		</c:if>
 		<div class="col-lg-6 col-sm-12">
 	
 			<h3 class="my-4 col-lg-12 col-sm-12">Mon Profil</h3>
