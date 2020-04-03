@@ -37,13 +37,13 @@ public class CategorieManager {
 	
 	
 	/**
-	 * Méthode en charge de récupérer une catégorie par son libellé
-	 * @param libelle
-	 * @return categorie
+	 * Méthode en charge de récupérer une catégorie par son id
+	 * @param noCategorie
+	 * @return Categorie
 	 * @throws BusinessException
 	 */
-	public Categorie selectByLibelle(String libelle) throws BusinessException{
-		Categorie categorie = categorieDAO.selectByLibelle(libelle);
+	public Categorie selectById(int noCategorie) throws BusinessException{
+		Categorie categorie = categorieDAO.selectById(noCategorie);
 		return categorie;
 	}
 	

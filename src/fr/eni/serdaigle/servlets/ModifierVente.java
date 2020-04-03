@@ -26,7 +26,6 @@ import fr.eni.serdaigle.exception.BusinessException;
 @WebServlet("/modifierVente")
 public class ModifierVente extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private ArticleManager mger;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -36,14 +35,18 @@ public class ModifierVente extends HttpServlet {
 		CategorieManager catMger = new CategorieManager();
 		List<Categorie> listeCategorie = new ArrayList<Categorie>();
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
-		mger = new ArticleManager();
+		ArticleManager mger = new ArticleManager();
 		ArticleVendu article = null;
+		
+		//Recuperation des categories pour les afficher dans le menu deroulant
 		try {
 			listeCategorie = catMger.selectAll();
 			request.setAttribute("listeCategorie", listeCategorie);
 		} catch (BusinessException ex) {
 			request.setAttribute("error", ex.getMessage());
 		}
+		
+		//Recuperation de l'article a afficher
 		try {
 			article = mger.select(noArticle);
 			request.setAttribute("articleVendu", article);
@@ -66,9 +69,8 @@ public class ModifierVente extends HttpServlet {
 		String description = request.getParameter("description");
 		String dateDebutEncheresStr = request.getParameter("dateDebut");
 		String dateFinEncheresStr = request.getParameter("dateFin");
-		String categorieStr = request.getParameter("categorie");
-
-		// Récupération n°Article
+		System.out.println("categorie" + request.getParameter("noCategorie"));
+		int noCategorie = Integer.parseInt(request.getParameter("noCategorie"));
 		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
 
 		// Initialisation variables
@@ -78,7 +80,7 @@ public class ModifierVente extends HttpServlet {
 		try {
 			ArticleManager artMger = new ArticleManager();
 			BusinessException be = new BusinessException();
-			CategorieManager catMger = new CategorieManager();
+			
 			// Conversion pour les dates
 			try {
 				DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
@@ -88,6 +90,7 @@ public class ModifierVente extends HttpServlet {
 				e.printStackTrace();
 				request.setAttribute("error", "Erreur de saisie dans les données Date de début et/ou fin enchère");
 			}
+			
 			// Conversion pour les entiers
 			try {
 				prixInitial = Integer.parseInt(request.getParameter("prixInitial").trim());
@@ -96,7 +99,8 @@ public class ModifierVente extends HttpServlet {
 				request.setAttribute("error", "Erreur de saisie dans les données de type numérique");
 			}
 			
-			Categorie categorie = catMger.selectByLibelle(categorieStr);
+			Categorie categorie = new Categorie();
+			categorie.setNoCategorie(noCategorie);
 
 			// Construction de l'objet et requete d'update
 			ArticleVendu art = new ArticleVendu(nomArticle, description, dateDebutEncheres, dateFinEncheres,
@@ -107,7 +111,6 @@ public class ModifierVente extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/afficherDetailEnchere");
 			rd.forward(request, response);
 		} catch (BusinessException be) {
-			System.out.println(be.getMessage());
 			request.setAttribute("error", be.getMessage());
 			doGet(request, response);
 		}

@@ -28,15 +28,16 @@
 						name="nom" size="30" value="${articleVendu.nomArticle}" required>
 				</div>
 				<div>
-					<label for="categorie">Catégorie :</label> <select>
+					<label for="categorie">Catégorie :</label> 
+					<select name="noCategorie">
 						<c:forEach var="categorie" items="${listeCategorie}">
 							<c:choose>
 								<c:when
-									test="${articleVendu.categorie.libelle == categorie.libelle}">
-									<option value="${categorie.libelle}" selected>${categorie.libelle}</option>
+									test="${articleVendu.categorie.noCategorie == categorie.noCategorie}">
+									<option value="${categorie.noCategorie}" selected>${categorie.libelle}</option>
 								</c:when>
 								<c:otherwise>
-									<option value="${categorie.libelle}">${categorie.libelle}</option>
+									<option value="${categorie.noCategorie}">${categorie.libelle}</option>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>

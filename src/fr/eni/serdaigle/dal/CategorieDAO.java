@@ -16,12 +16,12 @@ import fr.eni.serdaigle.exception.BusinessException;
  */
 public interface CategorieDAO {
 	/**
-	 * Méthode en charge de filtrer les encheres en cours par le libelle de sa catégorie
+	 * Méthode en charge de selectionner une catégorie par son id
 	 * @param libelle
 	 * @return Categorie
 	 * @throws BusinessException
 	 */
-	Categorie selectByLibelle(String libelle) throws BusinessException;
+	Categorie selectById(int noCategorie) throws BusinessException;
 	
 	/**
 	 * Méthode en charge de sélectionner toutes les catégories présentes en BDD

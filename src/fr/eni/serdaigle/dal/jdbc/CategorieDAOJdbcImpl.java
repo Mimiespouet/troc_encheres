@@ -92,7 +92,7 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	 * @see fr.eni.serdaigle.dal.CategorieDAO#selectByLibelle(java.lang.String)
 	 */
 	@Override
-	public Categorie selectByLibelle(String libelle) throws BusinessException {
+	public Categorie selectById(int noCategorie) throws BusinessException {
 		BusinessException be = new BusinessException();
 		Categorie categorie = null;
 		try (Connection cnx = ConnectionProvider.getConnection();
