@@ -18,7 +18,7 @@ import fr.eni.serdaigle.exception.BusinessException;
  * Servlet implementation class Accueil
  */
 /**
- * Classe en charge de supprimer un utilisateur
+ * Classe en charge de renvoyer la suppression des informations et données d'un utilisateur
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 31 mars 2020

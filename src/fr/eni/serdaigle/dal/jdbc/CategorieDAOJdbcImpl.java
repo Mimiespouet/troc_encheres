@@ -21,7 +21,7 @@ import fr.eni.serdaigle.dal.ConnectionProvider;
 import fr.eni.serdaigle.exception.BusinessException;
 
 /**
- * Classe en charge de gérer les requêtes sur catégorie
+ * Classe en charge de gérer les requêtes en BDD sur Categories
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 26 mars 2020

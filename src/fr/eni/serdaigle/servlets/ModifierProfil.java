@@ -18,7 +18,7 @@ import fr.eni.serdaigle.exception.BusinessException;
  * Servlet implementation class Accueil
  */
 /**
- * Classe en charge de modifier son profil
+ * Classe en charge de renvoyer des informations mises à jour concernant le profil d'un utilisateur (modifierProfil.jsp)
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 27 mars. 2020

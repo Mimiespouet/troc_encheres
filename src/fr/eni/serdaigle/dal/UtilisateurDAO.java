@@ -6,7 +6,7 @@ import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.exception.BusinessException;
 
 /**
- * Classe en charge de gérer les utilisateur
+ * Classe en charge de gérer les utilisateur en BDD
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 26 mars 2020
@@ -41,7 +41,7 @@ public interface UtilisateurDAO {
 	List<Utilisateur> select() throws BusinessException;
 	
 	/**
-	 * Méthode en charge de permettre la connexion de l'utilisateur
+	 * Méthode en charge de récupérer le pseudo et le mot de passe de l'utilisateur pour la connexion à son compte
 	 * @param identifiant
 	 * @param password
 	 * @return pseudo, mot de passe

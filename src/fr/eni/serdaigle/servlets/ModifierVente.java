@@ -24,7 +24,7 @@ import fr.eni.serdaigle.exception.BusinessException;
  * Servlet implementation class modifArticle
  */
 /**
- * Classe en charge de modifier une vente
+ * Classe en charge de renvoyer les informations mises à jour concernant un article mis en vente (modificationVente.jsp)
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 2 avril 2020

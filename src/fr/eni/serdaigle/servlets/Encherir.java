@@ -22,7 +22,7 @@ import fr.eni.serdaigle.exception.BusinessException;
  * Servlet implementation class Encherir
  */
 /**
- * Classe en charge d'encherir sur un article
+ * Classe en charge de renvoyer la nouvelle enchère selon l'article (encherir.jsp)
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 1 avril 2020

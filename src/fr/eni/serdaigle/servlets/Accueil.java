@@ -23,7 +23,7 @@ import fr.eni.serdaigle.exception.BusinessException;
  * Servlet implementation class Accueil
  */
 /**
- * Classe en charge d'aller sur la page principale du site
+ * Classe en charge de renvoyer la page principale du site (index.jsp)
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 31 mars 2020

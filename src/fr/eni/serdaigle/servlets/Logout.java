@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
  * Servlet implementation class accueil
  */
 /**
- * Classe en charge de se deconnecter
+ * Classe en charge de renvoyer sur la page principale sur site si l'état de l'utilisateur est connecté (index.jsp)
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 26 mars 2020

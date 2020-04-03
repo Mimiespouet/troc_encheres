@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class Accueil
  */
 /**
- * Classe en charge de consulter son profil
+ * Classe en charge de renvoyer les informations du profil de l'utilisateur connecté (profil.jsp)
  * @author serdaigle
  * @version troc_encheres - v1.0
  * @date 26 mars 2020

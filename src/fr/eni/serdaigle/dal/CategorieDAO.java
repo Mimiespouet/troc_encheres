@@ -9,7 +9,7 @@ import fr.eni.serdaigle.bo.Categorie;
 import fr.eni.serdaigle.exception.BusinessException;
 
 /**
- * Classe en charge de gérer les catégorie en BDD
+ * Classe en charge de gérer les catégories en BDD
  * @author Max
  * @version Trocencheres - v1.0
  * @date 26 mars 2020
@@ -23,7 +23,7 @@ public interface CategorieDAO {
 	List<Categorie> selectAll() throws BusinessException;
 
 	/**
-	 * Méthode en charge d'insérer une nouvelle catégorie en BDD
+	 * Méthode en charge d'insérer une nouvelle catégorie en BDD par l'administrateur
 	 * @param article
 	 * @throws BusinessException
 	 */

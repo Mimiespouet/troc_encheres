@@ -13,7 +13,7 @@ import fr.eni.serdaigle.dal.UtilisateurDAO;
 import fr.eni.serdaigle.exception.BusinessException;
 
 /**
- * Classe en charge de gérer les requêtes sur l'utilisateur
+ * Classe en charge de gérer les requêtes en BDD sur Utilisateur
  * @author cracb
  * @version troc_encheres - v1.0
  * @date 26 mars 2020
