@@ -17,6 +17,9 @@ public class CategorieManager {
 	private CategorieDAO categorieDAO;
 	private static final int CHAMPS_VARCHAR_30 = 30;
 	
+	/**
+	 * Constructeur
+	 */
 	public CategorieManager() {
 		categorieDAO = DAOFactory.getCategorieDAO();
 	}
@@ -33,6 +36,12 @@ public class CategorieManager {
 	}
 	
 	
+	/**
+	 * Méthode en charge de récupérer une catégorie par son libellé
+	 * @param libelle
+	 * @return categorie
+	 * @throws BusinessException
+	 */
 	public Categorie selectByLibelle(String libelle) throws BusinessException{
 		Categorie categorie = categorieDAO.selectByLibelle(libelle);
 		return categorie;

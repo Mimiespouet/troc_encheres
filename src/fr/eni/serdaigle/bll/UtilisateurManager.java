@@ -12,10 +12,18 @@ public class UtilisateurManager {
 	private static final int CHAMPS_VARCHAR_15 = 15;
 	private static final int CHAMPS_VARCHAR_10 = 10;
 
+	/**
+	 * Constructeur par défaut
+	 */
 	public UtilisateurManager() {
 		utilisateurDAO = DAOFactory.getUtilisateurDAO();
 	}
 
+	/**
+	 * Méthode en charge de permettre l'ajout (l'inscription) d'un utilisateur
+	 * @param utilisateur
+	 * @throws BusinessException
+	 */
 	public void ajouterUtilisateur(Utilisateur utilisateur) throws BusinessException {
 		BusinessException be = new BusinessException();
 		// valider les champs
@@ -37,18 +45,34 @@ public class UtilisateurManager {
 		}
 	}
 
+	/**
+	 * Méthode en charge de permettre la connexion selon le pseudo et le mot de passe de l'utilisateur
+	 * @param identifiant
+	 * @param password
+	 * @return utilisateurDAO.selectConnexion(identifiant, password)
+	 * @throws BusinessException
+	 */
 	public Utilisateur selectionnerConnexion(String identifiant, String password) throws BusinessException {
 		return utilisateurDAO.selectConnexion(identifiant, password);
 	}
 
+	/**
+	 * Méthode en charge de selectionner un utilisateur selon son pseudo
+	 * @param pseudo
+	 * @return utilisateurDAO.selectPseudo(pseudo)
+	 * @throws BusinessException
+	 */
 	public Utilisateur selectionnerUtilisateur(String pseudo) throws BusinessException {
 		return utilisateurDAO.selectPseudo(pseudo);
 	}
 
-//	public Utilisateur supprimerUtilisateur(Utilisateur utilisateur) throws BusinessException {
-//		return utilisateurDAO.selectPseudo(utilisateur.getNoUtilisateur());
-//	}
-
+	/**
+	 * Méthode en charge de valider les champs de formulaire en remplissant tout correctement
+	 * @param champs
+	 * @param varchar
+	 * @param be
+	 * @return null
+	 */
 	public Utilisateur validerChamps(String champs, int varchar, BusinessException be) {
 		if (champs == null || champs.equals("")) {
 			be.ajouterErreur(CodesResultatBLL.CHAMP_OBLIGATOIRE);
@@ -60,6 +84,11 @@ public class UtilisateurManager {
 		return null;
 	}
 
+	/**
+	 * Méthode en charge de modifier son profil 
+	 * @param utilisateur
+	 * @throws BusinessException
+	 */
 	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException {
 		BusinessException be = new BusinessException();
 		// valider les champs
@@ -81,6 +110,11 @@ public class UtilisateurManager {
 		}
 	}
 
+	/**
+	 * Méthode en charge de supprimer l'utilisateur 
+	 * @param utilisateur
+	 * @throws BusinessException
+	 */
 	public void supprimerUtilisateur(Utilisateur utilisateur) throws BusinessException {
 		utilisateurDAO.delete(utilisateur);
 	}
