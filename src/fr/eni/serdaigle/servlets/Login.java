@@ -70,14 +70,12 @@ public class Login extends HttpServlet {
 		try {
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
-			UtilisateurManager mger = new UtilisateurManager(); 
+			UtilisateurManager mger = new UtilisateurManager();
 
-			// A modifier
 			Utilisateur utilisateurTest = mger.selectionnerConnexion(username, password);
 
 			if (utilisateurTest==null) {
-				
-				request.setAttribute("error", "Erreur de saisie Login / MDP, veuillez réessayer");
+				request.setAttribute("errorLogin", "Erreur de saisie Login / MDP, veuillez réessayer");
 				RequestDispatcher rd = request.getRequestDispatcher("connexion");
 				rd.forward(request, response);
 			} else {
@@ -85,9 +83,7 @@ public class Login extends HttpServlet {
 				doGet(request, response);
 			}
 		} catch (GeneralException e) {
-			request.setAttribute("errorLogin", e.getMessage());
-			e.printStackTrace();
-			System.out.println(e.getMessage());
+			request.setAttribute("error", e.getMessage());
 		}
 	}
 }

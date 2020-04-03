@@ -18,7 +18,7 @@
 	<div class="container-fluid">
 
 		<%@ include file="entete.html"%>
-		<c:if test="${error != null}">
+		<c:if test="${errorLogin != null}">
 					<div class="col-lg-6 col-sm-12">
 						<div class="alert alert-danger" role="alert">
 							<p>${errorLogin}</p>
