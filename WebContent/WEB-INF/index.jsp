@@ -45,62 +45,54 @@
 
 
 		<!-- Page Heading -->
-
-		<h3 class="my-4 col-lg-12 col-sm-12">Filtres :</h3>
-
-		<c:if test="${utilisateur != null}">
-			<div class="col-lg-6 col-sm-12">
-
-				<input type="radio" id="filtre" name="filtre" value="buy" checked>
-				<label for="filtre">Achats<br></label> <input type="checkbox"
-					id="buy" name="buy" value="open"> <label for="buy">enchères
-					ouvertes</label> <br> <input type="checkbox" id="buy" name="buy"
-					value="current"> <label for="buy">mes enchères en
-					cours</label> <br> <input type="checkbox" id="buy" name="buy"
-					value="win"> <label for="buy">mes enchères
-					remportées</label> <br> <input type="radio" id="filtre" name="filtre"
-					value="sales"> <label for="filtre">Mes ventes<br></label>
-
-				<input type="checkbox" id="sales" name="sales" value="currentsales">
-				<label for="sales">mes ventes en cours</label> <br> <input
-					type="checkbox" id="sales" name="sales" value="upcommingsales">
-				<label for="sales">ventes non débutées</label> <br> <input
-					type="checkbox" id="sales" name="sales" value="closesales">
-				<label for="sales">ventes terminées</label> <br>
-			</div>
-		</c:if>
-
-		<div class="col-lg-6 col-sm-12">
-
-
-			<form action="" method="post">
-
-				<p>${error}</p>
-				<label for="categorie">Catégories : </label> <select id="categorie"
-					name="categorie" size="1">
-					<option value="toutes" selected="selected">Toutes</option>
-					<c:forEach var="categorie" items="${listeCategorie}">
-						<option value="${categorie}">${categorie.libelle}</option>
-					</c:forEach>
-				</select> <br> <input type="text"
-					placeholder="Le nom de l'article contient" id="nomArticle"
-					name="nomArticle"> <br>
-
-
-				<button class="col-lg-2 h-25" id="research" name="research">Rechercher</button>
-
-				<br>
-
-
-			</form>
-
-		</div>
+		<form action="accueil" method="post">
+			<c:if test="${utilisateur != null}">
+				<div class="col-lg-6 col-sm-12">
+					<h3 class="my-4 col-lg-12 col-sm-12">Filtres :</h3>
+					<p>Achats</p>
+					<input type="radio" id="encheresOuvertes" name="filtre" value="encheresOuvertes"> <label for="encheresOuvertes">enchères ouvertes</label> 
+					<input type="radio" id="mesEncheres" name="filtre" value="mesEncheres"> <label for="mesEncheres">mes enchères en cours</label> 
+					<input type="radio" id="encheresRemportees" name="filtre" value="encheresRemportees"> <label for="encheresRemportees">mes enchères remportées</label> 
+					<br>
+					<p>Ventes</p> 
+					<input type="radio" id="mesVentes" name="filtre" value="mesVentes"> <label for="mesVentes">mes ventes en cours</label> 
+					<input type="radio" id="ventesNonDebutees" name="filtre" value="ventesNonDebutees"> <label for="ventesNonDebutees">ventes non débutées</label> 
+					<input type="radio" id="ventesTerminees" name="filtre" value="ventesTerminees"> <label for="ventesTerminees">ventes terminées</label> 
+				</div>
+			</c:if>			
+			<label for="categorie">Catégories : </label> 
+			<select id="categorie" name="categorie" size="1">
+				<option value="" selected="selected">Toutes</option>
+				<c:forEach var="categorie" items="${listeCategorie}">
+					<option value="${categorie.libelle}">${categorie.libelle}</option>
+				</c:forEach>
+			</select> 
+			<br> 
+			<input type="text" placeholder="Le nom de l'article contient" id="nomArticleContient" name="nomArticleContient"> 
+			<br>
+			<button class="col-lg-2 col-sm-11 h-25" id="research" name="research">Rechercher</button>
+			<br>
+		</form>
 		
 		<c:forEach var="enchere" items="${listeEnchere}">
 			<div class="col-lg-5 col-sm-12 card">
 				<div class="card-body">
-					<a href="afficherDetailEnchere?noArticle=${enchere.article.noArticle}">${enchere.article.nomArticle}</a>
-					<p>Prix : ${enchere.article.prixInitial}</p>
+					<c:choose>
+						<c:when test="${utilisateur != null}">
+							<a href="afficherDetailEnchere?noArticle=${enchere.article.noArticle}">${enchere.article.nomArticle}</a>
+						</c:when>
+						<c:otherwise>
+							${enchere.article.nomArticle}
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${enchere.montantEnchere != 0}">
+							<p>Prix : ${enchere.montantEnchere}</p>
+						</c:when>
+						<c:otherwise>
+							<p>Prix : ${enchere.article.prixInitial}</p>
+						</c:otherwise>
+					</c:choose>
 					<p>
 						Fin de l'enchère :
 						<c:forTokens var="token"
@@ -126,7 +118,7 @@
 
 			</div>
 		</c:forEach>
-
+	</div>
 		<%@ include file="piedDePage.html"%>
 </body>
 </html>

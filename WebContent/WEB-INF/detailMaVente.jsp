@@ -40,7 +40,7 @@
 					<p>Date de fin de l'enchère : ${enchere.article.dateFinEncheres}</p>
 					<br>
 					
-					<p>Adresse de retrait :</p>
+<!-- 					<p>Adresse de retrait :</p> -->
 
 					<c:choose>
 						<c:when test="${enchere.article.retrait.rue != null}">

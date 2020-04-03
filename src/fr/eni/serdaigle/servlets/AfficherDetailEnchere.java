@@ -34,11 +34,11 @@ public class AfficherDetailEnchere extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config); 
-		emger = new EnchereManager();
+		emger = new EnchereManager();	
 		
 	}
-
 	
+
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -47,12 +47,12 @@ public class AfficherDetailEnchere extends HttpServlet {
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateur");
 		
 		LocalDateTime date = LocalDateTime.now();
-		int noArticle = Integer.parseInt(request.getParameter("noArticle"));
+		int noArticle;
 		
 		if (request.getParameter("noArticle")!=null) {
 			noArticle = Integer.parseInt(request.getParameter("noArticle"));
 		} else { 
-			request.setAttribute("noArticle",noArticle);
+			noArticle = (int) request.getAttribute("noArticle");
 		}
 		Enchere enchere = null;
 		
