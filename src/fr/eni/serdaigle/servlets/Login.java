@@ -76,7 +76,8 @@ public class Login extends HttpServlet {
 			Utilisateur utilisateurTest = mger.selectionnerConnexion(username, password);
 
 			if (utilisateurTest==null) {
-				request.setAttribute("errorLogin", "Erreur de saisie Login / MDP, veuillez réessayer");
+				
+				request.setAttribute("error", "Erreur de saisie Login / MDP, veuillez réessayer");
 				RequestDispatcher rd = request.getRequestDispatcher("connexion");
 				rd.forward(request, response);
 			} else {
