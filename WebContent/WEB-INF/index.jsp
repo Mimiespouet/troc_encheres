@@ -39,7 +39,7 @@
 					profil</a> <a href="logout">Déconnexion</a>
 			</div>
 			<div class="col-lg-6 col-sm-12">
-				<p>${utilisateur.pseudo}estconnectée</p>
+				<p>${utilisateur.pseudo} est connecté(e)</p>
 			</div>
 		</c:if>
 
@@ -50,14 +50,18 @@
 				<div class="col-lg-6 col-sm-12">
 					<h3 class="my-4 col-lg-12 col-sm-12">Filtres :</h3>
 					<p>Achats</p>
-					<input type="radio" id="encheresOuvertes" name="filtre" value="encheresOuvertes"> <label for="encheresOuvertes">enchères ouvertes</label> 
-					<input type="radio" id="mesEncheres" name="filtre" value="mesEncheres"> <label for="mesEncheres">mes enchères en cours</label> 
-					<!-- <input type="radio" id="encheresRemportees" name="filtre" value="encheresRemportees"> <label for="encheresRemportees">mes enchères remportées</label> -->
+					<div class="d-flex flex-column">
+						<input type="radio" id="encheresOuvertes" name="filtre" value="encheresOuvertes"> <label for="encheresOuvertes">enchères ouvertes</label> 
+						<input type="radio" id="mesEncheres" name="filtre" value="mesEncheres"> <label for="mesEncheres">mes enchères en cours</label> 
+						<!-- <input type="radio" id="encheresRemportees" name="filtre" value="encheresRemportees"> <label for="encheresRemportees">mes enchères remportées</label> -->
+					</div>
 					<br>
 					<p>Ventes</p> 
-					<input type="radio" id="mesVentes" name="filtre" value="mesVentes"> <label for="mesVentes">mes ventes en cours</label> 
-					<input type="radio" id="ventesNonDebutees" name="filtre" value="ventesNonDebutees"> <label for="ventesNonDebutees">ventes non débutées</label> 
-					<input type="radio" id="ventesTerminees" name="filtre" value="ventesTerminees"> <label for="ventesTerminees">ventes terminées</label> 
+					<div class="d-flex flex-column">
+						<input type="radio" id="mesVentes" name="filtre" value="mesVentes"> <label for="mesVentes">mes ventes en cours</label> 
+						<input type="radio" id="ventesNonDebutees" name="filtre" value="ventesNonDebutees"> <label for="ventesNonDebutees">ventes non débutées</label> 
+						<input type="radio" id="ventesTerminees" name="filtre" value="ventesTerminees"> <label for="ventesTerminees">ventes terminées</label> 
+					</div>
 				</div>
 			</c:if>			
 			<label for="categorie">Catégories : </label> 
