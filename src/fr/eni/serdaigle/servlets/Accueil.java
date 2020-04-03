@@ -17,7 +17,7 @@ import fr.eni.serdaigle.bll.EnchereManager;
 import fr.eni.serdaigle.bo.Categorie;
 import fr.eni.serdaigle.bo.Enchere;
 import fr.eni.serdaigle.bo.Utilisateur;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Servlet implementation class Accueil
@@ -89,7 +89,7 @@ public class Accueil extends HttpServlet {
 				request.setAttribute("listeEnchere", listeEnchere);
 			}
 			
-		} catch (BusinessException be) {
+		} catch (GeneralException be) {
 			request.setAttribute("error", be.getMessage());
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/index.jsp");

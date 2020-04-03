@@ -15,7 +15,7 @@ import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.dal.ArticleDAO;
 import fr.eni.serdaigle.dal.CodesResultatDAL;
 import fr.eni.serdaigle.dal.ConnectionProvider;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Classe en charge de gérer les requêtes en BDD sur les articles
@@ -36,9 +36,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	 * 
 	 * @see fr.eni.serdaigle.dal.ArticleDAO#insertArticle(fr.eni.serdaigle.bo.ArticleVendu)
 	 */
-	public int insertArticle(ArticleVendu article) throws BusinessException {
+	public int insertArticle(ArticleVendu article) throws GeneralException {
 		int noArticle = 0;
-		BusinessException be = new BusinessException();
+		GeneralException be = new GeneralException();
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement psmt = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);) {
 			psmt.setString(1, article.getNomArticle());
@@ -73,9 +73,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	 * @see fr.eni.serdaigle.dal.ArticleDAO#insertArticleRetrait(fr.eni.serdaigle.bo.ArticleVendu)
 	 */
 	@Override
-	public int insertArticleRetrait(ArticleVendu article) throws BusinessException {
+	public int insertArticleRetrait(ArticleVendu article) throws GeneralException {
 		Connection cnx = null;
-		BusinessException be = new BusinessException();
+		GeneralException be = new GeneralException();
 		int noArticle = 0;
 		try {
 			cnx = ConnectionProvider.getConnection();
@@ -140,9 +140,9 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	 * 
 	 * @see fr.eni.serdaigle.dal.ArticleDAO#update(fr.eni.serdaigle.bo.ArticleVendu)
 	 */
-	public void update(ArticleVendu article) throws BusinessException {
+	public void update(ArticleVendu article) throws GeneralException {
 		Connection cnx = null;
-		BusinessException be = new BusinessException();
+		GeneralException be = new GeneralException();
 		try {
 			cnx = ConnectionProvider.getConnection();
 			PreparedStatement psmt = cnx.prepareStatement(UPDATE);
@@ -177,8 +177,8 @@ public class ArticleDAOJdbcImpl implements ArticleDAO {
 	 * 
 	 * @see fr.eni.serdaigle.dal.ArticleDAO#select(int)
 	 */
-	public ArticleVendu select(int noArticle) throws BusinessException {
-		BusinessException be = new BusinessException();
+	public ArticleVendu select(int noArticle) throws GeneralException {
+		GeneralException be = new GeneralException();
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement psmt = cnx.prepareStatement(SELECT_BY_ID);) {
 			psmt.setInt(1, noArticle);

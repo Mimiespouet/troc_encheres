@@ -3,7 +3,7 @@ package fr.eni.serdaigle.bll;
 import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.dal.DAOFactory;
 import fr.eni.serdaigle.dal.UtilisateurDAO;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Classe en charge de gérer l'application des requêtes (UtilisateurDAO) sur utilisateur
@@ -28,10 +28,10 @@ public class UtilisateurManager {
 	/**
 	 * Méthode en charge de permettre l'ajout (l'inscription) d'un utilisateur
 	 * @param utilisateur
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public void ajouterUtilisateur(Utilisateur utilisateur) throws BusinessException {
-		BusinessException be = new BusinessException();
+	public void ajouterUtilisateur(Utilisateur utilisateur) throws GeneralException {
+		GeneralException be = new GeneralException();
 		// valider les champs
 
 		validerChamps(utilisateur.getPseudo(), CHAMPS_VARCHAR_30, be);
@@ -56,9 +56,9 @@ public class UtilisateurManager {
 	 * @param identifiant
 	 * @param password
 	 * @return utilisateurDAO.selectConnexion(identifiant, password)
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public Utilisateur selectionnerConnexion(String identifiant, String password) throws BusinessException {
+	public Utilisateur selectionnerConnexion(String identifiant, String password) throws GeneralException {
 		return utilisateurDAO.selectConnexion(identifiant, password);
 	}
 
@@ -66,9 +66,9 @@ public class UtilisateurManager {
 	 * Méthode en charge de selectionner un utilisateur selon son pseudo
 	 * @param pseudo
 	 * @return utilisateurDAO.selectPseudo(pseudo)
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public Utilisateur selectionnerUtilisateur(String pseudo) throws BusinessException {
+	public Utilisateur selectionnerUtilisateur(String pseudo) throws GeneralException {
 		return utilisateurDAO.selectPseudo(pseudo);
 	}
 
@@ -79,7 +79,7 @@ public class UtilisateurManager {
 	 * @param be
 	 * @return null
 	 */
-	public Utilisateur validerChamps(String champs, int varchar, BusinessException be) {
+	public Utilisateur validerChamps(String champs, int varchar, GeneralException be) {
 		if (champs == null || champs.equals("")) {
 			be.ajouterErreur(CodesResultatBLL.CHAMP_OBLIGATOIRE);
 		}
@@ -93,10 +93,10 @@ public class UtilisateurManager {
 	/**
 	 * Méthode en charge de modifier son profil 
 	 * @param utilisateur
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public void modifierUtilisateur(Utilisateur utilisateur) throws BusinessException {
-		BusinessException be = new BusinessException();
+	public void modifierUtilisateur(Utilisateur utilisateur) throws GeneralException {
+		GeneralException be = new GeneralException();
 		// valider les champs
 
 		validerChamps(utilisateur.getPseudo(), CHAMPS_VARCHAR_30, be);
@@ -119,9 +119,9 @@ public class UtilisateurManager {
 	/**
 	 * Méthode en charge de supprimer l'utilisateur 
 	 * @param utilisateur
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public void supprimerUtilisateur(Utilisateur utilisateur) throws BusinessException {
+	public void supprimerUtilisateur(Utilisateur utilisateur) throws GeneralException {
 		utilisateurDAO.delete(utilisateur);
 	}
 }

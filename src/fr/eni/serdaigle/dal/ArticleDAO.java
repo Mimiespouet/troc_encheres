@@ -1,7 +1,7 @@
 package fr.eni.serdaigle.dal;
 
 import fr.eni.serdaigle.bo.ArticleVendu;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Classe en charge de gérer les Articles en vente en BDD
@@ -14,29 +14,29 @@ public interface ArticleDAO {
 	 * Méthode en charge d'inserer un nouvel article avec une adresse de retrait
 	 * @param article
 	 * @return article
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	int insertArticleRetrait(ArticleVendu article) throws BusinessException;
+	int insertArticleRetrait(ArticleVendu article) throws GeneralException;
 	
 	/**
 	 * Méthode en charge d'insérer un nouvel article
 	 * @param article
 	 * @return article
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	int insertArticle(ArticleVendu article) throws BusinessException;
+	int insertArticle(ArticleVendu article) throws GeneralException;
 	
 	/**
 	 * Méthode en charge de mettre à jour/modifier un article
 	 * @param article
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	void update(ArticleVendu article) throws BusinessException;
+	void update(ArticleVendu article) throws GeneralException;
 
 	/**
 	 * Méthode en charge de retourner un article
 	 * @param noArticle
 	 * @return ArticleVendu
 	 */
-	public ArticleVendu select(int noArticle) throws BusinessException;
+	public ArticleVendu select(int noArticle) throws GeneralException;
 }

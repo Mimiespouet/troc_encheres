@@ -10,11 +10,11 @@ import java.util.List;
  * Cette classe permet de recenser l'ensemble des erreurs (par leur code) pouvant survenir lors d'un traitement
  * quel que soit la couche à l'origine.
  */
-public class BusinessException extends Exception {
+public class GeneralException extends Exception {
 	private static final long serialVersionUID = 1L;
 	private List<Integer> listeCodesErreur;
 	
-	public BusinessException() {
+	public GeneralException() {
 		super();
 		this.listeCodesErreur=new ArrayList<>();
 	}

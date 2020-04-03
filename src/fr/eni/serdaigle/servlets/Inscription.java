@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.serdaigle.bll.UtilisateurManager;
 import fr.eni.serdaigle.bo.Utilisateur;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Servlet implementation class Accueil
@@ -63,7 +63,7 @@ public class Inscription extends HttpServlet {
 			}else {
 				request.setAttribute("error", "Les mots de passe ne correspondent pas");
 			}
-		} catch (BusinessException be) {
+		} catch (GeneralException be) {
 			request.setAttribute("error", be.getMessage());
 			doGet(request, response);
 		

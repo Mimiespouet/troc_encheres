@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import fr.eni.serdaigle.bll.EnchereManager;
 import fr.eni.serdaigle.bo.Enchere;
 import fr.eni.serdaigle.bo.Utilisateur;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Servlet implementation class AfficherDetailEnchere
@@ -68,7 +68,7 @@ public class AfficherDetailEnchere extends HttpServlet {
 		System.out.println("numero article :" + noArticle);
 		try {			
 			enchere = emger.select(noArticle);
-		} catch (BusinessException e) {
+		} catch (GeneralException e) {
 			e.printStackTrace();
 		}
 		request.setAttribute("enchere",enchere);

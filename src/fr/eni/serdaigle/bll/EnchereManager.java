@@ -5,7 +5,7 @@ import java.util.List;
 import fr.eni.serdaigle.bo.Enchere;
 import fr.eni.serdaigle.dal.DAOFactory;
 import fr.eni.serdaigle.dal.EnchereDAO;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Classe en charge de gérer l'application des requêtes (EnchereDAO) sur les enchères
@@ -26,11 +26,11 @@ public class EnchereManager {
 	/**
 	 * Méthode en charge d'ajouter une enchère
 	 * @param enchere
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
 	public void ajouterEnchere(Enchere enchere)
-			throws BusinessException {
-		BusinessException be = new BusinessException();
+			throws GeneralException {
+		GeneralException be = new GeneralException();
 
 		//valider les champs
 		validerDateEnchere(enchere, be);
@@ -48,9 +48,9 @@ public class EnchereManager {
 	 * Méthode en charge de selectionner une enchère selon le numéro d'article
 	 * @param noArticle
 	 * @return enchereDAO.select(noArticle)
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public Enchere select(int noArticle) throws BusinessException {
+	public Enchere select(int noArticle) throws GeneralException {
 		return enchereDAO.select(noArticle);
 
 	}
@@ -59,19 +59,19 @@ public class EnchereManager {
 	 * Méthode en charge de selectionner une vente remportée selon le numéro d'article
 	 * @param noArticle
 	 * @return enchereDAO.selectVenteRemporte(noArticle)
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public Enchere selectVenteRemporte(int noArticle) throws BusinessException{
+	public Enchere selectVenteRemporte(int noArticle) throws GeneralException{
 		return enchereDAO.selectVenteRemporte(noArticle);
 	}
 	
 	/**
 	 * Méthode en charge de mettre à jour une enchère
 	 * @param enchere
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public void updateEnchere(Enchere enchere) throws BusinessException{
-		BusinessException be = new BusinessException();
+	public void updateEnchere(Enchere enchere) throws GeneralException{
+		GeneralException be = new GeneralException();
 		if (!be.hasErreurs()) {
 			enchereDAO.updateEnchere(enchere);
 		} else {
@@ -84,9 +84,9 @@ public class EnchereManager {
 	 * @param noUtilisateur
 	 * @param noArticle
 	 * @return enchereDAO.selectByUtilisateur(noUtilisateur,noArticle)
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public Enchere selectByUtilisateur(int noUtilisateur,int noArticle) throws BusinessException{
+	public Enchere selectByUtilisateur(int noUtilisateur,int noArticle) throws GeneralException{
 		return enchereDAO.selectByUtilisateur(noUtilisateur,noArticle);
 	}
 	
@@ -95,9 +95,9 @@ public class EnchereManager {
 	 * @param categorie
 	 * @param recherche
 	 * @return enchereDAO.selectAllEnCours(categorie, recherche)
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public List<Enchere> selectAllEnCours(String categorie, String recherche) throws BusinessException{
+	public List<Enchere> selectAllEnCours(String categorie, String recherche) throws GeneralException{
 		return enchereDAO.selectAllEnCours(categorie, recherche);
 	}
 	
@@ -107,9 +107,9 @@ public class EnchereManager {
 	 * @param recherche
 	 * @param noUtilisateur
 	 * @return enchereDAO.selectMesEncheres(categorie, recherche, noUtilisateur)
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public List<Enchere> selectMesEncheres(String categorie, String recherche, int noUtilisateur) throws BusinessException {
+	public List<Enchere> selectMesEncheres(String categorie, String recherche, int noUtilisateur) throws GeneralException {
 		return enchereDAO.selectMesEncheres(categorie, recherche, noUtilisateur);
 	}
 	
@@ -119,9 +119,9 @@ public class EnchereManager {
 	 * @param recherche
 	 * @param noUtilisateur
 	 * @return
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public List<Enchere> selectMesVentes(String categorie, String recherche, int noUtilisateur) throws BusinessException {
+	public List<Enchere> selectMesVentes(String categorie, String recherche, int noUtilisateur) throws GeneralException {
 		return enchereDAO.selectMesVentes(categorie, recherche, noUtilisateur);
 	}
 	
@@ -131,9 +131,9 @@ public class EnchereManager {
 	 * @param recherche
 	 * @param noUtilisateur
 	 * @return enchereDAO.selectMesVentesNonDebutees(categorie, recherche, noUtilisateur)
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public List<Enchere> selectMesVentesNonDebutees(String categorie, String recherche, int noUtilisateur) throws BusinessException {
+	public List<Enchere> selectMesVentesNonDebutees(String categorie, String recherche, int noUtilisateur) throws GeneralException {
 		return enchereDAO.selectMesVentesNonDebutees(categorie, recherche, noUtilisateur);
 	}
 	
@@ -143,9 +143,9 @@ public class EnchereManager {
 	 * @param recherche
 	 * @param noUtilisateur
 	 * @return enchereDAO.selectMesVentesTerminees(categorie, recherche, noUtilisateur)
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public List<Enchere> selectMesVentesTerminees(String categorie, String recherche, int noUtilisateur) throws BusinessException {
+	public List<Enchere> selectMesVentesTerminees(String categorie, String recherche, int noUtilisateur) throws GeneralException {
 		return enchereDAO.selectMesVentesTerminees(categorie, recherche, noUtilisateur);
 	}
 	
@@ -154,7 +154,7 @@ public class EnchereManager {
 	 * @param enchere
 	 * @param be
 	 */
-	public void validerMontantEnchere(Enchere enchere, BusinessException be) {
+	public void validerMontantEnchere(Enchere enchere, GeneralException be) {
 		if (enchere.getMontantEnchere() == 0) {
 			be.ajouterErreur(CodesResultatBLL.PRIX_ERREUR);
 		}
@@ -165,7 +165,7 @@ public class EnchereManager {
 	 * @param enchere
 	 * @param be
 	 */
-	private void validerDateEnchere(Enchere enchere, BusinessException be) {
+	private void validerDateEnchere(Enchere enchere, GeneralException be) {
 		if(enchere.getDateEnchere().isAfter(enchere.getArticle().getDateFinEncheres()) 
 				|| enchere.getDateEnchere().isBefore(enchere.getArticle().getDateDebutEncheres()) ){
 			be.ajouterErreur(CodesResultatBLL.DATE_ERREUR);

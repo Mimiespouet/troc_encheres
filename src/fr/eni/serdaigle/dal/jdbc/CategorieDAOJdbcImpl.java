@@ -18,7 +18,7 @@ import fr.eni.serdaigle.dal.ArticleDAO;
 import fr.eni.serdaigle.dal.CategorieDAO;
 import fr.eni.serdaigle.dal.CodesResultatDAL;
 import fr.eni.serdaigle.dal.ConnectionProvider;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Classe en charge de gérer les requêtes en BDD sur Categories
@@ -36,9 +36,9 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	 * @see fr.eni.serdaigle.dal.CategorieDAO#insert(fr.eni.serdaigle.bo.Categorie)
 	 */
 	@Override
-	public void insert(Categorie categorie) throws BusinessException {
+	public void insert(Categorie categorie) throws GeneralException {
 		Connection cnx = null;
-		BusinessException be = new BusinessException();
+		GeneralException be = new GeneralException();
 		try {
 			cnx = ConnectionProvider.getConnection();
 			PreparedStatement psmt = cnx.prepareStatement(INSERT);
@@ -64,9 +64,9 @@ public class CategorieDAOJdbcImpl implements CategorieDAO {
 	 * {@inheritDoc}
 	 * @see fr.eni.serdaigle.dal.CategorieDAO#selectAll()
 	 */
-	public List<Categorie> selectAll() throws BusinessException {
+	public List<Categorie> selectAll() throws GeneralException {
 		Connection cnx = null;
-		BusinessException be = new BusinessException();
+		GeneralException be = new GeneralException();
 		List<Categorie> listeCategorie = new ArrayList<Categorie>();
 		try {
 			cnx = ConnectionProvider.getConnection();

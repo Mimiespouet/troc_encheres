@@ -6,7 +6,7 @@ package fr.eni.serdaigle.dal;
 import java.util.List;
 
 import fr.eni.serdaigle.bo.Categorie;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Classe en charge de gérer les catégories en BDD
@@ -18,16 +18,16 @@ public interface CategorieDAO {
 	/**
 	 * Méthode en charge de sélectionner toutes les catégories présentes en BDD
 	 * @return List Categorie 
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	List<Categorie> selectAll() throws BusinessException;
+	List<Categorie> selectAll() throws GeneralException;
 
 	/**
 	 * Méthode en charge d'insérer une nouvelle catégorie en BDD par l'administrateur
 	 * @param article
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	void insert(Categorie categorie) throws BusinessException;
+	void insert(Categorie categorie) throws GeneralException;
 }
 
 

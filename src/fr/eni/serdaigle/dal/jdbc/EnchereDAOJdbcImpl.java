@@ -19,7 +19,7 @@ import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.dal.CodesResultatDAL;
 import fr.eni.serdaigle.dal.ConnectionProvider;
 import fr.eni.serdaigle.dal.EnchereDAO;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Classe en charge de gérer les requêtes en BDD sur Enchere
@@ -73,9 +73,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	 * @see fr.eni.serdaigle.dal.EnchereDAO#insert(fr.eni.serdaigle.bo.Enchere)
 	 */
 	@Override
-	public void insert(Enchere enchere) throws BusinessException {
+	public void insert(Enchere enchere) throws GeneralException {
 		Connection cnx = null;
-		BusinessException be = new BusinessException();
+		GeneralException be = new GeneralException();
 		try {
 			cnx = ConnectionProvider.getConnection();
 			PreparedStatement psmt = cnx.prepareStatement(INSERT);
@@ -106,8 +106,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectById(int)
 	 */
 	@Override
-	public Enchere select(int noArticle) throws BusinessException {
-		BusinessException be = new BusinessException();
+	public Enchere select(int noArticle) throws GeneralException {
+		GeneralException be = new GeneralException();
 		try (Connection cnx = ConnectionProvider.getConnection();
 			PreparedStatement psmt = cnx.prepareStatement(SELECT_AVEC_MEILLEURE_OFFRE);) {
 			psmt.setInt(1, noArticle);
@@ -131,7 +131,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectVenteRemporte(fr.eni.serdaigle.bo.Enchere)
 	 */
 	@Override
-	public Enchere selectVenteRemporte(int noArticle) throws BusinessException {
+	public Enchere selectVenteRemporte(int noArticle) throws GeneralException {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement psmt = cnx.prepareStatement(SELECT_VENTE_REMPORTE);) {
 			psmt.setInt(1, noArticle);
@@ -145,7 +145,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			return enchereRemporte;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			BusinessException be = new BusinessException();
+			GeneralException be = new GeneralException();
 			be.ajouterErreur(CodesResultatDAL.SELECT_VENTE_REMPORTE_ECHEC);
 			throw be;
 		}
@@ -156,8 +156,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectAllEnCours()
 	 */
 	@Override
-	public List<Enchere> selectAllEnCours(String categorie, String recherche) throws BusinessException {
-		BusinessException be = new BusinessException();
+	public List<Enchere> selectAllEnCours(String categorie, String recherche) throws GeneralException {
+		GeneralException be = new GeneralException();
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
 		Enchere enchere = null;
 		try (Connection cnx = ConnectionProvider.getConnection(); PreparedStatement psmt = cnx.prepareStatement(SELECT_ENCHERES_CONTAINS_BY_CATEGORIE);) {
@@ -183,8 +183,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectMesEncheres(java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	public List<Enchere> selectMesEncheres(String categorie, String recherche, int noUtilisateur) throws BusinessException {
-		BusinessException be = new BusinessException();
+	public List<Enchere> selectMesEncheres(String categorie, String recherche, int noUtilisateur) throws GeneralException {
+		GeneralException be = new GeneralException();
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
 		Enchere enchere = null;
 		try (Connection cnx = ConnectionProvider.getConnection(); PreparedStatement psmt = cnx.prepareStatement(SELECT_MES_ENCHERES);) {
@@ -210,8 +210,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectMesVentes(java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	public List<Enchere> selectMesVentes(String categorie, String recherche, int noUtilisateur) throws BusinessException {
-		BusinessException be = new BusinessException();
+	public List<Enchere> selectMesVentes(String categorie, String recherche, int noUtilisateur) throws GeneralException {
+		GeneralException be = new GeneralException();
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
 		Enchere enchere = null;
 		try (Connection cnx = ConnectionProvider.getConnection(); PreparedStatement psmt = cnx.prepareStatement(SELECT_MES_VENTES_EN_COURS);) {
@@ -238,8 +238,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectMesVentesNonDebutees(java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	public List<Enchere> selectMesVentesNonDebutees(String categorie, String recherche, int noUtilisateur) throws BusinessException {
-		BusinessException be = new BusinessException();
+	public List<Enchere> selectMesVentesNonDebutees(String categorie, String recherche, int noUtilisateur) throws GeneralException {
+		GeneralException be = new GeneralException();
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
 		Enchere enchere = null;
 		try (Connection cnx = ConnectionProvider.getConnection(); PreparedStatement psmt = cnx.prepareStatement(SELECT_MES_VENTES_NON_DEBUTEES);) {
@@ -265,8 +265,8 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectMesVentesTerminees(java.lang.String, java.lang.String, int)
 	 */
 	@Override
-	public List<Enchere> selectMesVentesTerminees(String categorie, String recherche, int noUtilisateur) throws BusinessException {
-		BusinessException be = new BusinessException();
+	public List<Enchere> selectMesVentesTerminees(String categorie, String recherche, int noUtilisateur) throws GeneralException {
+		GeneralException be = new GeneralException();
 		List<Enchere> listeEnchere = new ArrayList<Enchere>();
 		Enchere enchere = null;
 		try (Connection cnx = ConnectionProvider.getConnection(); PreparedStatement psmt = cnx.prepareStatement(SELECT_MES_VENTES_TERMINEES);) {
@@ -293,9 +293,9 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	 * @see fr.eni.serdaigle.dal.EnchereDAO#updateEnchere(fr.eni.serdaigle.bo.Enchere)
 	 */
 	@Override
-	public void updateEnchere(Enchere enchere) throws BusinessException {
+	public void updateEnchere(Enchere enchere) throws GeneralException {
 		Connection cnx = null;
-		BusinessException be = new BusinessException();
+		GeneralException be = new GeneralException();
 		try {
 			cnx = ConnectionProvider.getConnection();
 			// Pour prendre la main sur la transaction
@@ -325,7 +325,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 	 * @see fr.eni.serdaigle.dal.EnchereDAO#selectByUtilisateur(int, int)
 	 */
 	@Override
-	public Enchere selectByUtilisateur(int noUtilisateur,int noArticle) throws BusinessException {
+	public Enchere selectByUtilisateur(int noUtilisateur,int noArticle) throws GeneralException {
 		try (Connection cnx = ConnectionProvider.getConnection();
 			PreparedStatement psmt = cnx.prepareStatement(SELECT_BY_UTILISATEUR);) {
 			
@@ -350,7 +350,7 @@ public class EnchereDAOJdbcImpl implements EnchereDAO{
 			return enchere;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			BusinessException be = new BusinessException();
+			GeneralException be = new GeneralException();
 			be.ajouterErreur(CodesResultatDAL.SELECT_LOGIN_ECHEC);//*TODO refaire l'erreur, pas la bonne
 			throw be;
 		}

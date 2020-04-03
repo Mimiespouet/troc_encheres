@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import fr.eni.serdaigle.bll.UtilisateurManager;
 import fr.eni.serdaigle.bo.Utilisateur;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Servlet implementation class accueil
@@ -83,7 +83,7 @@ public class Login extends HttpServlet {
 				utilisateur = utilisateurTest;
 				doGet(request, response);
 			}
-		} catch (BusinessException e) {
+		} catch (GeneralException e) {
 			request.setAttribute("errorLogin", e.getMessage());
 			e.printStackTrace();
 			System.out.println(e.getMessage());

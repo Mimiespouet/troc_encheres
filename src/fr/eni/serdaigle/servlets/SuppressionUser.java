@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.serdaigle.bll.UtilisateurManager;
 import fr.eni.serdaigle.bo.Utilisateur;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Servlet implementation class Accueil
@@ -49,7 +49,7 @@ public class SuppressionUser extends HttpServlet {
 				request.setAttribute("success", "Compte supprimé avec succès");
 				doGet(request, response);
 				
-		} catch (BusinessException be) {
+		} catch (GeneralException be) {
 			request.setAttribute("error", be.getMessage());
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/modifierProfil.jsp");
 			rd.forward(request, response);	

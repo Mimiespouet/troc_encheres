@@ -20,7 +20,7 @@ import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.bo.Categorie;
 import fr.eni.serdaigle.bo.Retrait;
 import fr.eni.serdaigle.bo.Utilisateur;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Servlet implementation class Accueil
@@ -51,7 +51,7 @@ public class Vendre extends HttpServlet {
 				try {
 					listeCategorie = catMger.selectAll();
 					request.setAttribute("listeCategorie", listeCategorie);
-				} catch (BusinessException ex) {
+				} catch (GeneralException ex) {
 					request.setAttribute("error", ex.getMessage());
 				}
 		
@@ -81,7 +81,7 @@ public class Vendre extends HttpServlet {
 		
 		try {
 			ArticleManager artMger = new ArticleManager();
-			BusinessException be = new BusinessException();
+			GeneralException be = new GeneralException();
 			
 			//Conversion pour les dates
 			try {
@@ -128,7 +128,7 @@ public class Vendre extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("afficherDetailEnchere");
 				rd.forward(request, response);
 			}
-		} catch (BusinessException be) {
+		} catch (GeneralException be) {
 			System.out.println(be.getMessage());
 			request.setAttribute("error", be.getMessage());
 			doGet(request, response);

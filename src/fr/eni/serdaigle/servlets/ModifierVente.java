@@ -18,7 +18,7 @@ import fr.eni.serdaigle.bll.CategorieManager;
 import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.bo.Categorie;
 import fr.eni.serdaigle.bo.Utilisateur;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Servlet implementation class modifArticle
@@ -48,7 +48,7 @@ public class ModifierVente extends HttpServlet {
 		try {
 			listeCategorie = catMger.selectAll();
 			request.setAttribute("listeCategorie", listeCategorie);
-		} catch (BusinessException ex) {
+		} catch (GeneralException ex) {
 			request.setAttribute("error", ex.getMessage());
 		}
 		
@@ -56,7 +56,7 @@ public class ModifierVente extends HttpServlet {
 		try {
 			article = mger.select(noArticle);
 			request.setAttribute("articleVendu", article);
-		} catch (BusinessException e) {
+		} catch (GeneralException e) {
 			e.printStackTrace();
 		}
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/modificationVente.jsp");
@@ -85,7 +85,7 @@ public class ModifierVente extends HttpServlet {
 		int prixInitial = 0;
 		try {
 			ArticleManager artMger = new ArticleManager();
-			BusinessException be = new BusinessException();
+			GeneralException be = new GeneralException();
 			
 			// Conversion pour les dates
 			try {
@@ -116,7 +116,7 @@ public class ModifierVente extends HttpServlet {
 			request.setAttribute("success", "La vente a bien été modifié");
 			RequestDispatcher rd = request.getRequestDispatcher("/afficherDetailEnchere");
 			rd.forward(request, response);
-		} catch (BusinessException be) {
+		} catch (GeneralException be) {
 			request.setAttribute("error", be.getMessage());
 			doGet(request, response);
 		}

@@ -10,7 +10,7 @@ import fr.eni.serdaigle.bo.Utilisateur;
 import fr.eni.serdaigle.dal.CodesResultatDAL;
 import fr.eni.serdaigle.dal.ConnectionProvider;
 import fr.eni.serdaigle.dal.UtilisateurDAO;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Classe en charge de gérer les requêtes en BDD sur Utilisateur
@@ -27,9 +27,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	private static final String UPDATE = "UPDATE UTILISATEURS SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=? ;";
 
 	@Override
-	public void insert(Utilisateur utilisateur) throws BusinessException {
+	public void insert(Utilisateur utilisateur) throws GeneralException {
 		Connection cnx = null;
-		BusinessException be = new BusinessException();
+		GeneralException be = new GeneralException();
 		try {
 			cnx = ConnectionProvider.getConnection();
 			// Pour prendre la main sur la transaction
@@ -63,14 +63,14 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public List<Utilisateur> select() throws BusinessException {
+	public List<Utilisateur> select() throws GeneralException {
 		return null;
 	}
 
 	@Override
-	public Utilisateur selectConnexion(String identifiant, String password) throws BusinessException {
+	public Utilisateur selectConnexion(String identifiant, String password) throws GeneralException {
 		Utilisateur resultat = null;
-		BusinessException be = new BusinessException();
+		GeneralException be = new GeneralException();
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement psmt = cnx.prepareStatement(SELECT_CONNEXION);) {
 			psmt.setString(1, identifiant);
@@ -91,7 +91,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 		
 	}
 
-	public Utilisateur selectPseudo(String pseudo) throws BusinessException {
+	public Utilisateur selectPseudo(String pseudo) throws GeneralException {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement psmt = cnx.prepareStatement(SELECT_BY_PSEUDO);) {
 			psmt.setString(1, pseudo);
@@ -105,7 +105,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			return utilisateur;
 		} catch (SQLException e) {
 			e.printStackTrace();
-			BusinessException be = new BusinessException();
+			GeneralException be = new GeneralException();
 			be.ajouterErreur(CodesResultatDAL.SELECT_LOGIN_ECHEC);
 			throw be;
 		}
@@ -113,9 +113,9 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 	
 	@Override
-	public void update(Utilisateur utilisateur) throws BusinessException {
+	public void update(Utilisateur utilisateur) throws GeneralException {
 		Connection cnx = null;
-		BusinessException be = new BusinessException();
+		GeneralException be = new GeneralException();
 		try {
 			cnx = ConnectionProvider.getConnection();
 			// Pour prendre la main sur la transaction
@@ -151,7 +151,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public void delete(Utilisateur utilisateur) throws BusinessException {
+	public void delete(Utilisateur utilisateur) throws GeneralException {
 		try (Connection cnx = ConnectionProvider.getConnection();
 				PreparedStatement psmt = cnx.prepareStatement(DELETE);) {
 			psmt.setInt(1, utilisateur.getNoUtilisateur());
@@ -159,7 +159,7 @@ public class UtilisateurDAOJdbcImpl implements UtilisateurDAO {
 			psmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			BusinessException be = new BusinessException();
+			GeneralException be = new GeneralException();
 			be.ajouterErreur(CodesResultatDAL.DELETE_USER);
 			throw be;
 		}

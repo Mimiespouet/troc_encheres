@@ -1,7 +1,7 @@
 package fr.eni.serdaigle.bll;
 
 import fr.eni.serdaigle.dal.DAOFactory;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,19 +35,19 @@ public class ArticleManager {
 	 * Méthode en charge de sélectionner un article selon son numéro
 	 * @param noArticle
 	 * @return articleDAO.select(noArticle)
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public ArticleVendu select(int noArticle) throws BusinessException {
+	public ArticleVendu select(int noArticle) throws GeneralException {
 		return articleDAO.select(noArticle);
 	}
 
 	/**
 	 * Méthode en charge d'ajouter un article seul
 	 * @param article
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public int ajouterArticle(ArticleVendu article) throws BusinessException {
-		BusinessException be = new BusinessException();
+	public int ajouterArticle(ArticleVendu article) throws GeneralException {
+		GeneralException be = new GeneralException();
 
 		//valider les champs
 		validerNomArticle(article.getNomArticle(), CHAMPS_VARCHAR_30, be);
@@ -65,10 +65,10 @@ public class ArticleManager {
 	/**
 	 * Méthode en charge de modifier un article seul
 	 * @param article
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public void modifierArticle(ArticleVendu article) throws BusinessException {
-		BusinessException be = new BusinessException();
+	public void modifierArticle(ArticleVendu article) throws GeneralException {
+		GeneralException be = new GeneralException();
 		// valider les champs
 		validerModifArticle(article.getDateDebutEncheres(), LocalDateTime.now(), be);
 		validerNomArticle(article.getNomArticle(), CHAMPS_VARCHAR_30, be);
@@ -88,7 +88,7 @@ public class ArticleManager {
 	 * @param varchar
 	 * @param be
 	 */
-	public void validerNomArticle(String nomArticle, int varchar, BusinessException be) {
+	public void validerNomArticle(String nomArticle, int varchar, GeneralException be) {
 		if (nomArticle == null || nomArticle.equals("")) {
 			be.ajouterErreur(CodesResultatBLL.CHAMP_NOM_ARTICLE_OBLIGATOIRE);
 		}
@@ -104,7 +104,7 @@ public class ArticleManager {
 	 * @param varchar
 	 * @param be
 	 */
-	public void validerDescriptionArticle(String description, int varchar, BusinessException be) {
+	public void validerDescriptionArticle(String description, int varchar, GeneralException be) {
 		if (description == null || description.equals("")) {
 			be.ajouterErreur(CodesResultatBLL.CHAMP_DESCRIPTION_ARTICLE_OBLIGATOIRE);
 		}
@@ -124,7 +124,7 @@ public class ArticleManager {
 	 * @param be
 	 */
 	public void validerAdresseRetrait(String rue, String codePostal, String ville, int varchar1, int varchar2,
-			BusinessException be) {
+			GeneralException be) {
 		if (rue.length() > varchar1) {
 			be.ajouterErreur(CodesResultatBLL.CHAMP_NOM_ARTICLE_TAILLE_DEPASSEE);
 		}
@@ -144,7 +144,7 @@ public class ArticleManager {
 	 * @param be
 	 */
 	private void validerDateEncheres(LocalDateTime dateDebutEncheres, LocalDateTime dateFinEncheres,
-			BusinessException be) {
+			GeneralException be) {
 		if (dateDebutEncheres.isAfter(dateFinEncheres)) {
 			be.ajouterErreur(CodesResultatBLL.DATE_ERREUR);
 		}
@@ -156,7 +156,7 @@ public class ArticleManager {
 	 * @param dateNow
 	 * @param be
 	 */
-	public void validerModifArticle(LocalDateTime dateDebutEnchere, LocalDateTime dateNow, BusinessException be) {
+	public void validerModifArticle(LocalDateTime dateDebutEnchere, LocalDateTime dateNow, GeneralException be) {
 		if (dateNow.isAfter(dateDebutEnchere)) {
 			be.ajouterErreur(CodesResultatBLL.DATE_MODIFICATION_DEPASSE);
 		}
@@ -165,10 +165,10 @@ public class ArticleManager {
 	/**
 	 * Méthode en charge d'ajouter un article et un retrait
 	 * @param article
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public int ajouterArticleRetrait(ArticleVendu article) throws BusinessException {
-		BusinessException be = new BusinessException();
+	public int ajouterArticleRetrait(ArticleVendu article) throws GeneralException {
+		GeneralException be = new GeneralException();
 		// valider les champs
 		validerNomArticle(article.getNomArticle(), CHAMPS_VARCHAR_30, be);
 		validerDescriptionArticle(article.getDescription(), CHAMPS_VARCHAR_300, be);

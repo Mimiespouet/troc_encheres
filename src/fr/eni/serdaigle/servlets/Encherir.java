@@ -16,7 +16,7 @@ import fr.eni.serdaigle.bll.EnchereManager;
 import fr.eni.serdaigle.bo.ArticleVendu;
 import fr.eni.serdaigle.bo.Enchere;
 import fr.eni.serdaigle.bo.Utilisateur;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 /**
  * Servlet implementation class Encherir
@@ -77,7 +77,7 @@ public class Encherir extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("afficherDetailEnchere");
 			rd.forward(request, response);
 
-		} catch (BusinessException be) {
+		} catch (GeneralException be) {
 			System.out.println(be.getMessage());
 			request.setAttribute("error", be.getMessage());
 			doGet(request, response);

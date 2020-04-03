@@ -1,7 +1,7 @@
 package fr.eni.serdaigle.bll;
 
 import fr.eni.serdaigle.dal.DAOFactory;
-import fr.eni.serdaigle.exception.BusinessException;
+import fr.eni.serdaigle.exception.GeneralException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,9 +33,9 @@ public class CategorieManager {
 	/**
 	 * Méthode en charge de retourner toutes les catégories afin de les afficher dans le menu déroulant
 	 * @return List Categorie
-	 * @throws BusinessException
+	 * @throws GeneralException
 	 */
-	public List<Categorie> selectAll() throws BusinessException{
+	public List<Categorie> selectAll() throws GeneralException{
 		List<Categorie> listeCategorie = new ArrayList<Categorie>();
 		listeCategorie = categorieDAO.selectAll();
 		return listeCategorie;
